@@ -1,0 +1,24 @@
+/* Element selector */
+h1, #hobbies {
+    color: #CD2FAF;
+    background-color:#9EB5C3;
+    text-align: center;
+
+}
+/* ID selector */
+#hobbies { 
+    border:  2px solid green;
+}
+/* Class selectror */
+.big {
+    font-size: 2em;
+}
+/* Apply to all elements that are children of #hobbies
+(any element with that ID) */
+#hobbies li {
+    background-color: lightcyan;
+}
+li:hover, #hobbies li:hover {
+    background-color: pink;
+}
+

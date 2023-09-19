@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box
+    margin: 0;
+    padding: 0;
+}
+
+h1, p {
+    background-color: #dde0e3;
+}
+
+h1 {
+    padding:4rem;
+    border: 1rem solid #0f977a;
+
+}
+
+em, strong {
+    /* display:block; */
+    background-color: #baccde;
+}
+
+body > p {
+    padding: 2rem 1rem;
+}
+
+.btn {
+    color:#ffffff;
+    background-color: #5995da;
+    padding: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid blue;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    width: 33%;
+}
+
+.btn img {
+    width: 50%
+}
