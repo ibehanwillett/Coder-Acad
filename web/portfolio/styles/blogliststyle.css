@@ -1,0 +1,51 @@
+* {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+    font-family: Yrsa;
+}
+
+body {
+    background-color: #5A8F15;
+}
+
+
+h1 {
+    margin-top: 1em;
+    color: #E5C5EC;
+    text-align: center;
+}
+
+h2 {
+    color: #E5C5EC;
+}
+
+p {
+    color: #E5C5EC;
+}
+.social-buttons{
+    height: 1.5em;
+    width: 1.5em;
+}
+
+
+
+#socials{
+ position: sticky;
+ top: 0;
+}
+
+#socials img{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+#link-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bloglink{
+    text-align: center;
+}

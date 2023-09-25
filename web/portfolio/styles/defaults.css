@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #5A8F15;
+}
+
+
+/* CSS for the Nav bar */
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E5C5EC;
+    color: #5A8F15;
+    position: sticky;
+    top: 0;
+
+}
+
+nav img {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: -2em;
+}
+
+nav a {
+    color: #5A8F15;
+    font-size: 1.2em;
+}
+
+/* CSS for the footer */
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #E5C5EC;
+    position: relative;
+}
+
+footer p {
+    font-weight: bold;
+    color: #5A8F15;
+    margin: auto
+}
+
+.social-buttons{
+    height: 1.5em;
+    width: 1.5em;
+    margin: 1rem;
+}

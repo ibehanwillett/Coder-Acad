@@ -3,41 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheet for page -->
+    <link rel="stylesheet" href="./styles/stylesheet.css">
+    <!-- Stylesheet for font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yrsa">
+    <!-- Stylesheet for default styles -->
+    <link rel="stylesheet" href="styles/defaults.css">
     <title>Imogen Behan-Willett</title>
 </head>
 <body>
     <header>
-        <img src="https://placekitten.com/700/700" alt="placekitten">
-        <h1>Imogen</h1>
-        <h1>Behan-</h1>
-        <h1>Willett</h1>
+       <section id="name">
+            <h1>Imogen</h1>
+            <h1>Behan-</h1>
+            <h1>Willett</h1>
+        </section>
+        <section id="circleface">
+            <img id="headerpic" src="./images/mainpic.jpg" alt="A picture of Imogen Behan-Willett">
+        </section> 
     </header>
-    <section>
-        <p>Web developer.</p>
+    <section class="grid">
+        <section>
+            <p>Web developer.</p>
+        </section>
+        <section class= "grid-top">
+            <a href="about.html" class="button">
+                <button class="button">Who is she?</button>
+            </a>
+        </section>
+        <section class="grid-middle">
+            <a href="resume.html">
+                <button class="button">What has she done?</button>
+            </a>
+            <br>
+        </section>
+        <section class="grid-end">
+            <details class="button">
+                <summary>What is she talking about?</summary>
+                <p>Most Recent Blog Posts</p>
+                <ol>
+                    <li>Post One</li>
+                    <li>Post Two</li>
+                    <li>Post Three</li>
+                    <li>Post Four</li>
+                    <li>Post Five</li>
+                </ol>
+            </details>
+        </section>
     </section>
-    <section>
-        <button>Who is she?</button>
-    </section>
-    <section>
-        <button>What has she done?</button>
-    </section>
-    <section>
-        <details>
-            <summary>What is she talking about?</summary>
-            <p>Placeholder list of blog posts</p>
-            <ol>
-                <li>Post One</li>
-                <li>Post Two</li>
-                <li>Post Three</li>
-                <li>Post Four</li>
-                <li>Post Five</li>
-            </ol>
-        </details>
-    </section>
-    <footer> Contact me 
-        <a href="https://github.com/ibehanwillett"> Git Hub <alt="Git Hub Link"></a>
-        <a href="https://www.linkedin.com/in/imogen-behan-willett"> LinkedIn <alt="LinkedIn Link"></a>
-        <a href="mailto:imogen@behanwillett.com">Send Email</a>
+    <section id="socials">
+    <footer> 
+        <p>Contact Imogen</p>
+        <a href="https://github.com/ibehanwillett"> <img src="images/github-mark-white.png" alt="Git Hub Link" class="social-buttons"></a>
+        <a href="https://www.linkedin.com/in/imogen-behan-willett"> <img src="images/LI-In-Bug.png" alt="LinkedIn Link" class="social-buttons"></a>
+        <a href="https://www.facebook.com/behanwillettcomedy/"> <img src="images/Facebook_Logo_Secondary.png" alt="Link to Facebook" class="social-buttons"> </a>
     </footer>
+    </section>
     </body>
     </html>

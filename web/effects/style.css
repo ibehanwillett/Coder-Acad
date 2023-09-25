@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes colorful-text {
+    0% {
+        background: #1b7007;
+    }
+    50% {
+        background: #b8fa03;
+        transform: translate(100px);
+    }
+    100% {
+        background: #eaff02;
+
+        transform: translate(100px) rotate(45deg);
+    }
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    background: salmon; 
+    transition: transform 2s;
+}
+
+div:hover {
+    /* width: 200px;
+    background: purple; */
+    /* transform: rotate(45deg) scale(1.5, 2) translate(100px); */
+    animation: colorful-text 2s forwards;
+}

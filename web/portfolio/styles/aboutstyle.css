@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Yrsa;
+}
+
+nav img {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 0 -2em 0;
+}
+
+
+#main-content {
+    margin-top: 1.5em;
+    display: flex;
+    color: #E5C5EC;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+p {
+    justify-content: flex-end;
+}
+
+h1 {
+    font-size: 2em;
+    justify-content: flex-end;
+    position: relative;
+    left: 20vw;
+}
+
+p {
+    margin-top: 1em;
+}
+
+img {
+    margin: 1em;
+}
