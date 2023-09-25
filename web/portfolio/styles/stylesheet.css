@@ -5,10 +5,6 @@
     font-family: Yrsa;
 }
 
-body {
-    background: #5A8F15;
-    overflow: scroll;
-}
 
 header{
     display: flex;
@@ -45,61 +41,51 @@ h1:nth-child(2){
     left: 14vw;
 }
 
+#description {
+    position: relative;
+    margin: 3vw 0 1vw 10vw;
+}
 .button {
     background-color: #5A8F15;
     color: #E5C5EC;
     border: 0;
-    padding: 1em 1em;
+    padding: 2vw 2vw;
     text-align: center;
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 6vw;
+    border-radius: 20vw;
   }
 
-.social-buttons{
-    height: 1.5em;
-    width: 1.5em;
-}
-
-footer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #E5C5EC;
-    padding: 0.5em;
-    position: relative;
-}
-
-footer p {
-    font-weight: bold;
-    color: #5A8F15;
-    position: sticky;
-}
-
-#socials{
- position: sticky;
- top: 0;
-}
-
 .grid {
-    margin: 5vh;
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 80vw;
+    margin-left: 5vw;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows: repeat(3, 15vh);
 }
 
 .grid-top {
-    align-items: flex-start;
-    flex-basis: 100%;
-    flex: 3;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .grid-middle {
     align-items: center;
-    flex-basis:100%
-    flex 3;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .grid-bottom {
-    align-items: flex-end;
-    flex-basis: 100%;
+   grid-column: 3;
+   grid-row: 3;
+}
+
+.button:hover{
+    background-color: #E5C5EC;
+    color: #5A8F15;
+}
+
+.hiddentext {
+    font-size: 0.7em;
+    font-style: oblique;
+    color: #5A8F15;
 }

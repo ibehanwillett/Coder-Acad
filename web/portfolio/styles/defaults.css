@@ -6,6 +6,9 @@
 
 body {
     background-color: #5A8F15;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -30,18 +33,23 @@ nav img {
 }
 
 nav a {
-    color: #5A8F15;
     font-size: 1.2em;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #5A8F15;
 }
 
 /* CSS for the footer */
 
 footer {
+    margin-top: auto;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-color: #E5C5EC;
-    position: relative;
+    position: flex-end;
 }
 
 footer p {
