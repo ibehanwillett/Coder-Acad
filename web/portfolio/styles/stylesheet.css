@@ -5,7 +5,6 @@
     font-family: Yrsa;
 }
 
-
 header{
     display: flex;
     justify-content: flex-end;
@@ -16,12 +15,15 @@ p{
     font-size: 2em;
 }
 
+/* CSS For Picture */
 #headerpic {
     height: 60vw;
     width: 60vw;
     border-radius: 50%;
 }
 
+
+/* CSS For Name */
 h1 {
     margin:-0.4em 0em -0.4em 0em;
     font-weight: bold;
@@ -41,10 +43,12 @@ h1:nth-child(2){
     left: 14vw;
 }
 
+/* CSS for Description */
 #description {
     position: relative;
     margin: 3vw 0 1vw 10vw;
 }
+/* CSS for Button Menu */
 .button {
     background-color: #5A8F15;
     color: #E5C5EC;
@@ -53,31 +57,35 @@ h1:nth-child(2){
     text-align: center;
     display: inline-block;
     font-size: 6vw;
-    border-radius: 20vw;
-  }
+    border-radius: 10vw;
+}
+/* CSS Flexbox */
+#grid {
+    margin: 5vh 0;
+    display: flex;
+    flex-direction: column;
 
-.grid {
-    margin-left: 5vw;
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    grid-template-rows: repeat(3, 15vh);
 }
 
-.grid-top {
-    grid-column: 1;
-    grid-row: 1;
+#grid-top {
+    width: 33%;
 }
 
-.grid-middle {
-    align-items: center;
-    grid-column: 2;
-    grid-row: 2;
+#grid-middle {
+    justify-self: center;
+    width: 33%;
+    position: relative;
+    left: 33vw;
 }
 
-.grid-bottom {
-   grid-column: 3;
-   grid-row: 3;
+#grid-bottom {
+    flex: 1;
+    width: 33%;
+    padding: 0 0 10% 0;
+    position: relative;
+    left: 66%;
 }
+
 
 .button:hover{
     background-color: #E5C5EC;
@@ -89,3 +97,6 @@ h1:nth-child(2){
     font-style: oblique;
     color: #5A8F15;
 }
+
+/* Styling for Tablet */
+

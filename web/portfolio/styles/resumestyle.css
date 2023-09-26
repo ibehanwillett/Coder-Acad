@@ -5,56 +5,87 @@
     font-family: Yrsa;
 }
 
-
-
 section {
     display: flex;
     align-items: center;
 }
 
-section :nth-child(2){
-    margin-top: 2.5em;
-}
-
-#download-btn {
-    display: flex;
-    justify-content: center;
-    background-color: #5A8F15;
-    color: #E5C5EC;
-    border: 0;
-    padding: 1em 1em;
-    text-align: center;
-    display: inline-block;
-    font-size: 1.5em;
-  }
-
-  section a {
-    color: #E5C5EC;
-    
-  }
-
-
-
-section h2:nth-child(1){
-    margin-top: 1em;
-}
-
 h2{
     color: #E5C5EC;
-    margin: 1em;
+    margin: 2vw;
 }
 
 p {
     color: #E5C5EC;
 }
 
+
+/* CSS for Profile */
+
+#profile{
+    margin-top: 1em;
+}
+
+#profile h2{
+    font-size: 2em;
+    vertical-align: baseline;
+}
+
+/* CSS for Employment History */
+
+#employment{
+    margin-top: 1em;
+    text-align: right;
+}
+
+/* CSS for Education */
+
+#education{
+    vertical-align: text-top;
+}
+
+/* CSS for References */
+
+#references{
+    text-align: right;
+}
+
+/* CSS for Download button */
+
+#download-btn {
+    background-color: #E5C5EC;
+    color: #0e5e23;
+    border-radius: 3em;
+    border: #E5C5EC solid 0.5em;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 10%;
+    padding: 0.5em 1em;
+    text-decoration: none;
+  }
+
+  #download-btn:hover {
+    background-color: #0e5e23;
+    color: #E5C5EC;
+  }
+
+
+section:nth-child(6){
+    display: flex;
+    justify-content: center;
+  }
+
+ 
+/* Code for images */
+
 .resumeimg {
     border-radius: 3rem;
     background-color: #E5C5EC;
     opacity: 0.5;
+    z-index: -1;
 }
 
-.resumeimg:active{
+.resumeimg:hover{
     animation-name:opacitychange;
     animation-fill-mode: forwards;
 }

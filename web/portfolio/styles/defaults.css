@@ -11,6 +11,10 @@ body {
     flex-direction: column;
 }
 
+article {
+    flex: 1;
+}
+
 
 /* CSS for the Nav bar */
 nav {
@@ -44,22 +48,23 @@ nav a:hover {
 /* CSS for the footer */
 
 footer {
-    margin-top: auto;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-color: #E5C5EC;
     position: flex-end;
+    min-height: 10vh;
 }
 
 footer p {
     font-weight: bold;
     color: #5A8F15;
-    margin: auto
+    margin: auto;
+    font-size: 6vw;
 }
 
 .social-buttons{
-    height: 1.5em;
-    width: 1.5em;
+    height: 5vw;
+    width: 5vw;
     margin: 1rem;
 }

@@ -16,13 +16,17 @@ h1 {
     text-align: center;
 }
 
-
+/* CSS for the whole link section */
 
 #link-section{
+    width: 50%;
+    margin: 0 25%;
     display: flex;
     flex-direction: column;
     justify-content: center space-evenly:
 }
+
+/* CSS for the links themselves */
 
 .bloglink{
     display: inline-block;
@@ -31,9 +35,18 @@ h1 {
     color: #5A8F15;
     background-color: #E5C5EC;
     font-style: oblique;
-    margin: 5vw
+    margin: 5vw;
+    padding: 10% 0;
+    border-radius: 2em;
+    transition: 2s;
 }
 
-details p {
+details a {
     text-decoration: none;
+    color: rgb(9, 72, 6);
+    font-size: 1.5em;
+}
+
+details :active {
+    transform: scale(1.1);
 }
