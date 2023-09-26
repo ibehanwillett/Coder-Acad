@@ -25,10 +25,10 @@ p{
 
 /* CSS For Name */
 h1 {
-    margin:-0.4em 0em -0.4em 0em;
+    margin:-0.4em 0em -0.4em 10vh;
     font-weight: bold;
     color: #E5C5EC;
-    font-size: 4em;
+    font-size: 16vw;
 }
 
 h1:nth-child(2){
@@ -39,16 +39,19 @@ h1:nth-child(2){
 
 #name {
     position: relative;
-    top: 16vh;
+    top: 5em;
     left: 14vw;
 }
 
-/* CSS for Description */
+/* Description */
 #description {
-    position: relative;
     margin: 3vw 0 1vw 10vw;
 }
-/* CSS for Button Menu */
+
+#description p {
+    font-size: 7vw;
+}
+/* Button Menu */
 .button {
     background-color: #5A8F15;
     color: #E5C5EC;
@@ -61,7 +64,7 @@ h1:nth-child(2){
 }
 /* CSS Flexbox */
 #grid {
-    margin: 5vh 0;
+    margin: 10vh 0 0 0;
     display: flex;
     flex-direction: column;
 
@@ -99,4 +102,82 @@ h1:nth-child(2){
 }
 
 /* Styling for Tablet */
+
+@media only screen and (min-width:650px) {
+
+    /* Picture */
+    #headerpic {
+        height: 40vw;
+        width: 40vw;
+    }
+
+    /* Name */
+    #name {
+        position: relative;
+        top: 5em;
+        left: -9vw;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 13vw;
+    }
+
+    /* Grid Menu*/
+    #grid {
+        margin: 10vh 0 2vh 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #grid-bottom {
+        padding: 0;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 1000px) {
+
+    /* Picture */
+    #headerpic {
+        height: 30vw;
+        width: 30vw;
+    }
+
+    /* Name */
+    #name {
+        position: relative;
+        top: 5em;
+        left: -9vw;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 10vw;
+    }
+
+
+    /* Description */
+    #description {
+       position: relative;
+       bottom: 4em;
+    }
+    #description p {
+        font-size: 5vw;
+    }
+
+    /*  Grid Menu*/
+    #grid {
+        margin: 10vh 0 2vh 0;
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+    }
+
+    .button {
+        padding: 2vw 2vw;
+        font-size: 4vw;
+    }
+
+}
 

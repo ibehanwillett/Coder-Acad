@@ -16,7 +16,7 @@ article {
 }
 
 
-/* CSS for the Nav bar */
+/* Nav Bar */
 nav {
     display: flex;
     justify-content: space-around;
@@ -45,7 +45,7 @@ nav a:hover {
     color: #5A8F15;
 }
 
-/* CSS for the footer */
+/* Footer */
 
 footer {
     display: flex;
@@ -60,7 +60,7 @@ footer p {
     font-weight: bold;
     color: #5A8F15;
     margin: auto;
-    font-size: 6vw;
+    font-size: 1.5em;
 }
 
 .social-buttons{
@@ -68,3 +68,4 @@ footer p {
     width: 5vw;
     margin: 1rem;
 }
+
