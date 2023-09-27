@@ -1,5 +1,6 @@
-article {
+.page-content {
     align-self: center;
+    flex-direction: column;
 }
 section {
     display: flex;
@@ -108,7 +109,7 @@ section:nth-child(6){
 /* Tablet Display */
 
 @media only screen and (min-width:650px) {
-    article {
+    .page-content {
         width: 80vw;
     }
 

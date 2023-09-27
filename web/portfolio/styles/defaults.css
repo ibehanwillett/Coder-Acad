@@ -11,7 +11,8 @@ body {
     flex-direction: column;
 }
 /* This is so the footer remains at the bottom */
-article {
+
+.page-content {
     flex: 1;
     min-height: 80vh;
 }
