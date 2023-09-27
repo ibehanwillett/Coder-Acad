@@ -1,0 +1,74 @@
+/* Header */
+header {
+    color: #E5C5EC;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    background-color: #5a8f15c5;
+    border-radius: 5em;
+}
+
+h2 {
+    font-size: 140%;
+}
+
+/* Text of post */
+article {
+    width: 55%;
+    margin: 0 20%;
+    color: #faebd7;
+}
+
+/* Image */
+
+#blogimage {
+    border-radius: 3em;
+    width: 80%;
+    margin: 1em 0 1em 0.5em; 
+}
+
+/* Tablet */
+@media only screen and (min-width: 650px){
+    /* Header */
+    header {
+        position: relative;
+        bottom: 2em;
+        width: 75%;
+    }
+    /* Text of post */
+
+    article {
+        font-size: 2em;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 950px) {
+    /* Header */
+
+    header {
+        position: relative;
+        bottom: 3em;
+        left: 3em;
+    }
+
+    h1{
+        font-size: 5em;
+    }
+
+    h2{
+        font-size: 3em;
+    }
+    
+    /* Text of post */
+    article {
+        font-size: 5vh;
+    }
+
+    /* Image */
+    #blogimage{
+        width: 60%;
+    }
+}
