@@ -41,10 +41,15 @@ nav img {
 nav a {
     font-size: 1.2em;
     text-decoration: none;
+    color: #12260b;
 }
 
 nav a:hover {
     color: #5A8F15;
+}
+
+nav a:visited {
+    font-style: italic;
 }
 
 /* Footer */
