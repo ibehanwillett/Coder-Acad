@@ -44,6 +44,10 @@ details :active {
     border-radius: 2em;
 }
 
+a :hover {
+    font-style: italic;
+}
+
 /* Images */
 
 .linkimg {
