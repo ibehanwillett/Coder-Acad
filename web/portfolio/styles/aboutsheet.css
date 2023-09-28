@@ -44,6 +44,12 @@ p a:hover {
     border-radius: 0;
 }
 
+figcaption {
+    position: relative;
+    bottom: 0.5em;
+    left: 1em;
+}
+
 /* Tablet Styling */
 
 @media only screen and (min-width: 600px) {
