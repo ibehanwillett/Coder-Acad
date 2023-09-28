@@ -56,27 +56,24 @@ nav a:visited {
 
 footer {
     display: flex;
-    justify-content: center;
-    align-items: space-between;
+    justify-content: space-between;
+    align-items: center;
     background-color: #E5C5EC;
     position: flex-end;
-    min-height: 10vh;
+    padding: 1%;
+    min-height: 5vh;
 }
 
 footer p {
     font-weight: bold;
     color: #5A8F15;
-    margin: 5vw 5vw 0;
     vertical-align: middle;
-    font-size: 5.5vw;
-    position: relative;
-    left: 10%;
+    font-size: 4vw;
+   
 }
 
 .social-buttons{
-    height: 9vw;
-    width: 9vw;
-    margin: 5vw;
-
+    height: 5vw;
+    width: 5vw;
 }
 

@@ -30,6 +30,7 @@ h1:nth-child(2){
 }
 
 
+
 #name {
     position: relative;
     top: 5em;
@@ -171,7 +172,7 @@ h1:nth-child(2){
 
     .button {
         padding: 2vw 2vw;
-        font-size: 4vw;
+        font-size: 3vw;
     }
 
 }
