@@ -45,9 +45,8 @@ p a:hover {
 }
 
 figcaption {
-    position: relative;
-    bottom: 0.5em;
-    left: 1em;
+    margin: -0.2em 1em 0.5em;
+    text-align: center;
 }
 
 /* Tablet Styling */

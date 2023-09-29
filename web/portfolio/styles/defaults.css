@@ -48,15 +48,13 @@ nav a:hover {
     color: #5A8F15;
 }
 
-nav a:visited {
-    font-style: italic;
-}
+
 
 /* Footer */
 
 footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     background-color: #E5C5EC;
     position: flex-end;
