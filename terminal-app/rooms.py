@@ -35,4 +35,4 @@ class Kitchen(Room):
 
 class DininigRoom(Room):
     def __init__(self):
-        self.description = "You are in the kitchen."
+        self.description = "You are in the kitchen ."
