@@ -1,7 +1,8 @@
 import rooms
+import time
 
 # GENERAL SCRIPT
-howto_move = print('To move to another room, input the direction you want to move)')
+
 
 position = 'entrance'
 
@@ -66,6 +67,7 @@ while True:
             position = f'{move_choice}'
     if position == 'dining':
         dining.description()
+    
         move_choice = dining.doorpick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')

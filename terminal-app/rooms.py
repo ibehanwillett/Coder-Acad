@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 
 # Room base class
-class Room(ABC):
-    def __init__(self, name):
+class Room:
+    def __init__(self, name, north, south, east, west, description):
         self.name = name
-        self.north = 'wall'
-        self.east = 'wall'
-        self.south = 'wall'
-        self.west = 'wall'
+        self.north = north
+        self.east = east
+        self.south = south
+        self.west = west
     
     def __str__(self):
         return f'You are in the {self.name}'
@@ -22,25 +22,15 @@ class Room(ABC):
             return f'{self.east}'
         if door == 'west':
             return f'{self.west}'
+    
+    
 
-# Doors
-# class Door():
-#     def __init__(self, name):
-#         self.name = name
-
-#     def move(name):
-#         print('The door creaks as you move into the other room')
-#         return name
-
-
-            
 
 
     
 # Rooms themselves definition
 class Entrance(Room):
     def __init__(self, name):
-        super.__init__(self)
         self.name = name
         self.north = 'locked'
         self.east = 'library'
@@ -53,8 +43,7 @@ class Entrance(Room):
 
 
 class Library(Room):
-    def __init__(self, name):
-        super.__init__(self.east, self.east)
+    def __init__(self, name, north, south, east, west, description):
         self.name = name
         self.south = 'study'
         self.west = 'entrance'
@@ -101,26 +90,44 @@ class Dining(Room):
      def __init__(self, name):
          self.south = 'kitchen'
          self.east = 'entrance'
+         self.candle = True
 
      def description(self):
         print('You\'re in the dining room. There\'s a door on the south wall and east wall.')
+
+    def candle():
+        if self.candle == True:
+            print('There\'s a table set with a beautiful roast chicken. It looks like it might have been out for a while.')
+            time.sleep(1)
+            print('... It smells like it\'s been out for a while. \n There\'s a beautiful long white tallow candle illuminating the screen.' ) 
+            answer = str(input('Blow out candle?'))  
+            if answer == 'yes':
+                candle == False
+                print('You blow out the candle. As soon as you do, the food resting on the dinner plates errupts into a cacouphanous swirl of flies and cocharoaches.\n They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
+                time.sleep(1)
+                print('The smell remains.)')
+            if answer == 'no':
+                print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
+        if self.candle == False:
+            print('There\'s a table set for two, the bone-whiteplates are empty. The smell of rot is intense.')
+
+
 
 
 
 
 
 ## Rooms set-up
-entrance = Entrance('Entrance')
-library = Library('Library')
-study = Study('Study')
-statue = Statue('Statue')
+entrance = Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
+library = Library('library', 'wall', 'study', 'wall', 'entrance', 'You\'re in a library. Placeholder description. There is a door on south wall and west wall.')
+statue = Statue('statue',)
 bedroom = Bedroom('Bedroom')
 kitchen = Kitchen('Kitchen')
 dining = Dining('Dining Room')
 
 
 # Items
-class Item(ABC):
+class Item:
     def __init__(self, name, description):
         self.name = name
         self.definition = description
@@ -138,7 +145,16 @@ class Book(Item):
 
 # Inventory
 class Inventory:
-    
+    def __init__(self, items, hasKey):
+        self.name = name
+        self.items = items
+        self.hasKey = hasKey
+
+# Charater 
+class Charater:
+    def __init__(self, name):
+        inv = Inventory('', False)
+
 
 
 
