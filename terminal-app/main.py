@@ -6,13 +6,13 @@ import time
 
 position = 'entrance'
 
-entrance = roooms.Entrance('Entrance')
-library = rooms.Library('Library')
-study = rooms.Study('Study')
-statue = rooms.Statue('Statue')
-bedroom = rooms.Bedroom('Bedroom')
-kitchen = rooms.Kitchen('Kitchen')
-dining = rooms.Dining('Dining Room')
+entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
+library = rooms.Library('library', 'wall', 'study', 'wall', 'entrance', 'You\'re in a library. There\'s a door on south wall and west wall.')
+study = rooms.Study('study', 'library', 'wall', 'wall', 'statue', 'You\'re in the study. There is a door on the west wall and the north wall.')
+statue = rooms.Statue('statue', 'entrance', 'bedroom', 'study', 'kitchen','You\'re in a room full of statutes. Doors surround you on all all four cardinal directions.' )
+bedroom = rooms.Bedroom('Bedroom','statue', 'wall', 'wall', 'wall', 'You are in the bedroom. There is only one door to the north.' )
+kitchen = rooms.Kitchen('Kitchen', 'dining', 'wall', 'statue', 'wall','You\'re in the kitchen. There is a door on the east wall and north wall.')
+dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You\'re in the dining room. There\'s a door on the south wall and east wall.')
 
 
 # def whereto(move_choice):
@@ -28,6 +28,11 @@ dining = rooms.Dining('Dining Room')
 #START OF GAME
 print('You wake in a spooky scary house! Uh oh!')
 print('You try and open the door behind you...')
+time.sleep(1)
+print('...it\'s locked...')
+time.sleep(1)
+print('You\'re stuck in here.')
+print('You take a look around.)')
 
 while True:
     if position == 'entrance':
