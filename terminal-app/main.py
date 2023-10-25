@@ -5,7 +5,7 @@ import time
 
 
 position = 'entrance'
-
+# Room set up
 entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
 library = rooms.Library('library', 'wall', 'study', 'wall', 'entrance', 'You\'re in a library. There\'s a door on south wall and west wall.')
 study = rooms.Study('study', 'library', 'wall', 'wall', 'statue', 'You\'re in the study. There is a door on the west wall and the north wall.')
@@ -13,6 +13,10 @@ statue = rooms.Statue('statue', 'entrance', 'bedroom', 'study', 'kitchen','You\'
 bedroom = rooms.Bedroom('Bedroom','statue', 'wall', 'wall', 'wall', 'You are in the bedroom. There is only one door to the north.' )
 kitchen = rooms.Kitchen('Kitchen', 'dining', 'wall', 'statue', 'wall','You\'re in the kitchen. There is a door on the east wall and north wall.')
 dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You\'re in the dining room. There\'s a door on the south wall and east wall.')
+
+# Charater set up
+player = rooms.Charater('Player')
+
 
 
 # def whereto(move_choice):
@@ -32,6 +36,7 @@ time.sleep(1)
 print('...it\'s locked...')
 time.sleep(1)
 print('You\'re stuck in here.')
+time.sleep(1)
 print('You take a look around.)')
 
 while True:
@@ -72,12 +77,16 @@ while True:
             position = f'{move_choice}'
     if position == 'dining':
         dining.description()
-    
-        move_choice = dining.doorpick()
-        if move_choice == 'wall':
-            print('There\'s no door to that direction!')
-        else:
-            position = f'{move_choice}'
+        looksie = str(input('Look around or move on?  '))
+        if looksie == 'look around':
+            dining.scene()
+                player.inv.append('candle')
+        if looksie == 'move on':
+            move_choice = dining.doorpick()
+            if move_choice == 'wall':
+                print('There\'s no door to that direction!')
+            else:
+                position = f'{move_choice}'
     if position == 'bedroom':
         bedroom.description()
         move_choice = bedroom.doorpick()
