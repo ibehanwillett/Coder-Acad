@@ -1,5 +1,9 @@
 import rooms
+from rooms import quitcheck()
+from rooms import player
+import sys
 import time
+
 
 # GENERAL SCRIPT
 
@@ -14,8 +18,7 @@ bedroom = rooms.Bedroom('Bedroom','statue', 'wall', 'wall', 'wall', 'You are in 
 kitchen = rooms.Kitchen('Kitchen', 'dining', 'wall', 'statue', 'wall','You\'re in the kitchen. There is a door on the east wall and north wall.')
 dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You\'re in the dining room. There\'s a door on the south wall and east wall.')
 
-# Charater set up
-player = rooms.Charater('Player')
+
 
 
 
@@ -30,6 +33,7 @@ player = rooms.Charater('Player')
 
 
 #START OF GAME
+pygame.init()
 print('You wake in a spooky scary house! Uh oh!')
 print('You try and open the door behind you...')
 time.sleep(1)
@@ -43,6 +47,7 @@ while True:
     if position == 'entrance':
         entrance.description()
         move_choice = entrance.doorpick()
+        quitcheck(move_choice)
         if move_choice == 'locked':
             print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
         else:
@@ -77,10 +82,7 @@ while True:
             position = f'{move_choice}'
     if position == 'dining':
         dining.description()
-        looksie = str(input('Look around or move on?  '))
-        if looksie == 'look around':
-            dining.scene()
-                player.inv.append('candle')
+        dining.scene()
         if looksie == 'move on':
             move_choice = dining.doorpick()
             if move_choice == 'wall':

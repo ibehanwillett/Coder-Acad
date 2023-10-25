@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
 import time
+# General code
+def quitcheck(input):
+    if input == 'quit':
+        sys.exit()
 
 # Room base class
 class Room:
@@ -14,6 +18,7 @@ class Room:
 
     def doorpick(self):
         door = str(input('Where do you want to go?  '))
+        quitcheck(door)
         if door == 'north':
             return f'{self.north}'
         if door == 'south':
@@ -22,6 +27,7 @@ class Room:
             return f'{self.east}'
         if door == 'west':
             return f'{self.west}'
+    
 
     def description(self):
         print(f'You are in the {self.name}')
@@ -77,6 +83,21 @@ class Bedroom(Room):
          self.name = name
          self.north = 'statue'
          self.doors = doors
+    
+    def scene(self):
+        print('It\'s too dark to see...')
+        if 'candle' in player.inv.items and 'matches' not in player.inv.items:
+            print('You have a candle, but nothing to light it with! \nYou should probably leave.')
+        if 'matches' in player.inv.items and 'candle' not in player.inv.items:
+            print('You try to light some matches...')
+            time.sleep(1)
+            print('You get a second of light! You see briefly what look\'s to be a bedroom, it\'s very pink and- wait.')
+            time.sleep(2)
+            print('Did something just move?')
+            time.sleep(1)
+            print('The match burns out, leaving you with nothing but burnt fingertips and a stone of dread rising in your throat. \n Best come back when you have something to light the candle with.')
+        if 'candle' in player.inv.items and 'matches' in player.inv.items:
+            
 
 
 
@@ -87,6 +108,9 @@ class Kitchen(Room):
          self.north = 'dining'
          self.doors = doors
         
+     def scene(self):
+
+        
 
 
 class Dining(Room):
@@ -96,8 +120,7 @@ class Dining(Room):
          self.east = 'entrance'
          self.doors = doors
          self.candle = True
-        
-
+         self.inv = ['candle'], False
 
      def scene(self):
         if self.candle == True:
@@ -110,7 +133,7 @@ class Dining(Room):
                 print('You blow out the candle. As soon as you do, the food resting on the dinner plates errupts into a cacouphanous swirl of flies and cocharoaches.\n They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
                 time.sleep(1)
                 print('The smell remains.)')
-                return complete
+                player.inv.append('candle')
             if answer == 'no':
                 print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
         if self.candle == False:
@@ -153,17 +176,21 @@ class Book(Item):
 
 # Inventory
 class Inventory:
-    def __init__(self, items, hasKey):
+    def __init__(self, items):
         self.items = items
-        self.hasKey = hasKey
+    
+    def exchange(self, to_inv, from_inv):
+        to_inv.items.append(from_inv.items)
+        from_inv.items = []
     
 
 
 # Charater 
 class Charater:
-    def __init__(self, name):
-        inv = Inventory([], False)
+    def __init__(self, name, things):
+        inv = Inventory([self.things])
 
 
-
+player = Charater('Player')
+ghost = Charater('Ghost', 'key')
 
