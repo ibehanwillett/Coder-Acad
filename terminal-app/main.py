@@ -1,13 +1,13 @@
 import rooms
 from rooms import quitcheck
-from rooms import player
 import sys
 import time
+import characters
+
 
 
 # GENERAL SCRIPT
-
-
+player = characters.Character('Player', [])
 position = 'entrance'
 # Room set up
 entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
@@ -41,13 +41,16 @@ print('...it\'s locked...')
 time.sleep(1)
 print('You\'re stuck in here.')
 time.sleep(1)
-print('You take a look around.)')
+print('You take a look around.')
 
 while True:
     if position == 'entrance':
         entrance.description()
         move_choice = entrance.doorpick()
         quitcheck(move_choice)
+        if move_choice == 'locked' and key in player.inv:
+            print('You unlock the door!')
+            break
         if move_choice == 'locked':
             print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
         else:
@@ -82,15 +85,15 @@ while True:
             position = f'{move_choice}'
     if position == 'dining':
         dining.description()
-        dining.scene()
-        if looksie == 'move on':
-            move_choice = dining.doorpick()
-            if move_choice == 'wall':
-                print('There\'s no door to that direction!')
-            else:
-                position = f'{move_choice}'
+        dining.scene(player.inv)
+        move_choice = dining.doorpick()
+        if move_choice == 'wall':
+            print('There\'s no door to that direction!')
+        else:
+            position = f'{move_choice}'
     if position == 'bedroom':
         bedroom.description()
+        bedroom.scene(player.inv.items)
         move_choice = bedroom.doorpick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
