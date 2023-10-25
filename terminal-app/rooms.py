@@ -57,6 +57,9 @@ class Library(Room):
         self.south = 'study'
         self.west = 'entrance'
         self.doors = doors
+    
+odyssey = Book('The Odyssey', 'The Odyssey by Homer', '“But the great leveler, Death: not even the gods can defend a man, not even one they love, that day when fate takes hold and lays him out at last.”')
+carson = Book('Autobiography of Red', 'Autobiography of Red by Anne Carson', 'XIII. HERAKLES\' KILLING CLUB\nLittle red dog did not see it he felt it\nAll events carry but one')
         
 
 class Study(Room):
@@ -97,6 +100,8 @@ class Bedroom(Room):
             time.sleep(1)
             print('The match burns out, leaving you with nothing but burnt fingertips and a stone of dread rising in your throat. \n Best come back when you have something to light the candle with.')
         if 'candle' in player.inv.items and 'matches' in player.inv.items:
+            print('You see a spooky ghost girl!')
+            ghost.conversation()
             
 
 
@@ -109,6 +114,7 @@ class Kitchen(Room):
          self.doors = doors
         
      def scene(self):
+        print('Kitchen time baby. Time to make a pie... of PEOPLE!!! SPOOKY SCARY')
 
         
 
@@ -120,20 +126,22 @@ class Dining(Room):
          self.east = 'entrance'
          self.doors = doors
          self.candle = True
-         self.inv = ['candle'], False
+         self.inv = ['candle']
 
      def scene(self):
         if self.candle == True:
-            print('There\'s a table set with a beautiful roast chicken. It looks like it might have been out for a while.')
-            time.sleep(1)
+            print('There\'s a table set with what looks like to have been roast chicken once. It looks like it might have been out for a while.')
+            time.sleep(2)
             print('... It smells like it\'s been out for a while. \n There\'s a beautiful long white tallow candle illuminating the screen.' ) 
-            answer = str(input('Blow out candle?'  ))  
+            time.sleep(2)
+            answer =(input('Blow out candle?  '))
+            quitcheck(answer)  
             if answer == 'yes':
                 self.candle == False
                 print('You blow out the candle. As soon as you do, the food resting on the dinner plates errupts into a cacouphanous swirl of flies and cocharoaches.\n They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
-                time.sleep(1)
+                time.sleep(3)
                 print('The smell remains.)')
-                player.inv.append('candle')
+                player.inv.append(self.inv)
             if answer == 'no':
                 print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
         if self.candle == False:
@@ -161,36 +169,47 @@ class Dining(Room):
 class Item:
     def __init__(self, name, description):
         self.name = name
-        self.definition = description
+        self.description = description
+
+    def inspect(self):
+        print(f'{self.description})
 
     @abstractmethod
-    def inspect(self):
+    def interact(self):
         pass
 
 class Book(Item):
     def __init__(self, name, description, excerpt):
         super.__init__(name, description)
         self.excerpt = excerpt
-    def inspect():
-        print(excerpt)
+    def interact():
+        print('You flip to a random page and begin to read ...')
+        time.sleep(2)
+        print(f'{self.excerpt}')
+        time.sleep(3)
+        print('Hmm... a lot to think about.')
 
 # Inventory
 class Inventory:
     def __init__(self, items):
         self.items = items
     
-    def exchange(self, to_inv, from_inv):
-        to_inv.items.append(from_inv.items)
-        from_inv.items = []
+    def exchange(self, from_inv):
+        self.items.append(from_inv)
+        from_inv = []
     
 
 
 # Charater 
 class Charater:
     def __init__(self, name, things):
-        inv = Inventory([self.things])
+        self.things = things
+        self.inv = Inventory([self.things])
+    
+    def conversation(self):
+        print('The ghost says \'No... please don\'t go... I don\'t want you to go...\'')
 
 
-player = Charater('Player')
+player = Charater('Player', '')
 ghost = Charater('Ghost', 'key')
 

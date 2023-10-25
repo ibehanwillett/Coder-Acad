@@ -1,5 +1,5 @@
 import rooms
-from rooms import quitcheck()
+from rooms import quitcheck
 from rooms import player
 import sys
 import time
@@ -33,7 +33,7 @@ dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You
 
 
 #START OF GAME
-pygame.init()
+
 print('You wake in a spooky scary house! Uh oh!')
 print('You try and open the door behind you...')
 time.sleep(1)
