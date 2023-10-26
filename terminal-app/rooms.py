@@ -1,15 +1,9 @@
 from abc import ABC
 import time
-import sys
 import characters
 import items
-
-
-# General code
-def quitcheck(input):
-    if input == 'quit':
-        sys.exit()
-
+from general import quitcheck
+from general import get_a_yes_no
 
 
 # Room base class
@@ -27,9 +21,8 @@ class Room:
 
     def door_pick(self):
         while True:
-            try: 
-                door = (input('Where do you want to go?  '))
-                quitcheck(door)
+            door = (input('Where do you want to go?  '))
+            quitcheck(door)
             if door == 'north':
                 return f'{self.north}'
             if door == 'south':
@@ -47,14 +40,13 @@ class Room:
         print(self.doors)
     
     def print_item_list(self, room_inv):
-        answer = input('Do you want to look around?')
-        quitcheck(answer)
-        if answer == 'yes' or answer == 'y':
+        answer = get_a_yes_no('Do you want to look around?  ')
+        if answer == True:
             print('Here\'s what jumps out at you as you look around the room')
             for item in range(len(room_inv)):
                 print(room_inv[item])
-        if answer == 'no' or answer == 'n':
-            return
+        if answer == False:
+            pass
 
     
 # Rooms themselves definition
@@ -84,12 +76,27 @@ class Library(Room):
         self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
     def flavourtext(self):
-        print('You see a bookshelf groaning under the combined weight of many large tomes.\n The smell of rot and mildew is overwhelming- What first looked like a pattern on the wallpaper is revealed to be black mold winding over the walls.\nMost of the books have become swollen with water like a well fed tick and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
+        print('You see a bookshelf groaning under the weight of many large tomes.\n The smell of rot and mildew is overwhelming-  you realise what you first took to be a pattern on the wallpaper is actually black mold growing in spirals over everything.\nMost of the books have become swollen with water and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
 
-    def scene(self, user):
-        print('You wanna see some books baby???')
-        answer = input('')
-    
+    def scene(self):
+        answer = get_a_yes_no('Do you want to read any of the books?  ')
+        if answer == True:
+            while True:
+                book_pick = input('Which book do you want to read?  ')
+                quitcheck(book_pick)
+                if book_pick == 'book with a blue spine' or book_pick == 'blue book':
+                    items.odyssey.interact()
+                    break
+                if book_pick == 'book with a red spine' or book_pick == 'red book':
+                    items.carson.interact()
+                    break
+                if book_pick == 'book with a black spine' or book_pick == 'black book':
+                    items.riddle.interact()
+                    break
+                else:
+                    print('I can\'t find that book; try again or write \'exit\' to leave.')
+        if answer == False:
+            print('You leave the books alone to their somber, sodden rest.')
 
 
         
@@ -102,9 +109,23 @@ class Study(Room):
          self.west = 'statue'
          self.north = 'library'
          self.doors = doors
-         self.inv = items.Inventory([])
+         self.inv = items.Inventory(['matches'])
+         self.has_scene_played = False
 
-        
+     def flavourtext(self, player_inv):
+        print('The study\'s wall are covered in writing. The words spiral out from the writing desk like someone starting writing and couldn\'t stop.\nThe writing starts out neat and carefully penned in black ink and gets wilder and more erratic as it goes on.\nEventually the ink runs out and the words are scratched into the wall instead.\n ...then the writer found a new kind of ink.')
+        if 'knife' in player_inv.items:
+            print('You can make the words out now. In fact you can\'t believe they ever gave you difficulty.\nIt reads \"MEAT MEAT MEAT MEAT MEAT\" They\'re lyrics and you know the song.')
+
+    def scene(player_inv):
+        if self.has_scene_played == False:
+            answer = input('What do you want to interact with?  ')
+            quitcheck(answer)
+            if answer == 'matches':
+                print('You see some matches scattered across the table.\nMost of them have been ruined by the... ink... but some are still good.')
+                get_matches = get_a_yes_no('Pick them up?')
+                if get_matches == True:
+                    self.inv.add_from(self.inv, player_inv)
 class Statue(Room):
 
 
@@ -153,7 +174,7 @@ class Kitchen(Room):
          self.east = 'statue'
          self.north = 'dining'
          self.doors = doors
-         self.inv = items.Inventory([])
+         self.inv = items.Inventory(['knife'])
         
      def scene(self):
         print('Kitchen time baby. Time to make a pie... of PEOPLE!!! SPOOKY SCARY')
@@ -185,20 +206,23 @@ class Dining(Room):
      def scene(self, user):
         answer = input('What would you like to interact with?  ')
         quitcheck(answer)
+        if answer == 'nothing':
+            print('You leave it be.')
+            return
         if answer == 'candle' or 'the candle':
-            extinguish_candle =(input('Blow out candle?  '))
-            quitcheck(extinguish_candle)  
-            if extinguish_candle == 'yes':
-                self.has_scene_played = True
-                print('You blow out the candle.\n As soon as you do, the food resting on the dinner plates errupts into a cacophonous swirl of flies and cockroaches.')
-                time.sleep(1)
-                print('They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
-                time.sleep(3)
-                print('The smell remains.')
-                self.inv.add_from(self.inv, user)
-                time.sleep(3)
-                print('You pick up the candle and put it in your pocket.')
-            if extinguish_candle == 'no':
-                print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
-
+            if self.has_scene_played == False:
+                extinguish_candle = (get_a_yes_no('Blow out candle?  '))
+                if extinguish_candle == True:
+                    self.has_scene_played = True
+                    print('You blow out the candle.\n As soon as you do, the food resting on the dinner plates errupts into a cacophonous swirl of flies and cockroaches.')
+                    time.sleep(1)
+                    print('They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
+                    time.sleep(3)
+                    print('The smell remains.')
+                    self.inv.add_from(self.inv, user)
+                    time.sleep(3)
+                    print('You pick up the candle and put it in your pocket.')
+                if extinguish_candle == False:
+                    print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
+    
         

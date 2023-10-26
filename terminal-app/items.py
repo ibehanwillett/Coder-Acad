@@ -1,4 +1,5 @@
-from abc import ABC, abstractmethod
+from general import quitcheck
+import time
 
 # Items
 class Item:
@@ -9,9 +10,6 @@ class Item:
     def inspect(self):
         print(f'{self.description}')
 
-    @abstractmethod
-    def interact(self):
-        pass
 
 class Book(Item):
     def __init__(self, name, description, excerpt):
@@ -22,7 +20,7 @@ class Book(Item):
     def __str__(self):
         return f'{self.name}'   
 
-    def interact():
+    def interact(self):
         print('You flip to a random page and begin to read ...')
         time.sleep(2)
         print(f'\"{self.excerpt}\"')

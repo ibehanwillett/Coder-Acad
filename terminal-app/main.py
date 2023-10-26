@@ -1,13 +1,15 @@
 import rooms
-from rooms import quitcheck
+from general import quitcheck
 import sys
 import time
 import characters
 
 
 
-# GENERAL SCRIPT
+# Player and Charater Set Up
 player = characters.Character('Player', [])
+ghost = characters.Character('Ghost', ['key'])
+# Position Set Up
 position = 'entrance'
 # Room set up
 entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
@@ -33,7 +35,7 @@ dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You
 
 
 #START OF GAME
-
+username = input('What\'s your name?  ')
 print('You wake in a spooky scary house! Uh oh!')
 print('You try and open the door behind you...')
 time.sleep(1)
@@ -59,6 +61,7 @@ while True:
         library.description()
         library.flavourtext()
         library.print_item_list(library.inv.items)
+        library.scene()
         move_choice = library.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
@@ -66,6 +69,9 @@ while True:
             position = f'{move_choice}'
     if position == 'study':
         study.description()
+        study.flavourtext(player.inv)
+        study.print_item_list(study.inv.items)
+        study.scene(player.inv)
         move_choice = study.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
@@ -97,7 +103,7 @@ while True:
             position = f'{move_choice}'
     if position == 'bedroom':
         bedroom.description()
-        bedroom.scene(player.inv.items)
+        bedroom.scene(player.inv, ghost.inv, username)
         move_choice = bedroom.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
