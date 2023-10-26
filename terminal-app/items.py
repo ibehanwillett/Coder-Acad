@@ -43,9 +43,15 @@ class Inventory:
 
 
     
-    def give(self, from_inv, to_inv, item):
-        to_inv.items.append(item)
-        from_inv.items.remove(item)
+    def give(self, item):
+        self.items.append(item)
+    
+    def remove(self, item):
+        self.items.remove(item)
+    
+    def transfer_item(self, other_inv, item):
+        other_inv.give(item)
+        self.inv.remove(item)
     
     def view_inventory(self):
         for item in range(len(self.items)):

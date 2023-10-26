@@ -23,9 +23,9 @@ class Character:
                 print('She asks:')
                 answer = input(' I saw a woman sit alone. What am I?  ')
                 quitcheck(answer)
-                if answer == 'a mirror' or 'mirror':
+                if (answer == 'a m' or answer == 'm'):
                     print('\"That\'s exactly right.\"')
-                    self.inv.give(ghost_inv, player_inv, 'key')
+                    self.inv.transfer(player_inv, 'key')
                     print('You feel the key slide into you pocket. It\'s cold as ice.')
                 else:
                     print('The ghost shrieks \'WRONG!\' A red cloud covers the mirror and when it disappates the ghost is gone.')

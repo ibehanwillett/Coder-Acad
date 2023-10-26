@@ -137,7 +137,7 @@ class Study(Room):
                 print('You see some matches scattered across the table.\nMost of them have been ruined by the... ink... but some are still good.')
                 get_matches = get_a_yes_no('Pick them up?')
                 if get_matches == True:
-                    self.inv.give(self.inv, player_inv, 'matches')
+                    self.inv.transfer_item(player_inv, 'matches')
                     self.has_scene_played = True
                     print('You pick the matches up.')
                 if get_matches == False:
@@ -231,7 +231,7 @@ class Kitchen(Room):
                 knife_get = get_a_yes_no('Take the knife?')
                 if knife_get == True:
                     print('The knife feels good in your hand, like it\'s supposed to be there.')
-                    self.inv.give(self.inv, player_inv, 'knife')
+                    self.inv.transfer_item(player_inv, 'knife')
                     print('The knife is added to your inventory.')
                 else:
                     print('You leave it be, shining in the warm red light emanating from the oven.')
@@ -280,7 +280,7 @@ class Dining(Room):
                     print('They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
                     time.sleep(3)
                     print('The smell remains.')
-                    self.inv.give(self.inv, user, 'candle')
+                    self.inv.transfer_item(user, 'candle')
                     time.sleep(3)
                     print('You pick up the candle and put it in your pocket.')
                 if extinguish_candle == False:
