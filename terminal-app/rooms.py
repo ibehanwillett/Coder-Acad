@@ -51,9 +51,8 @@ class Room:
     
 # Rooms themselves definition
 class Entrance(Room):
-
-
     def __init__(self, name, north, south, east, west, doors):
+        super().__init__(name, doors)
         self.name = name
         self.north = 'locked'
         self.east = 'library'
@@ -66,9 +65,8 @@ class Entrance(Room):
 
 
 class Library(Room):
-
-
     def __init__(self, name, north, south, east, west, doors):
+        super()_.__init__(north, east)
         self.name = name
         self.south = 'study'
         self.west = 'entrance'
@@ -129,6 +127,7 @@ class Study(Room):
                 if get_matches == True:
                     self.inv.add_from(self.inv, player_inv)
                     self.has_scene_played = True
+                    print('You pick the matches up.')
                 if get_matches == False:
                     print('You leave them alone.')
             else: 
@@ -158,11 +157,11 @@ class Bedroom(Room):
          self.north = 'statue'
          self.doors = doors
          
-    def scene(self, player_inventory):
-        print('It\'s too dark to see...')
-        if 'candle' in player_inventory and 'matches' not in player_inventory:
-            print('You have a candle, but nothing to light it with! \nYou should probably leave.')
-        if 'matches' in player_inventory and 'candle' not in player_inventory:
+    def scene(self, player_inventory, ghost_inventory, username):
+        print('It\'s so dark...')
+        if ('candle' in player_inventory.items and 'matches' not in player_inventory.items):
+            print('It\'s too dark to see. You have a candle, but nothing to light it with! \nYou should probably leave.')
+        elif ('matches' in player_inventory.items and 'candle' not in player_inventory.items):
             print('You try to light some matches...')
             time.sleep(1)
             print('You get a second of light! You see briefly what look\'s to be a bedroom, it\'s very pink and- wait.')
@@ -170,10 +169,11 @@ class Bedroom(Room):
             print('Did something just move?')
             time.sleep(1)
             print('The match burns out, leaving you with nothing but burnt fingertips and a stone of dread rising in your throat. \n Best come back when you have something to light the candle with.')
-        if ('candle' in player_inventory and 'matches' in player_inventory) or 'lit candle' in player_inventory:
+        elif ('candle' in player_inventory.items and 'matches' in player_inventory.items) or ('lit candle' in player_inventory.items):
             print('You see a spooky ghost girl!')
-            ghost.conversation()
-            
+            characters.ghost.conversation(player_inventory, ghost_inventory, username)
+        else:
+            print('It\'s too dark to see! You get a bad feeling; you should leave.')  
 
 
 

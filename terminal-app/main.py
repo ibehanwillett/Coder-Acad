@@ -1,4 +1,5 @@
 import rooms
+import general
 from general import quitcheck
 import sys
 import time
@@ -8,7 +9,7 @@ import characters
 
 # Player and Charater Set Up
 player = characters.Character('Player', [])
-ghost = characters.Character('Ghost', ['key'])
+ghost = characters.ghost
 # Position Set Up
 position = 'entrance'
 # Room set up
@@ -23,15 +24,6 @@ dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You
 
 
 
-
-# def whereto(move_choice):
-#     if move_choice == 'locked':
-#             print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
-#     if move_choice == 'wall':
-#             print('There\'s no door to that direction!')
-#     else:
-#         global position
-#         position = f'{move_choice}'
 
 
 #START OF GAME
@@ -48,15 +40,16 @@ print('You take a look around.')
 while True:
     if position == 'entrance':
         entrance.description()
-        move_choice = entrance.door_pick()
-        quitcheck(move_choice)
-        if move_choice == 'locked' and key in player.inv:
-            print('You unlock the door!')
-            break
-        if move_choice == 'locked':
-            print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
-        else:
-            position = f'{move_choice}'
+        position = general.leave(entrance)
+        # move_choice = entrance.door_pick()
+        # quitcheck(move_choice)
+        # if (move_choice == 'locked' and 'key' in player.inv.items):
+        #     print('You unlock the door!')
+        #     break
+        # if (move_choice == 'locked' and 'key' not in player.inv.items):
+        #     print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
+        # else:
+        #     position = f'{move_choice}'
     if position == 'library':
         library.description()
         library.flavourtext()
