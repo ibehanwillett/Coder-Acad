@@ -93,6 +93,8 @@ class Library(Room):
                 if book_pick == 'book with a black spine' or book_pick == 'black book':
                     items.riddle.interact()
                     break
+                if book_pick == 'none':
+                    break
                 else:
                     print('I can\'t find that book; try again or write \'exit\' to leave.')
         if answer == False:
@@ -117,7 +119,7 @@ class Study(Room):
         if 'knife' in player_inv.items:
             print('You can make the words out now. In fact you can\'t believe they ever gave you difficulty.\nIt reads \"MEAT MEAT MEAT MEAT MEAT\" They\'re lyrics and you know the song.')
 
-    def scene(player_inv):
+     def scene(self, player_inv):
         if self.has_scene_played == False:
             answer = input('What do you want to interact with?  ')
             quitcheck(answer)
@@ -126,6 +128,15 @@ class Study(Room):
                 get_matches = get_a_yes_no('Pick them up?')
                 if get_matches == True:
                     self.inv.add_from(self.inv, player_inv)
+                    self.has_scene_played = True
+                if get_matches == False:
+                    print('You leave them alone.')
+            else: 
+                print('I don\'t know what you mean.')
+        if self.has_scene_played == True:
+            print('God... why does some of the ink still look wet?')
+
+
 class Statue(Room):
 
 

@@ -14,9 +14,9 @@ def get_a_yes_no(prompt):
             print('No numbers please!')
             continue
         quitcheck(answer)
-        if answer == 'yes' or 'y':
+        if answer == ('yes' or 'y'):
             return True
-        if answer == 'no' or 'n':
+        elif answer == ('no' or 'n'):
             return False
         else:
             print('Yes or no please!')
