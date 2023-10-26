@@ -53,4 +53,9 @@ def leave(room):
         else:
             return where
         
-    
+def win_condition_met(username)
+    print('You open the door!')
+    print('Outside the day is bright and sunny! You sprint off into the warm sunlight.')
+    print('You don\'t even notice the little pale ghost face at the bedroom window.')
+    print('You certainly don\'t hear the whisper...')
+    print(f'\"Goodbye... {username}')

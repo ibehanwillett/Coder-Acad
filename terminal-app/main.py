@@ -13,13 +13,13 @@ ghost = characters.ghost
 # Position Set Up
 position = 'entrance'
 # Room set up
-entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','The entrance is a room. Placeholder description. There is a door on the east wall, west wall and south wall.')
-library = rooms.Library('library', 'wall', 'study', 'wall', 'entrance', 'You\'re in a library. There\'s a door on south wall and west wall.')
-study = rooms.Study('study', 'library', 'wall', 'wall', 'statue', 'You\'re in the study. There is a door on the west wall and the north wall.')
-statue = rooms.Statue('statue', 'entrance', 'bedroom', 'study', 'kitchen','You\'re in a room full of statutes. Doors surround you on all all four cardinal directions.' )
-bedroom = rooms.Bedroom('Bedroom','statue', 'wall', 'wall', 'wall', 'You are in the bedroom. There is only one door to the north.' )
-kitchen = rooms.Kitchen('Kitchen', 'dining', 'wall', 'statue', 'wall','You\'re in the kitchen. There is a door on the east wall and north wall.')
-dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'You\'re in the dining room. There\'s a door on the south wall and east wall.')
+entrance = rooms.Entrance('entrance', 'locked', 'statue','library','dining','There is a door to the east, west and south.')
+library = rooms.Library('library', 'wall', 'study', 'wall', 'entrance', 'There\'s a door to the south and the west.')
+study = rooms.Study('study', 'library', 'wall', 'wall', 'statue', 'There is a door on the west and the north.')
+statue = rooms.Statue('statue', 'entrance', 'bedroom', 'study', 'kitchen','There is a door to your west, north and east. To the south, a spiral staircase winds up to darkness.' )
+bedroom = rooms.Bedroom('Bedroom','statue', 'wall', 'wall', 'wall', 'You are in the bedroom. The only exit is north, the stairwell going back downstairs.' )
+kitchen = rooms.Kitchen('Kitchen', 'dining', 'wall', 'statue', 'wall','There is a door to the east and the north.')
+dining = rooms.Dining('Dining Room', 'wall', 'kitchen', 'entrance', 'wall', 'There\'s a door to the south and another to the east.')
 
 
 
@@ -102,6 +102,7 @@ while True:
             print('There\'s no door to that direction!')
         else:
             position = f'{move_choice}'
+
 
 
     

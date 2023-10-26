@@ -8,8 +8,6 @@ from general import get_a_yes_no
 
 # Room base class
 class Room:
-
-
     def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.north = north
@@ -52,21 +50,30 @@ class Room:
 # Rooms themselves definition
 class Entrance(Room):
     def __init__(self, name, north, south, east, west, doors):
-        super().__init__(name, doors)
         self.name = name
         self.north = 'locked'
         self.east = 'library'
         self.south = 'statue'
         self.west = 'dining'
         self.doors = doors
-        self.inv = items.Inventory([])
+        self.inv = items.Inventory(['locked door'])
+    
+    def flavourtext(self, player_inv):
+        print('You find yourself in a ruined entrance of a grand old manor house.')
+        print('The black and white parquet is cracked and ruined. ')
+        print('Sometimes, something hot and wet oozes from underneath the tile as you step on it.')
+
+    def scene(self, player_inventory):
+        answer = get_a_yes_no('Do you try and open the locked door?')
+        if answer == True:
+            if 'key' in player_inventory.items:
+                
 
     
 
 
 class Library(Room):
     def __init__(self, name, north, south, east, west, doors):
-        super()_.__init__(north, east)
         self.name = name
         self.south = 'study'
         self.west = 'entrance'
