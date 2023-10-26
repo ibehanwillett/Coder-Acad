@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from rooms import quitcheck
 # Items
 class Item:
     def __init__(self, name, description):
@@ -21,3 +22,38 @@ class Book(Item):
         print(f'{self.excerpt}')
         time.sleep(3)
         print('Hmm... a lot to think about.')
+
+# Book instances
+odyssey = Book('A book with a blue spine', 'The Odyssey by Homer', '“But the great leveler, Death: not even the gods can defend a man, not even one they love, that day when fate takes hold and lays him out at last.”')
+carson = Book('A book with a red spine', 'Autobiography of Red by Anne Carson', 'XIII. HERAKLES\' KILLING CLUB\nLittle red dog did not see it he felt it\nAll events carry but one')
+riddle = Book('A book with a black spine', 'A book about Anglo-Saxon riddles.', '...although contentious, most scholars agree the answer to the riddle \'I saw a...(There\'s a stain on the page here.) ...alone is a mirror.')
+
+
+# Inventory
+
+class Inventory:
+
+
+    def __init__(self, items):
+        self.items = items
+
+
+    
+    def add_from(self, from_inv, to_inv):
+        to_inv.items.extend(from_inv.items)
+        from_inv.items = []
+    
+    def view_inventory(self):
+        for item in range(len(self.items)):
+            print(self.items[item])
+        if 'candle' in self.items and 'matches' in self.items:
+            answer = ('Light the candle with the matches?')
+            quitcheck(answer)
+            if answer == 'yes' or answer == 'y':
+                self.items.append('lit candle')
+                self.items.remove('matches')
+                self.items.remove('candle')
+                print('You now have a lit candle in your inventory.\nIt gives off a lovely light.')
+            if answer == 'no' or 'n':
+                return
+                

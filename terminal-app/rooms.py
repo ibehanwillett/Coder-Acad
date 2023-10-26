@@ -23,7 +23,7 @@ class Room:
         self.south = south
         self.west = west
         self.doors = doors
-        self.inv = characters.Inventory([])
+        self.inv = items.Inventory([])
 
     def door_pick(self):
         door = str(input('Where do you want to go?  '))
@@ -63,7 +63,7 @@ class Entrance(Room):
         self.south = 'statue'
         self.west = 'dining'
         self.doors = doors
-        self.inv = characters.Inventory([])
+        self.inv = items.Inventory([])
 
     
 
@@ -76,15 +76,13 @@ class Library(Room):
         self.south = 'study'
         self.west = 'entrance'
         self.doors = doors
-        self.inv = characters.Inventory([])
+        self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
     def scene(self, user):
         print('You see a bookshelf groaning under the combined weight of many large tomes.\n The smell of rot and mildew is overwhelming- What first looked like a pattern on the wallpaper is revealed to be black mold winding over the walls.\nMost of the books have become swollen with water like a well fed tick and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
         answer = input('')
     
-odyssey = items.Book('The Odyssey', 'The Odyssey by Homer', '“But the great leveler, Death: not even the gods can defend a man, not even one they love, that day when fate takes hold and lays him out at last.”')
-carson = items.Book('Autobiography of Red', 'Autobiography of Red by Anne Carson', 'XIII. HERAKLES\' KILLING CLUB\nLittle red dog did not see it he felt it\nAll events carry but one')
-riddle = items.Book('Anglo-Saxon Riddles', 'A book about Anglo-Saxon riddles.', '...although contentious, most scholars agree the answer to the riddle \'I saw a...(There\'s a stain on the page here.) ...alone is a mirror.')
+
 
         
 
@@ -132,7 +130,7 @@ class Bedroom(Room):
             print('Did something just move?')
             time.sleep(1)
             print('The match burns out, leaving you with nothing but burnt fingertips and a stone of dread rising in your throat. \n Best come back when you have something to light the candle with.')
-        if 'candle' in player_inventory and 'matches' in player_inventory:
+        if ('candle' in player_inventory and 'matches' in player_inventory) or 'lit candle' in player_inventory:
             print('You see a spooky ghost girl!')
             ghost.conversation()
             

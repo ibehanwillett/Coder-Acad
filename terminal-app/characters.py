@@ -1,15 +1,4 @@
-# Inventory
-class Inventory:
-    def __init__(self, items):
-        self.items = items
-    
-    def add_from(self, from_inv, to_inv):
-        to_inv.items.extend(from_inv.items)
-        from_inv.items = []
-    
 
-
-# Character 
 class Character:
     def __init__(self, name, things):
         self.things = things
