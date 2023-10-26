@@ -25,7 +25,7 @@ class Character:
                 quitcheck(answer)
                 if answer == 'a mirror' or 'mirror':
                     print('\"That\'s exactly right.\"')
-                    self.inv.add_from(ghost_inv, player_inv)
+                    self.inv.give(ghost_inv, player_inv, 'key')
                     print('You feel the key slide into you pocket. It\'s cold as ice.')
                 else:
                     print('The ghost shrieks \'WRONG!\' A red cloud covers the mirror and when it disappates the ghost is gone.')

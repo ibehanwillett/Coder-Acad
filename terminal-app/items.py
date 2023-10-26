@@ -43,9 +43,9 @@ class Inventory:
 
 
     
-    def add_from(self, from_inv, to_inv):
-        to_inv.items.extend(from_inv.items)
-        from_inv.items = []
+    def give(self, from_inv, to_inv, item):
+        to_inv.items.append(item)
+        from_inv.items.remove(item)
     
     def view_inventory(self):
         for item in range(len(self.items)):

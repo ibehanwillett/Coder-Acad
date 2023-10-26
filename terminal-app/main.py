@@ -49,7 +49,6 @@ while True:
         if (move_choice == 'locked' and 'key' in player.inv.items):
             print('You unlock the door!')
             win_conditon_met(username)
-            break
         if (move_choice == 'locked' and 'key' not in player.inv.items):
             print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
         else:
@@ -87,7 +86,6 @@ while True:
         kitchen.flavourtext()
         kitchen.print_item_list(kitchen.inv.items)
         kitchen.scene(player.inv)
-
         move_choice = kitchen.door_pick()
         if move_choice == 'wall':
                 print('There\'s no door to that direction!')
