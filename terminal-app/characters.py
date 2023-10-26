@@ -1,8 +1,8 @@
-
+import items
 class Character:
     def __init__(self, name, things):
         self.things = things
-        self.inv = Inventory([self.things])
+        self.inv = items.Inventory([self.things])
     
     def conversation(self):
         print('The ghost says \'No... please don\'t go... I don\'t want you to go...\'')

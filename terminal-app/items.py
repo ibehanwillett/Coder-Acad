@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from rooms import quitcheck
+
 # Items
 class Item:
     def __init__(self, name, description):
@@ -15,11 +15,17 @@ class Item:
 
 class Book(Item):
     def __init__(self, name, description, excerpt):
+        self.name = name
+        self.description = description
         self.excerpt = excerpt
+
+    def __str__(self):
+        return f'{self.name}'   
+
     def interact():
         print('You flip to a random page and begin to read ...')
         time.sleep(2)
-        print(f'{self.excerpt}')
+        print(f'\"{self.excerpt}\"')
         time.sleep(3)
         print('Hmm... a lot to think about.')
 

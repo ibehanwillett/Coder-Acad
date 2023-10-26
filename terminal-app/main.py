@@ -57,6 +57,8 @@ while True:
             position = f'{move_choice}'
     if position == 'library':
         library.description()
+        library.flavourtext()
+        library.print_item_list(library.inv.items)
         move_choice = library.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')

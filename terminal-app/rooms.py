@@ -26,16 +26,21 @@ class Room:
         self.inv = items.Inventory([])
 
     def door_pick(self):
-        door = str(input('Where do you want to go?  '))
-        quitcheck(door)
-        if door == 'north':
-            return f'{self.north}'
-        if door == 'south':
-            return f'{self.south}'
-        if door == 'east':
-            return f'{self.east}'
-        if door == 'west':
-            return f'{self.west}'
+        while True:
+            try: 
+                door = (input('Where do you want to go?  '))
+                quitcheck(door)
+            if door == 'north':
+                return f'{self.north}'
+            if door == 'south':
+                return f'{self.south}'
+            if door == 'east':
+                return f'{self.east}'
+            if door == 'west':
+                return f'{self.west}'
+            else: 
+                print('Sorry, I don\'t understand. Please try again.')
+                continue
 
     def description(self):
         print(f'You are in the {self.name}')
@@ -78,8 +83,11 @@ class Library(Room):
         self.doors = doors
         self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
-    def scene(self, user):
+    def flavourtext(self):
         print('You see a bookshelf groaning under the combined weight of many large tomes.\n The smell of rot and mildew is overwhelming- What first looked like a pattern on the wallpaper is revealed to be black mold winding over the walls.\nMost of the books have become swollen with water like a well fed tick and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
+
+    def scene(self, user):
+        print('You wanna see some books baby???')
         answer = input('')
     
 
@@ -94,7 +102,7 @@ class Study(Room):
          self.west = 'statue'
          self.north = 'library'
          self.doors = doors
-         self.inv = characters.Inventory([])
+         self.inv = items.Inventory([])
 
         
 class Statue(Room):
@@ -107,7 +115,7 @@ class Statue(Room):
         self.south = 'bedroom'
         self.west = 'kitchen'
         self.doors = doors
-        self.inv = characters.Inventory([])
+        self.inv = items.Inventory([])
 
 
 class Bedroom(Room):
@@ -145,7 +153,7 @@ class Kitchen(Room):
          self.east = 'statue'
          self.north = 'dining'
          self.doors = doors
-         self.inv = characters.Inventory([])
+         self.inv = items.Inventory([])
         
      def scene(self):
         print('Kitchen time baby. Time to make a pie... of PEOPLE!!! SPOOKY SCARY')
@@ -162,7 +170,7 @@ class Dining(Room):
          self.east = 'entrance'
          self.doors = doors
          self.has_scene_played = False
-         self.inv = characters.Inventory(['candle'])
+         self.inv = items.Inventory(['candle'])
 
      def flavourtext(self):
         if self.has_scene_played == False:
