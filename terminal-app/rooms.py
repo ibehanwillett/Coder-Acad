@@ -1,7 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 import time
 import sys
 import characters
+import items
 
 
 # General code
@@ -9,31 +10,12 @@ def quitcheck(input):
     if input == 'quit':
         sys.exit()
 
-# Items
-class Item:
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
 
-    def inspect(self):
-        print(f'{self.description}')
-
-    @abstractmethod
-    def interact(self):
-        pass
-
-class Book(Item):
-    def __init__(self, name, description, excerpt):
-        self.excerpt = excerpt
-    def interact():
-        print('You flip to a random page and begin to read ...')
-        time.sleep(2)
-        print(f'{self.excerpt}')
-        time.sleep(3)
-        print('Hmm... a lot to think about.')
 
 # Room base class
 class Room:
+
+
     def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.north = north
@@ -41,9 +23,9 @@ class Room:
         self.south = south
         self.west = west
         self.doors = doors
-    
+        self.inv = characters.Inventory([])
 
-    def doorpick(self):
+    def door_pick(self):
         door = str(input('Where do you want to go?  '))
         quitcheck(door)
         if door == 'north':
@@ -54,19 +36,26 @@ class Room:
             return f'{self.east}'
         if door == 'west':
             return f'{self.west}'
-    
 
     def description(self):
         print(f'You are in the {self.name}')
         print(self.doors)
     
-    
-
-
+    def print_item_list(self, room_inv):
+        answer = input('Do you want to look around?')
+        quitcheck(answer)
+        if answer == 'yes' or answer == 'y':
+            print('Here\'s what jumps out at you as you look around the room')
+            for item in range(len(room_inv)):
+                print(room_inv[item])
+        if answer == 'no' or answer == 'n':
+            return
 
     
 # Rooms themselves definition
 class Entrance(Room):
+
+
     def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.north = 'locked'
@@ -74,36 +63,45 @@ class Entrance(Room):
         self.south = 'statue'
         self.west = 'dining'
         self.doors = doors
+        self.inv = characters.Inventory([])
 
     
 
 
 class Library(Room):
+
+
     def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.south = 'study'
         self.west = 'entrance'
         self.doors = doors
+        self.inv = characters.Inventory([])
     
-    def scene(self):
-        print('You see a bookshelf groaning under the weight of ')
+    def scene(self, user):
+        print('You see a bookshelf groaning under the combined weight of many large tomes.\n The smell of rot and mildew is overwhelming- What first looked like a pattern on the wallpaper is revealed to be black mold winding over the walls.\nMost of the books have become swollen with water like a well fed tick and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
+        answer = input('')
     
-odyssey = characters.Book('The Odyssey', 'The Odyssey by Homer', '“But the great leveler, Death: not even the gods can defend a man, not even one they love, that day when fate takes hold and lays him out at last.”')
-carson = characters.Book('Autobiography of Red', 'Autobiography of Red by Anne Carson', 'XIII. HERAKLES\' KILLING CLUB\nLittle red dog did not see it he felt it\nAll events carry but one')
-riddle = characters.Book('Anglo-Saxon Riddles', 'A book about Anglo-Saxon riddles.', '...although contentious, most scholars agree the answer to the riddle \'I saw a...(There\'s a stain on the page here.) ...alone is a mirror.')
+odyssey = items.Book('The Odyssey', 'The Odyssey by Homer', '“But the great leveler, Death: not even the gods can defend a man, not even one they love, that day when fate takes hold and lays him out at last.”')
+carson = items.Book('Autobiography of Red', 'Autobiography of Red by Anne Carson', 'XIII. HERAKLES\' KILLING CLUB\nLittle red dog did not see it he felt it\nAll events carry but one')
+riddle = items.Book('Anglo-Saxon Riddles', 'A book about Anglo-Saxon riddles.', '...although contentious, most scholars agree the answer to the riddle \'I saw a...(There\'s a stain on the page here.) ...alone is a mirror.')
 
         
 
 class Study(Room):
+
+
      def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.west = 'statue'
          self.north = 'library'
          self.doors = doors
+         self.inv = characters.Inventory([])
 
         
-
 class Statue(Room):
+
+
      def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.north = 'entrance'
@@ -111,14 +109,17 @@ class Statue(Room):
         self.south = 'bedroom'
         self.west = 'kitchen'
         self.doors = doors
+        self.inv = characters.Inventory([])
 
 
 class Bedroom(Room):
+
+
     def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.north = 'statue'
          self.doors = doors
-    
+         
     def scene(self, player_inventory):
         print('It\'s too dark to see...')
         if 'candle' in player_inventory and 'matches' not in player_inventory:
@@ -139,11 +140,14 @@ class Bedroom(Room):
 
 
 class Kitchen(Room):
+
+
      def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.east = 'statue'
          self.north = 'dining'
          self.doors = doors
+         self.inv = characters.Inventory([])
         
      def scene(self):
         print('Kitchen time baby. Time to make a pie... of PEOPLE!!! SPOOKY SCARY')
@@ -152,6 +156,8 @@ class Kitchen(Room):
 
 
 class Dining(Room):
+
+    
      def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.south = 'kitchen'
@@ -160,55 +166,33 @@ class Dining(Room):
          self.has_scene_played = False
          self.inv = characters.Inventory(['candle'])
 
-     def scene(self, user):
+     def flavourtext(self):
         if self.has_scene_played == False:
-            print('There\'s a table set with what looks like to have been roast chicken once.\n It looks like it might have been out for a while.')
+            print('There\'s a table set with what looks like to have been roast chicken once.\nIt looks like it might have been out for a while.')
             time.sleep(2)
-            print('... It smells like it\'s been out for a while. \n There\'s a beautiful long white tallow candle illuminating the screen.' ) 
+            print('... It smells like it\'s been out for a while.') 
             time.sleep(2)
-            answer =(input('Blow out candle?  '))
-            quitcheck(answer)  
-            if answer == 'yes':
+            print('There\'s a beautiful long white tallow candle illuminating the screen.')
+        if self.has_scene_played == True:
+            print('There\'s a table set for two, the bone-whiteplates are empty. The smell of rot is intense.')
+
+     def scene(self, user):
+        answer = input('What would you like to interact with?  ')
+        quitcheck(answer)
+        if answer == 'candle' or 'the candle':
+            extinguish_candle =(input('Blow out candle?  '))
+            quitcheck(extinguish_candle)  
+            if extinguish_candle == 'yes':
                 self.has_scene_played = True
-                print('You blow out the candle. As soon as you do, the food resting on the dinner plates errupts into a cacouphanous swirl of flies and cocharoaches.')
+                print('You blow out the candle.\n As soon as you do, the food resting on the dinner plates errupts into a cacophonous swirl of flies and cockroaches.')
                 time.sleep(1)
                 print('They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
                 time.sleep(3)
                 print('The smell remains.')
                 self.inv.add_from(self.inv, user)
-            if answer == 'no':
+                time.sleep(3)
+                print('You pick up the candle and put it in your pocket.')
+            if extinguish_candle == 'no':
                 print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
-        if self.has_scene_played == True:
-            print('There\'s a table set for two, the bone-whiteplates are empty. The smell of rot is intense.')
 
-
-
-# Inventory
-class Inventory:
-    def __init__(self, items):
-        self.items = items
-    
-    def add_from(self, from_inv):
-        self.items.extend(from_inv)
-        from_inv = []
-    
-
-
-# Charater 
-class Charater:
-    def __init__(self, name, things):
-        self.things = things
-        self.inv = Inventory([self.things])
-    
-    def conversation(self):
-        print('The ghost says \'No... please don\'t go... I don\'t want you to go...\'')
-        print('I\'ll give you the key if you can answer my riddle; I saw a woman sit alone.')
-        answer = input('What am I?')
-        if answer == 'a mirror' or 'mirror':
-            print('That\'s exactly right.')
-        else:
-            print('The ghost shrieks \'WRONG!\' A red cloud covers the mirror and when it disappates the ghost is gone.')
-
-
-ghost = Charater('Ghost', ['key'])
-
+        

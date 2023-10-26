@@ -46,7 +46,7 @@ print('You take a look around.')
 while True:
     if position == 'entrance':
         entrance.description()
-        move_choice = entrance.doorpick()
+        move_choice = entrance.door_pick()
         quitcheck(move_choice)
         if move_choice == 'locked' and key in player.inv:
             print('You unlock the door!')
@@ -57,36 +57,38 @@ while True:
             position = f'{move_choice}'
     if position == 'library':
         library.description()
-        move_choice = library.doorpick()
+        move_choice = library.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
         else:
             position = f'{move_choice}'
     if position == 'study':
         study.description()
-        move_choice = study.doorpick()
+        move_choice = study.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
         else:
             position = f'{move_choice}'
     if position == 'statue':
         statue.description()
-        move_choice = statue.doorpick()
+        move_choice = statue.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
         else:
             position = f'{move_choice}'
     if position == 'kitchen':
         kitchen.description()
-        move_choice = kitchen.doorpick()
+        move_choice = kitchen.door_pick()
         if move_choice == 'wall':
                 print('There\'s no door to that direction!')
         else:
             position = f'{move_choice}'
     if position == 'dining':
         dining.description()
+        dining.flavourtext()
+        dining.print_item_list(dining.inv.items)
         dining.scene(player.inv)
-        move_choice = dining.doorpick()
+        move_choice = dining.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
         else:
@@ -94,7 +96,7 @@ while True:
     if position == 'bedroom':
         bedroom.description()
         bedroom.scene(player.inv.items)
-        move_choice = bedroom.doorpick()
+        move_choice = bedroom.door_pick()
         if move_choice == 'wall':
             print('There\'s no door to that direction!')
         else:
