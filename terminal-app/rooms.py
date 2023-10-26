@@ -2,8 +2,10 @@ from abc import ABC
 import time
 import characters
 import items
+import random
 from general import quitcheck
 from general import get_a_yes_no
+from general import win_condition_met
 
 
 # Room base class
@@ -40,9 +42,12 @@ class Room:
     def print_item_list(self, room_inv):
         answer = get_a_yes_no('Do you want to look around?  ')
         if answer == True:
-            print('Here\'s what jumps out at you as you look around the room')
-            for item in range(len(room_inv)):
-                print(room_inv[item])
+            if room_inv == []:
+                print('There\'s nothing interesting here.')
+            else:
+                print('Here\'s what jumps out at you as you look around the room')
+                for item in range(len(room_inv)):
+                    print(room_inv[item])
         if answer == False:
             pass
 
@@ -63,10 +68,16 @@ class Entrance(Room):
         print('The black and white parquet is cracked and ruined. ')
         print('Sometimes, something hot and wet oozes from underneath the tile as you step on it.')
 
-    def scene(self, player_inventory):
+    def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?')
         if answer == True:
             if 'key' in player_inventory.items:
+                win_condition_met(username)
+            else: 
+                print('You really try to pry the door open but it\'s locked fast.')
+        else: 
+            print('The wind howls outside.')
+
                 
 
     
@@ -109,9 +120,7 @@ class Library(Room):
         
 
 class Study(Room):
-
-
-     def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.west = 'statue'
          self.north = 'library'
@@ -119,12 +128,12 @@ class Study(Room):
          self.inv = items.Inventory(['matches'])
          self.has_scene_played = False
 
-     def flavourtext(self, player_inv):
+    def flavourtext(self, player_inv):
         print('The study\'s wall are covered in writing. The words spiral out from the writing desk like someone starting writing and couldn\'t stop.\nThe writing starts out neat and carefully penned in black ink and gets wilder and more erratic as it goes on.\nEventually the ink runs out and the words are scratched into the wall instead.\n ...then the writer found a new kind of ink.')
         if 'knife' in player_inv.items:
             print('You can make the words out now. In fact you can\'t believe they ever gave you difficulty.\nIt reads \"MEAT MEAT MEAT MEAT MEAT\" They\'re lyrics and you know the song.')
 
-     def scene(self, player_inv):
+    def scene(self, player_inv):
         if self.has_scene_played == False:
             answer = input('What do you want to interact with?  ')
             quitcheck(answer)
@@ -145,8 +154,7 @@ class Study(Room):
 
 class Statue(Room):
 
-
-     def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, north, south, east, west, doors):
         self.name = name
         self.north = 'entrance'
         self.east = 'study'
@@ -154,6 +162,27 @@ class Statue(Room):
         self.west = 'kitchen'
         self.doors = doors
         self.inv = items.Inventory([])
+    
+    def flavourtext(self):
+        random.seed()
+        num = random.randint(1,5)
+        match num:
+            case 1:
+                print('The statues are all gasping in horror.')
+            case 2:
+                print('All the statues are facing you. Have they always faced this direction? Did they always look this angry?')
+            case 3:
+                print('There\'s only one statue in the room.')
+                print('It\'s of a young women. She\'s looking into a handmirror and crying.')
+                time.sleep(1)
+                print('She looks... familiar.')
+            case 4:
+                print('The room is filled with horse statues.')
+                print('The horses are bitng and tearing each other\'s skin.')
+                print('Eurgh!')
+            case 5:
+                print('There\'s a statue of... you?')
+                print('You\'re looking into a handmirror and crying.')
 
 
 class Bedroom(Room):
@@ -185,25 +214,42 @@ class Bedroom(Room):
 
 
 class Kitchen(Room):
-
-
-     def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.east = 'statue'
          self.north = 'dining'
          self.doors = doors
          self.inv = items.Inventory(['knife'])
+
+    def flavourtext(self):
+        print('The kitchen is as hot as a furnace!')
+        print('The stove has been left on, flames rage from behind it\'s glass window.')
+        print('You try and turn it off but it\'s knobs are too hot for you to touch.')
+                
+    def scene(self, player_inv):
+        answer = input('What do you want to inspect in the kitchen?)')
+        quitcheck(answer)
+        if answer == 'knife':
+            if 'knife' in self.inv.items:
+                print('You see a sharp kitchen knife stabbed deep into the wooden countertop.')
+                print('It\'s gleaming metallic surface looks out of place amongst this run down kitchen.')
+                knife_get = get_a_yes_no('Take the knife?')
+                if knife_get == True:
+                    print('The knife feels good in your hand, like it\'s supposed to be there.')
+                    self.inv.add_from(self.inv, user)
+                    print('The knife is added to your inventory.')
+                else:
+                    print('You leave it be, shining in the warm red light emanating from the oven.')
+            else:
+                print('You already have the knife, remember? It hasn\'t left your hand.')
+        elif answer == 'stove':
+            print('It\'s too hot to touch!')
+        else:
+            print('I did\'t understand that.')
+                    
         
-     def scene(self):
-        print('Kitchen time baby. Time to make a pie... of PEOPLE!!! SPOOKY SCARY')
-
-        
-
-
 class Dining(Room):
-
-    
-     def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, north, south, east, west, doors):
          self.name = name
          self.south = 'kitchen'
          self.east = 'entrance'
@@ -211,7 +257,7 @@ class Dining(Room):
          self.has_scene_played = False
          self.inv = items.Inventory(['candle'])
 
-     def flavourtext(self):
+    def flavourtext(self):
         if self.has_scene_played == False:
             print('There\'s a table set with what looks like to have been roast chicken once.\nIt looks like it might have been out for a while.')
             time.sleep(2)
@@ -221,7 +267,7 @@ class Dining(Room):
         if self.has_scene_played == True:
             print('There\'s a table set for two, the bone-whiteplates are empty. The smell of rot is intense.')
 
-     def scene(self, user):
+    def scene(self, user):
         answer = input('What would you like to interact with?  ')
         quitcheck(answer)
         if answer == 'nothing':
