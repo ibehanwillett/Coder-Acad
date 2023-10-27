@@ -39,3 +39,15 @@ def win_condition_met(username):
 def print_red(input):
     text = colored(input, "red")
     print(text)
+
+def print_green(input):
+    text = colored(input, "green")
+    print(text)
+
+def print_blue(input):
+    text = colored(input, "blue")
+    print(text)
+
+def print_yellow(input):
+    text = colored(input, "yellow")
+    print(text)

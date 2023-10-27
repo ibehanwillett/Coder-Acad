@@ -4,7 +4,7 @@ import characters
 import items
 import random
 from doors import Doors
-from general import quitcheck
+from general import quitcheck, print_red, print_green, print_blue, print_yellow
 from general import get_a_yes_no
 from general import win_condition_met
 
@@ -25,7 +25,7 @@ class Room:
             case 2:
                 print('You feel watched.')
             case 3:
-                print('The reflections are wrong here.')
+                print_blue('The reflections are wrong here.')
             case 4:
                 print('Suddenly, you\'re struck by a ravenous hunger.')
             case 5:
@@ -35,7 +35,7 @@ class Room:
             case 7:
                 print('Suddenly, your heart starts beating faster.')
             case 8:
-                print('You feel sick.')
+                print_green('You feel sick.')
             case 9:
                 print('Somewhere else, a door slams.')
             case 10:
@@ -161,13 +161,14 @@ class Statue(Room):
                 print('There\'s only one statue in the room.')
                 print('It\'s of a young women. She\'s looking into a handmirror and crying.')
                 time.sleep(1)
-                print('She looks... familiar.')
+                print_blue('She looks... familiar.')
             case 4:
                 print('The room is filled with horse statues.')
                 print('The horses are bitng and tearing each other\'s skin.')
                 print('Eurgh!')
             case 5:
-                print('There\'s a statue of... you?')
+                print('There\'s a statue of...')
+                print_blue('you?')
                 print('You\'re looking into a handmirror and crying.')
 
 
@@ -184,17 +185,21 @@ class Bedroom(Room):
             print('It\'s too dark to see. You have a candle, but nothing to light it with! \nYou should probably leave.')
         elif ('matches' in player_inventory.items and 'candle' not in player_inventory.items):
             print('You try to light some matches...')
-            time.sleep(1)
-            print('You get a second of light! You see briefly what look\'s to be a bedroom, it\'s very pink and- wait.')
+            time.sleep(2)
+            print_yellow('You get a second of light!'), \
+            ('You see briefly what look\'s to be a bedroom- wait.')
             time.sleep(2)
             print('Did something just move?')
-            time.sleep(1)
-            print('The match burns out, leaving you with nothing but burnt fingertips and a stone of dread rising in your throat. \n Best come back when you have something to light the candle with.')
+            time.sleep(2)
+            print('The match burns out,') , \
+            ('leaving you with only burnt fingertips'), \ 
+            ('and a stone of dread rising in your throat.'), \
+            ('\nBest come back when you have something to light the candle with.')
         elif ('candle' in player_inventory.items and 'matches' in player_inventory.items) or ('lit candle' in player_inventory.items):
-            print('You see a spooky ghost girl!')
+            print_yellow('You see a spooky ghost girl!')
             characters.ghost.conversation(player_inventory, ghost_inventory, username)
         else:
-            print('It\'s too dark to see! You get a bad feeling; you should leave.')  
+            print('It\'s too dark to see! You get a feeling you should leave.')  
 
 
 class Kitchen(Room):
@@ -204,9 +209,9 @@ class Kitchen(Room):
          self.inv = items.Inventory(['knife'])
 
     def flavourtext(self):
-        print('The kitchen is as hot as a furnace!')
-        print('The stove has been left on, flames rage from behind it\'s glass window.')
-        print('You try and turn it off but it\'s knobs are too hot for you to touch.')
+        print_red('The kitchen is as hot as a furnace!')
+        print_red('The stove has been left on, flames rage from behind it\'s glass window.')
+        print_red('You try and turn it off but it\'s knobs are too hot for you to touch.')
                 
     def scene(self, player_inv):
         answer = input('What do you want to inspect in the kitchen?)')
@@ -225,7 +230,7 @@ class Kitchen(Room):
             else:
                 print('You already have the knife, remember? It hasn\'t left your hand.')
         elif answer == 'stove':
-            print('It\'s too hot to touch!')
+            print_red('It\'s too hot to touch!')
         else:
             print('I did\'t understand that.')
                     
