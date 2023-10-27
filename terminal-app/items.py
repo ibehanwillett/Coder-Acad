@@ -1,4 +1,4 @@
-from general import quitcheck
+from general import get_a_yes_no
 import time
 
 # Items
@@ -56,14 +56,13 @@ class Inventory:
     def view_inventory(self):
         for item in range(len(self.items)):
             print(self.items[item])
-        if 'candle' in self.items and 'matches' in self.items:
-            answer = ('Light the candle with the matches?')
-            quitcheck(answer)
-            if answer == 'yes' or answer == 'y':
+        if ('candle' in self.items and 'matches' in self.items):
+            answer = get_a_yes_no('Light the candle with the matches?')
+            if answer == True:
                 self.items.append('lit candle')
                 self.items.remove('matches')
                 self.items.remove('candle')
                 print('You now have a lit candle in your inventory.\nIt gives off a lovely light.')
-            if answer == 'no' or 'n':
+            if answer == False:
                 return
                 
