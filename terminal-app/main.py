@@ -31,9 +31,8 @@ dining = rooms.Dining('dining room')
 with open('intro.txt') as f:
     data = f.read()
     print(data)
-start_game = general.get_a_yes_no('                     ?')
-if start_game == False
-    print('Alright then.')
+start_game = general.get_a_yes_no('')
+if start_game == False:
     quit()
 else:
     pass
