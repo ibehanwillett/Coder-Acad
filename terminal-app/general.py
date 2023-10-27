@@ -1,5 +1,6 @@
 import sys
-from pynput import keyboard
+from colorama import just_fix_windows_console
+from termcolor import colored
 
 
 def quitcheck(input):
@@ -26,9 +27,6 @@ def get_a_yes_no(prompt):
             continue
      
 
-    
-
-        
 def win_condition_met(username):
     print('You open the door!')
     print('Outside the day is bright and sunny! You sprint off into the warm sunlight.')
@@ -37,3 +35,7 @@ def win_condition_met(username):
     print(f'\"Goodbye... {username}')
     print("YOU WON!")
     quit()
+
+def print_red(input):
+    text = colored(input, "red")
+    print(text)

@@ -1,18 +1,22 @@
 import rooms
 import general
-from general import quitcheck
-from general import win_condition_met
+from general import quitcheck, win_condition_met, print_red
 import sys
 import time
+from colorama import just_fix_windows_console
+from termcolor import colored
 import characters
 
-
+# Colour Set Up
+just_fix_windows_console()
 
 # Player and Charater Set Up
 player = characters.Character('Player', ' ')
 ghost = characters.ghost
+
 # Position Set Up
 position = 'entrance'
+
 # Room set up
 entrance = rooms.Entrance('entrance')
 library = rooms.Library('library')
@@ -22,15 +26,11 @@ bedroom = rooms.Bedroom('bedroom')
 kitchen = rooms.Kitchen('kitchen')
 dining = rooms.Dining('dining room')
 
-
-
-
-
-
 #START OF GAME
-with open('intro.txt') as f:
-    data = f.read()
-    print(data)
+with open('intro.txt') as x:
+    intro = x.read()
+    intro = colored(intro, 'green')
+    print(intro)
 start_game = general.get_a_yes_no('')
 if start_game == False:
     quit()
@@ -44,7 +44,7 @@ print('You try and open the door behind you...')
 time.sleep(1)
 print('...it\'s locked...')
 time.sleep(1)
-print('You\'re stuck in here.')
+print_red('You\'re stuck in here.')
 time.sleep(1)
 print('You take a look around.')
 
