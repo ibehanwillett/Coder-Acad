@@ -14,13 +14,13 @@ ghost = characters.ghost
 # Position Set Up
 position = 'entrance'
 # Room set up
-entrance = rooms.Entrance('entrance','There is a door to the east, west and south.')
-library = rooms.Library('library', 'There\'s a door to the south and the west.')
-study = rooms.Study('study', 'There is a door on the west and the north.')
-statue = rooms.Statue('statue room', 'There is a door to your west, north and east. To the south, a spiral staircase winds up to darkness.' )
-bedroom = rooms.Bedroom('bedroom','You are in the bedroom. The only exit is north, the stairwell going back downstairs.' )
-kitchen = rooms.Kitchen('kitchen', 'There is a door to the east and the north.')
-dining = rooms.Dining('dining room', 'There\'s a door to the south and another to the east.')
+entrance = rooms.Entrance('entrance')
+library = rooms.Library('library')
+study = rooms.Study('study')
+statue = rooms.Statue('statue room')
+bedroom = rooms.Bedroom('bedroom')
+kitchen = rooms.Kitchen('kitchen')
+dining = rooms.Dining('dining room')
 
 
 
@@ -28,7 +28,18 @@ dining = rooms.Dining('dining room', 'There\'s a door to the south and another t
 
 
 #START OF GAME
+with open('intro.txt') as f:
+    data = f.read()
+    print(data)
+start_game = general.get_a_yes_no('                     ?')
+if start_game == False
+    print('Alright then.')
+    quit()
+else:
+    pass
 username = input('What\'s your name?  ')
+if username == 'quit':
+    quit()
 print('You wake in a spooky scary house! Uh oh!')
 print('You try and open the door behind you...')
 time.sleep(1)

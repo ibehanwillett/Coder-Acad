@@ -11,14 +11,36 @@ from general import win_condition_met
 
 # Room base class
 class Room:
-    def __init__(self, name, layout):
+    def __init__(self, name):
         self.name = name
-        self.layout = layout
         self.inv = items.Inventory([])
 
     def description(self):
         print(f'You are in the {self.name}')
-        print(self.layout)
+        random.seed()
+        num = random.randint(1,10)
+        match num:
+            case 1:
+                print('You can hear the wind moaning outside.')
+            case 2:
+                print('You feel watched.')
+            case 3:
+                print('The reflections are wrong here.')
+            case 4:
+                print('Suddenly, you\'re struck by a ravenous hunger.')
+            case 5:
+                print('Your teeth feel wrong in your mouth.')
+            case 6:
+                print('The floorboards creak underneath your feet.')
+            case 7:
+                print('Suddenly, your heart starts beating faster.')
+            case 8:
+                print('You feel sick.')
+            case 9:
+                print('Somewhere else, a door slams.')
+            case 10:
+                print('You hear a scream from somewhere else in the house.')
+        time.sleep(1)
     
     def print_item_list(self, room_inv):
         answer = get_a_yes_no('Do you want to look around?  ')
@@ -35,10 +57,9 @@ class Room:
     
 # Rooms themselves definition
 class Entrance(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
         self.name = name
         self.doors = Doors('locked', 'statue','library','dining')
-        self.layout = layout
         self.inv = items.Inventory(['locked door'])
     
     def flavourtext(self, player_inv):
@@ -58,9 +79,8 @@ class Entrance(Room):
 
                 
 class Library(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
         self.name = name
-        self.layout = layout
         self.doors = Doors('wall', 'study', 'wall', 'entrance')
         self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
@@ -93,9 +113,8 @@ class Library(Room):
         
 
 class Study(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
          self.name = name
-         self.layout = layout
          self.doors = Doors('library', 'wall', 'wall', 'statue')
          self.inv = items.Inventory(['matches'])
          self.has_scene_played = False
@@ -125,9 +144,8 @@ class Study(Room):
 
 
 class Statue(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
         self.name = name
-        self.layout = layout
         self.doors = Doors('entrance', 'bedroom', 'study', 'kitchen')
         self.inv = items.Inventory([])
     
@@ -156,9 +174,8 @@ class Statue(Room):
 class Bedroom(Room):
 
 
-    def __init__(self, name, layout):
+    def __init__(self, name):
          self.name = name
-         self.layout = layout
          self.doors = Doors('statue', 'wall', 'wall', 'wall')
          
     def scene(self, player_inventory, ghost_inventory, username):
@@ -181,9 +198,8 @@ class Bedroom(Room):
 
 
 class Kitchen(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
          self.name = name
-         self.layout = layout
          self.doors = Doors('dining', 'wall', 'statue', 'wall')
          self.inv = items.Inventory(['knife'])
 
@@ -215,9 +231,8 @@ class Kitchen(Room):
                     
         
 class Dining(Room):
-    def __init__(self, name, layout):
+    def __init__(self, name):
          self.name = name
-         self.layout = layout
          self.doors = Doors('wall', 'kitchen', 'entrance', 'wall')
          self.has_scene_played = False
          self.inv = items.Inventory(['candle'])

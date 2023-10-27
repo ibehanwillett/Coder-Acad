@@ -9,7 +9,7 @@ class Character:
     
     def conversation(self, player_inv, ghost_inv, username):
             if self.has_had_conversation == False:
-                print('The ghost says \"Please... please don\'t go...\"')
+                print('The ghost says \"Please...please don\'t go...\"')
                 time.sleep(1)
                 print('The ghost is crying. She was beautiful once.')
                 time.sleep(1)
