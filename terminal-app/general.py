@@ -1,4 +1,5 @@
 import sys
+from pynput import keyboard
 
 
 def quitcheck(input):
@@ -25,20 +26,21 @@ def get_a_yes_no(prompt):
             continue
      
 
+    
 
 def leave(room):
     def where_from(room):
         print('Where would you like to go?')
         print('Hit the arrows keys to choose a direction or hit q to quit the game.')
-        if keyboard.is_pressed(0x48): # Up Arrow
+        if keyboard.on_press(pynput.keyboard.up): # Up Arrow
             return room.north
-        if keyboard.is_pressed(0x4B): # Left Arrow
+        if keyboard.on_press(pynput.keyboard.left): # Left Arrow
             return room.west
-        if keyboard.is_pressed(0x4D): # Right Arrow
+        if keyboard.on_press(pynput.keyboard.right): # Right Arrow
             return room.east
-        if keyboard.is_pressed(0x50): # Down Arror
+        if keyboard.on_press(pynput.keyboard.down): # Down Arror
             return room.south
-        if keyboard.is_pressed(16): # Q key
+        if keyboard.on_press(pynput.keyboard.q): # Q key
             print('Thanks for playing!')
             quit()
     
