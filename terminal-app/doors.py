@@ -1,4 +1,5 @@
 import general
+from general import get_input
 import time
 
 class Doors:
@@ -17,7 +18,7 @@ class Doors:
                 print(f'To the west, {cls.west}')
                 print('Type the direction you\'d like to go,' \
                 ' or inv to check your inventory.')
-                direction = input('Where would like to go?  ')
+                direction = get_input('Where would like to go?  ')
                 general.quitcheck(direction)
                 match direction:
                     case 'north':

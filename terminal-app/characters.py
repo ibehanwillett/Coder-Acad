@@ -21,7 +21,7 @@ class Character:
                 print('Her eye flash with- what? Spite? Rage? Sorrow?\nYou can\'t tell.')
                 time.sleep(1)
                 print('She asks:')
-                answer = input(' I saw a woman sit alone. What am I?  ')
+                answer = get_input(' I saw a woman sit alone. What am I?  ')
                 quitcheck(answer)
                 if (answer == 'a m' or answer == 'm'):
                     print('\"That\'s exactly right.\"')

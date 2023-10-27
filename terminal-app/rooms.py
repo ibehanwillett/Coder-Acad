@@ -48,7 +48,7 @@ class Room:
             if room_inv == []:
                 print('There\'s nothing interesting here.')
             else:
-                print('Here\'s what jumps out at you as you look around the room')
+                print('Here\'s what you see:')
                 for item in range(len(room_inv)):
                     print(room_inv[item])
         if answer == False:
@@ -63,9 +63,11 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
     
     def flavourtext(self, player_inv):
-        print('You find yourself in a ruined entrance of a grand old manor house.')
-        print('The black and white parquet is cracked and ruined. ')
-        print('Sometimes, something hot and wet oozes from underneath the tile as you step on it.')
+        print('The entrance, once grand, is now a shambling pile of rot') \
+        ('and peeling paint.')
+        print('The black and white parquet is cracked and ruined.')
+        print('Sometimes, something hot and wet'), \
+        ('oozes from underneath the tiles.')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -73,7 +75,8 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else: 
-                print('You really try to pry the door open but it\'s locked fast.')
+                print('You scream and bang on the door.'), \
+                (' It remains locked.')
         else: 
             print('The wind howls outside.')
 
@@ -85,14 +88,29 @@ class Library(Room):
         self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
     def flavourtext(self):
-        print('You see a bookshelf groaning under the weight of many large tomes.\n The smell of rot and mildew is overwhelming-  you realise what you first took to be a pattern on the wallpaper is actually black mold growing in spirals over everything.\nMost of the books have become swollen with water and can\'t be moved from their place on the shelf.\nThree books look like they\'re not too water damaged.')
+        print_blue('The walls are covered in heavy wooden bookshelves.')
+        time.sleep(1)
+        print_blue('Most of the shelves have collasped.')
+        time.sleep(1)
+        print_blue('The smell of rot and mildew is overwhelming:')
+        time.sleep(1)
+        print_blue('Black mold covers everything.')
+        time.sleep(1)
+        print_blue('You can hear a faint dripping noise.')
+        time.sleep(1)
+        print_blue('The air feels thick in your throat.')
+        time.sleep(1)
+        print_blue('Most of the books have become swollen with water.')
+        time.sleep(1)
+        print_blue('They\'ve fused together.')
+        time.sleep(1)
+        print_blue('Three books look like they\'re not too water damaged.')
 
     def scene(self):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
         if answer == True:
             while True:
-                book_pick = input('Which book do you want to read?  ')
-                quitcheck(book_pick)
+                book_pick = get_input('Which book do you want to read?  ')
                 if book_pick == 'book with a blue spine' or book_pick == 'blue book':
                     items.odyssey.interact()
                     break
@@ -107,7 +125,7 @@ class Library(Room):
                 else:
                     print('I can\'t find that book; try again or write \'exit\' to leave.')
         if answer == False:
-            print('You leave the books alone to their somber, sodden rest.')
+            print_blue('You leave the books alone to their somber, sodden rest.')
 
 
         
@@ -120,16 +138,35 @@ class Study(Room):
          self.has_scene_played = False
 
     def flavourtext(self, player_inv):
-        print('The study\'s wall are covered in writing. The words spiral out from the writing desk like someone starting writing and couldn\'t stop.\nThe writing starts out neat and carefully penned in black ink and gets wilder and more erratic as it goes on.\nEventually the ink runs out and the words are scratched into the wall instead.\n ...then the writer found a new kind of ink.')
+        print('The study\'s wall are covered in writing.')
+        time.sleep(1)
+        print('The words spiral out from the writing desk')
+        time.sleep(1)
+        print('like someone starting writing and couldn\'t stop.')
+        time.sleep(1)
+        print('The writing gets more erratic as it goes on.')
+        time.sleep(1)
+        print('Eventually the ink runs out'), \
+        ('and the words are scratched into the wall instead.')
+        time.sleep(1)
+        print(' ...then the writer found a new kind of ink.')
+        time.sleep(1)
         if 'knife' in player_inv.items:
-            print('You can make the words out now. In fact you can\'t believe they ever gave you difficulty.\nIt reads \"MEAT MEAT MEAT MEAT MEAT\" They\'re lyrics and you know the song.')
+            print_red('You can read the words out now.')
+            time.sleep(1)
+            print_red('How could you not?')
+            time.sleep(1)
+            print_red('They reads \"MEAT MEAT MEAT MEAT MEAT\"')
+            time.sleep(1)
+            print_red('They\'re lyrics and you know the song.')
 
     def scene(self, player_inv):
         if self.has_scene_played == False:
-            answer = input('What do you want to interact with?  ')
-            quitcheck(answer)
+            answer = get_input('What do you want to interact with?  ')
             if answer == 'matches':
-                print('You see some matches scattered across the table.\nMost of them have been ruined by the... ink... but some are still good.')
+                print('You see some matches scattered across the table.')
+                print('Most of them have been ruined by the... ink...'), \
+                (' but some are still good.')
                 get_matches = get_a_yes_no('Pick them up?')
                 if get_matches == True:
                     self.inv.transfer_item(player_inv, 'matches')
@@ -159,16 +196,21 @@ class Statue(Room):
                 print('All the statues are facing you. Have they always faced this direction? Did they always look this angry?')
             case 3:
                 print('There\'s only one statue in the room.')
+                time.sleep(1)
                 print('It\'s of a young women. She\'s looking into a handmirror and crying.')
                 time.sleep(1)
                 print_blue('She looks... familiar.')
             case 4:
                 print('The room is filled with horse statues.')
+                time.sleep(1)
                 print('The horses are bitng and tearing each other\'s skin.')
+                time.sleep(1)
                 print('Eurgh!')
             case 5:
                 print('There\'s a statue of...')
+                time.sleep(1)
                 print_blue('you?')
+                time.sleep(1)
                 print('You\'re looking into a handmirror and crying.')
 
 
@@ -182,7 +224,7 @@ class Bedroom(Room):
     def scene(self, player_inventory, ghost_inventory, username):
         print('It\'s so dark...')
         if ('candle' in player_inventory.items and 'matches' not in player_inventory.items):
-            print('It\'s too dark to see. You have a candle, but nothing to light it with! \nYou should probably leave.')
+            print('It\'s too dark to see. You have a candle, but nothing to light it with!\nYou should probably leave.')
         elif ('matches' in player_inventory.items and 'candle' not in player_inventory.items):
             print('You try to light some matches...')
             time.sleep(2)
@@ -192,10 +234,11 @@ class Bedroom(Room):
             print('Did something just move?')
             time.sleep(2)
             print('The match burns out,') , \
-            ('leaving you with only burnt fingertips'), \ 
+            ('leaving you with only burnt fingertips'), \
             ('and a stone of dread rising in your throat.'), \
             ('\nBest come back when you have something to light the candle with.')
-        elif ('candle' in player_inventory.items and 'matches' in player_inventory.items) or ('lit candle' in player_inventory.items):
+        elif ('candle' in player_inventory.items and 'matches' in player_inventory.items), \
+        or ('lit candle' in player_inventory.items):
             print_yellow('You see a spooky ghost girl!')
             characters.ghost.conversation(player_inventory, ghost_inventory, username)
         else:
@@ -214,8 +257,7 @@ class Kitchen(Room):
         print_red('You try and turn it off but it\'s knobs are too hot for you to touch.')
                 
     def scene(self, player_inv):
-        answer = input('What do you want to inspect in the kitchen?)')
-        quitcheck(answer)
+        answer = iget_nput('What do you want to inspect in the kitchen?)')
         if answer == 'knife':
             if 'knife' in self.inv.items:
                 print('You see a sharp kitchen knife stabbed deep into the wooden countertop.')
@@ -244,36 +286,40 @@ class Dining(Room):
 
     def flavourtext(self):
         if self.has_scene_played == False:
-            print('There\'s a table set with what looks like to have been roast chicken once.')
-            print('It looks like it might have been out for a while.')
+            print_green('There\'s a table set with what looks like to have been roast chicken once.')
+            time.sleep(1)
+            print_green('It looks like it might have been out for a while.')
             time.sleep(2)
-            print('... It smells like it\'s been out for a while.') 
+            print_green('... It smells like it\'s been out for a while.') 
             time.sleep(2)
-            print('There\'s a beautiful long white tallow candle illuminating the screen.')
+            print_green('There\'s a beautiful long white tallow candle illuminating the screen.')
         if self.has_scene_played == True:
-            print('There\'s a table set for two, the bone-whiteplates are empty. The smell of rot is intense.')
+            print_green('There\'s a table set for two,'), \
+            ('the bone-whiteplates are empty. The smell of rot is intense.')
 
     def scene(self, user):
         answer = input('What would you like to interact with?  ')
         quitcheck(answer)
         if answer == 'nothing':
-            print('You leave it be.')
+            print_green('You leave it be.')
             return
         if answer == 'candle' or 'the candle':
             if self.has_scene_played == False:
                 extinguish_candle = (get_a_yes_no('Blow out candle?  '))
                 if extinguish_candle == True:
                     self.has_scene_played = True
-                    print('You blow out the candle.')
-                    print('As soon as you do, the food resting on the dinner plates errupts into a cacophonous swirl of flies and cockroaches.')
+                    print_green('You blow out the candle.')
+                    print_red('As soon as you do, the food resting on the dinner plates errupts into a cacophonous swirl of flies and cockroaches.')
                     time.sleep(1)
-                    print('They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.\n When they finally disapate enough that you can see again, you notice the plates are empty.')
+                    print_red('They fly thick and fast at your face;'), \
+                    ('some get tangled in your hair, some get into your mouth.')
+                    print_green('When they finally disapate enough that you can see again, you notice the plates are empty.')
                     time.sleep(3)
-                    print('The smell remains.')
+                    print_green('The smell remains.')
                     self.inv.transfer_item(user, 'candle')
                     time.sleep(3)
                     print('You pick up the candle and put it in your pocket.')
                 if extinguish_candle == False:
-                    print('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
+                    print_green('You leave it be. The skin of the roast chicken ripples slightly as something moves from underneath it.')
     
         

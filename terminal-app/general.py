@@ -2,13 +2,27 @@ import sys
 from colorama import just_fix_windows_console
 from termcolor import colored
 
-
 def quitcheck(input):
     input = input.strip()
     input = input.lower()
     if input == 'quit':
         sys.exit()
     return input
+
+def get_input(prompt):
+    while True:
+        try:
+            x = input(prompt)
+        except ValueError:
+            print('No numbers please!')
+            continue
+        except:
+            print('Something went wrong. Can you try that again?')
+            continue
+        else:
+            quitcheck(x)
+            return x
+
 
 def get_a_yes_no(prompt):
     while True:

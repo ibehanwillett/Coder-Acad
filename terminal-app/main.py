@@ -1,6 +1,6 @@
 import rooms
 import general
-from general import quitcheck, win_condition_met, print_red
+from general import quitcheck, get_input, win_condition_met, print_red
 import sys
 import time
 from colorama import just_fix_windows_console
