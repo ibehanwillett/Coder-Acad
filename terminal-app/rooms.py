@@ -3,6 +3,7 @@ import time
 import characters
 import items
 import random
+from doors import Doors
 from general import quitcheck
 from general import get_a_yes_no
 from general import win_condition_met
@@ -10,34 +11,14 @@ from general import win_condition_met
 
 # Room base class
 class Room:
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
         self.name = name
-        self.north = north
-        self.east = east
-        self.south = south
-        self.west = west
-        self.doors = doors
+        self.layout = layout
         self.inv = items.Inventory([])
-
-    def door_pick(self):
-        while True:
-            door = (input('Where do you want to go?  '))
-            quitcheck(door)
-            if door == 'north':
-                return f'{self.north}'
-            if door == 'south':
-                return f'{self.south}'
-            if door == 'east':
-                return f'{self.east}'
-            if door == 'west':
-                return f'{self.west}'
-            else: 
-                print('Sorry, I don\'t understand. Please try again.')
-                continue
 
     def description(self):
         print(f'You are in the {self.name}')
-        print(self.doors)
+        print(self.layout)
     
     def print_item_list(self, room_inv):
         answer = get_a_yes_no('Do you want to look around?  ')
@@ -54,13 +35,10 @@ class Room:
     
 # Rooms themselves definition
 class Entrance(Room):
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
         self.name = name
-        self.north = 'locked'
-        self.east = 'library'
-        self.south = 'statue'
-        self.west = 'dining'
-        self.doors = doors
+        self.doors = Doors('locked', 'statue','library','dining')
+        self.layout = layout
         self.inv = items.Inventory(['locked door'])
     
     def flavourtext(self, player_inv):
@@ -80,11 +58,10 @@ class Entrance(Room):
 
                 
 class Library(Room):
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
         self.name = name
-        self.south = 'study'
-        self.west = 'entrance'
-        self.doors = doors
+        self.layout = layout
+        self.doors = Doors('wall', 'study', 'wall', 'entrance')
         self.inv = items.Inventory([items.odyssey, items.carson, items.riddle])
     
     def flavourtext(self):
@@ -116,11 +93,10 @@ class Library(Room):
         
 
 class Study(Room):
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
          self.name = name
-         self.west = 'statue'
-         self.north = 'library'
-         self.doors = doors
+         self.layout = layout
+         self.doors = Doors('library', 'wall', 'wall', 'statue')
          self.inv = items.Inventory(['matches'])
          self.has_scene_played = False
 
@@ -149,14 +125,10 @@ class Study(Room):
 
 
 class Statue(Room):
-
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
         self.name = name
-        self.north = 'entrance'
-        self.east = 'study'
-        self.south = 'bedroom'
-        self.west = 'kitchen'
-        self.doors = doors
+        self.layout = layout
+        self.doors = Doors('entrance', 'bedroom', 'study', 'kitchen')
         self.inv = items.Inventory([])
     
     def flavourtext(self):
@@ -184,10 +156,10 @@ class Statue(Room):
 class Bedroom(Room):
 
 
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
          self.name = name
-         self.north = 'statue'
-         self.doors = doors
+         self.layout = layout
+         self.doors = Doors('statue', 'wall', 'wall', 'wall')
          
     def scene(self, player_inventory, ghost_inventory, username):
         print('It\'s so dark...')
@@ -209,11 +181,10 @@ class Bedroom(Room):
 
 
 class Kitchen(Room):
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
          self.name = name
-         self.east = 'statue'
-         self.north = 'dining'
-         self.doors = doors
+         self.layout = layout
+         self.doors = Doors('dining', 'wall', 'statue', 'wall')
          self.inv = items.Inventory(['knife'])
 
     def flavourtext(self):
@@ -244,11 +215,10 @@ class Kitchen(Room):
                     
         
 class Dining(Room):
-    def __init__(self, name, north, south, east, west, doors):
+    def __init__(self, name, layout):
          self.name = name
-         self.south = 'kitchen'
-         self.east = 'entrance'
-         self.doors = doors
+         self.layout = layout
+         self.doors = Doors('wall', 'kitchen', 'entrance', 'wall')
          self.has_scene_played = False
          self.inv = items.Inventory(['candle'])
 
