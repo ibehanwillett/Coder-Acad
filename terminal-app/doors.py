@@ -40,6 +40,7 @@ class Doors:
             where = where_from(cls, player_inventory)
             if where == 'locked':
                 print('It\'s locked.')
+                time.sleep(1)
                 if 'key' in player_inventory.items:
                     print('The key slides into the locked door!')
                     general.win_condition_met()
@@ -47,6 +48,7 @@ class Doors:
                     continue
             elif where == 'wall':
                 print('There\'s no door here!')
+                time.sleep(1)
                 continue
             else:
                 return (f'{where}')

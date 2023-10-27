@@ -51,7 +51,7 @@ class Inventory:
     
     def transfer_item(self, other_inv, item):
         other_inv.give(item)
-        self.inv.remove(item)
+        self.items.remove(item)
     
     def view_inventory(self):
         for item in range(len(self.items)):

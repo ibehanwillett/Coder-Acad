@@ -9,7 +9,7 @@ import characters
 
 
 # Player and Charater Set Up
-player = characters.Character('Player', [])
+player = characters.Character('Player', ' ')
 ghost = characters.ghost
 # Position Set Up
 position = 'entrance'
@@ -76,7 +76,7 @@ while True:
     if position == 'bedroom':
         bedroom.description()
         bedroom.scene(player.inv, ghost.inv, username)
-       position = bedroom.doors.leave(player.inv)
+        position = bedroom.doors.leave(player.inv)
 
 
 

@@ -47,7 +47,7 @@ class Entrance(Room):
         print('Sometimes, something hot and wet oozes from underneath the tile as you step on it.')
 
     def scene(self, player_inventory, username):
-        answer = get_a_yes_no('Do you try and open the locked door?')
+        answer = get_a_yes_no('Do you try and open the locked door?  ')
         if answer == True:
             if 'key' in player_inventory.items:
                 win_condition_met(username)
