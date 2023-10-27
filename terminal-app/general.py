@@ -1,5 +1,5 @@
 import sys
-# import keyboard
+
 
 def quitcheck(input):
     input = input.strip()
@@ -26,32 +26,32 @@ def get_a_yes_no(prompt):
      
 
 
-# def leave(room):
-#     def where_from(room):
-#         print('Where would you like to go?')
-#         print('Hit the arrows keys to choose a direction or hit q to quit the game.')
-#         if keyboard.is_pressed(0x48): # Up Arrow
-#             return room.north
-#         if keyboard.is_pressed(0x4B): # Left Arrow
-#             return room.west
-#         if keyboard.is_pressed(0x4D): # Right Arrow
-#             return room.east
-#         if keyboard.is_pressed(0x50): # Down Arror
-#             return room.south
-#         if keyboard.is_pressed(16): # Q key
-#             print('Thanks for playing!')
-#             quit()
+def leave(room):
+    def where_from(room):
+        print('Where would you like to go?')
+        print('Hit the arrows keys to choose a direction or hit q to quit the game.')
+        if keyboard.is_pressed(0x48): # Up Arrow
+            return room.north
+        if keyboard.is_pressed(0x4B): # Left Arrow
+            return room.west
+        if keyboard.is_pressed(0x4D): # Right Arrow
+            return room.east
+        if keyboard.is_pressed(0x50): # Down Arror
+            return room.south
+        if keyboard.is_pressed(16): # Q key
+            print('Thanks for playing!')
+            quit()
     
-#     while True:
-#         where = where_from(room)
-#         if where == 'locked':
-#             print('It\'s locked.')
-#             continue
-#         elif where == 'wall':
-#             print('There\'s no door here!')
-#             continue
-#         else:
-#             return where
+    while True:
+        where = where_from(room)
+        if where == 'locked':
+            print('It\'s locked.')
+            continue
+        elif where == 'wall':
+            print('There\'s no door here!')
+            continue
+        else:
+            return where
         
 def win_condition_met(username):
     print('You open the door!')

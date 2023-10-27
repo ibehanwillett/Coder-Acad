@@ -43,16 +43,16 @@ while True:
         entrance.description()
         entrance.flavourtext(player.inv)
         entrance.scene(player.inv, username)
-        # position = general.leave(entrance)
-        move_choice = entrance.door_pick()
-        quitcheck(move_choice)
-        if (move_choice == 'locked' and 'key' in player.inv.items):
-            print('You unlock the door!')
-            win_conditon_met(username)
-        if (move_choice == 'locked' and 'key' not in player.inv.items):
-            print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
-        else:
-            position = f'{move_choice}'
+        position = general.leave(entrance)
+        # move_choice = entrance.door_pick()
+        # quitcheck(move_choice)
+        # if (move_choice == 'locked' and 'key' in player.inv.items):
+        #     print('You unlock the door!')
+        #     win_conditon_met(username)
+        # if (move_choice == 'locked' and 'key' not in player.inv.items):
+        #     print('The front door is locked! You jiggle the doorknob a couple times but nothing happens...')
+        # else:
+        #     position = f'{move_choice}'
     if position == 'library':
         library.description()
         library.flavourtext()
