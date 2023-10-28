@@ -27,7 +27,7 @@ class Room:
             case 2:
                 print('You feel watched.')
             case 3:
-                print_blue('The reflections are wrong here.')
+                print_colour('The reflections are wrong here.', 'blue')
             case 4:
                 print('Suddenly, you\'re struck by a ravenous hunger.')
             case 5:
@@ -65,7 +65,7 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
 
     def flavourtext(self, player_inv):
-       line_start_and_end(entrance_script,0,6)
+       line_start_and_end(entrance_script,0, 5, 'dark_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -73,10 +73,9 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else:
-                print('You scream and bang on the door.'), \
-                    (' It remains locked.')
+                line_start_and_end(entrance_script, 5, 7, 'dark_grey')
         else:
-            print('The wind howls outside.')
+            line_start_and_end(entrance_script, 7, 8, 'dark_grey')
 
 
 class Library(Room):

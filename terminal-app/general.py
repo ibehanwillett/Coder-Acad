@@ -52,10 +52,12 @@ def win_condition_met(username):
     print("YOU WON!")
     quit()
 
-
 def print_colour(input, colour):
-    text = colored(input, colour)
-    print(text)
+    if colour is None:
+        print(input)
+    else:
+        text = colored(input, colour)
+        print(text)
 
 def script(filename):
     room = []
@@ -65,9 +67,5 @@ def script(filename):
     return room
 
 def line_start_and_end(script, start, end, colour):
-    if colour is None:
-        for line in range(start, end):
-            print(script[line])
-    else:
-        for line in range(start, end):
-            print_colour(script[line], colour)
+    for line in range(start, end):
+        print_colour(script[line], colour)

@@ -1,6 +1,6 @@
 import rooms
 import general
-from general import quitcheck, get_input, win_condition_met, print_red
+from general import get_input, win_condition_met
 import sys
 import time
 from colorama import just_fix_windows_console
@@ -49,7 +49,7 @@ print('You try and open the door behind you...')
 time.sleep(1)
 print('...it\'s locked...')
 time.sleep(1)
-print_red('You\'re stuck in here.')
+general.print_colour('You\'re stuck in here.', 'red')
 time.sleep(1)
 print('You take a look around.')
 
