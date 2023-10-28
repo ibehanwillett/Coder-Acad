@@ -24,7 +24,7 @@ class Doors:
                     case 'north':
                         return cls.north
                     case 'south':
-                        return cls.west
+                        return cls.south
                     case 'east':
                         return cls.east
                     case 'west':

@@ -2,12 +2,14 @@ import sys
 from colorama import just_fix_windows_console
 from termcolor import colored
 
+
 def quitcheck(input):
     input = input.strip()
     input = input.lower()
     if input == 'quit':
         sys.exit()
     return input
+
 
 def get_input(prompt):
     while True:
@@ -39,7 +41,7 @@ def get_a_yes_no(prompt):
         else:
             print('Yes or no please!')
             continue
-     
+
 
 def win_condition_met(username):
     print('You open the door!')
@@ -50,17 +52,21 @@ def win_condition_met(username):
     print("YOU WON!")
     quit()
 
+
 def print_red(input):
     text = colored(input, "red")
     print(text)
+
 
 def print_green(input):
     text = colored(input, "green")
     print(text)
 
+
 def print_blue(input):
     text = colored(input, "blue")
     print(text)
+
 
 def print_yellow(input):
     text = colored(input, "yellow")

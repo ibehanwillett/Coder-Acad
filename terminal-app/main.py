@@ -69,7 +69,6 @@ while True:
     if position == 'statue':
         statue.description()
         statue.flavourtext()
-        move_choice = statue.door_pick()
         position = statue.doors.leave(player.inv)
     if position == 'kitchen':
         kitchen.description()
@@ -85,7 +84,7 @@ while True:
         position = dining.doors.leave(player.inv)
     if position == 'bedroom':
         bedroom.description()
-        bedroom.scene(player.inv, ghost.inv, username)
+        bedroom.scene(player.inv, username)
         position = bedroom.doors.leave(player.inv)
 
 
