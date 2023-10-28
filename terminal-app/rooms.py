@@ -13,6 +13,7 @@ ent_script = script('entrance.txt')
 descript_script = script('descriptions.txt')
 lib_script = script('library.txt')
 study_script = script('study.txt')
+statue_script = script('statue.txt')
 
 # Room base class
 class Room:
@@ -68,7 +69,7 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
 
     def flavourtext(self, player_inv):
-       print_text(ent_script,0, 5, 'dark_grey')
+       print_text(ent_script,0, 5, 'light_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -76,9 +77,9 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else:
-                print_text(ent_script, 5, 7, 'dark_grey')
+                print_text(ent_script, 5, 7, 'light_grey')
         else:
-            print_text(ent_script, 7, 8, 'dark_grey')
+            print_text(ent_script, 7, 8, 'light_grey')
 
 
 class Library(Room):
@@ -191,31 +192,29 @@ class Statue(Room):
         num = random.randint(1, 5)
         match num:
             case 1:
-                print('The room is full of different statutes'), \
-                    (' of men grappling with snakes.')
+                print_text(statue_script, 0, 3, 'light grey')
             case 2:
-                print('All the statues are facing you.')
-                print('Have they always faced this direction?'), \
-                    ('Did they always look this angry?')
+                print_text(statue_script, 3, 6, 'light grey')
             case 3:
-                print('There\'s only one statue in the room.')
+                print_text(statue_script, 6, 7, 'light grey')
                 time.sleep(1)
-                print('It\'s of a young women.'), \
-                    ('She\'s looking into a handmirror and crying.')
+                print_text(statue_script, 7, 9, 'light grey')
                 time.sleep(1)
-                print_blue('She looks... familiar.')
+                print_text(statue_script, 9, 10, 'light blue')
             case 4:
-                print('The room is filled with horse statues.')
+                print_text(statue_script, 10, 11, 'light grey')
                 time.sleep(1)
-                print('The horses are bitng and tearing at each other.')
+                print_text(statue_script, 11, 12, 'light grey')
                 time.sleep(1)
-                print('Eurgh!')
+                print_text(statue_script, 12, 13, 'light grey')
             case 5:
-                print('There\'s a statue of...')
+                print_text(statue_script, 13, 14, 'light grey')
                 time.sleep(1)
-                print_blue('you?')
+                print_text(statue_script, 14, 15, 'light grey')
                 time.sleep(1)
-                print('You\'re looking into a handmirror and crying.')
+                print_text(statue_script, 15, 16, 'light blue')
+                time.sleep(1)
+                print_text(statue_script, 16, 17, 'light grey')
 
 
 class Bedroom(Room):
