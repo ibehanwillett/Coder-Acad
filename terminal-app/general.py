@@ -44,8 +44,9 @@ def get_a_yes_no(prompt):
 
 def win_condition_met(username):
     print('You open the door!')
-    print('Outside the day is bright and sunny! You sprint off into the warm sunlight.')
-    print('You don\'t even notice the little pale ghost face at the bedroom window.')
+    print('Outside the day is bright and sunny!')
+    print('You sprint off into the warm sunlight.')
+    print('You don\'t even notice the face at the bedroom window.')
     print('You certainly don\'t hear the whisper...')
     print(f'\"Goodbye... {username}')
     print("YOU WON!")

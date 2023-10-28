@@ -8,13 +8,8 @@ from doors import Doors
 from general import get_a_yes_no, get_input, win_condition_met
 from general import script, print_text
 
-# Scripts
-ent_script = script('entrance.txt')
+# General Script
 descript_script = script('descriptions.txt')
-lib_script = script('library.txt')
-study_script = script('study.txt')
-statue_script = script('statue.txt')
-bedroom_script = script('bedroom.txt')
 
 # Room base class
 class Room:
@@ -68,9 +63,10 @@ class Entrance(Room):
         self.name = name
         self.doors = Doors('locked', 'statue', 'library', 'dining')
         self.inv = items.Inventory(['locked door'])
+        self.script = script('entrance.txt')
 
     def flavourtext(self, player_inv):
-       print_text(ent_script,0, 5, 'light_grey')
+       print_text(self.script, 0, 5, 'light_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -78,9 +74,9 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else:
-                print_text(ent_script, 5, 7, 'light_grey')
+                print_text(self.script, 5, 7, 'light_grey')
         else:
-            print_text(ent_script, 7, 8, 'light_grey')
+            print_text(self.script, 7, 8, 'light_grey')
 
 
 class Library(Room):
@@ -88,29 +84,30 @@ class Library(Room):
         self.name = name
         self.doors = Doors('wall', 'study', 'wall', 'entrance')
         self.inv = items.Inventory([odyssey, carson, riddle])
+        self.script = script('library.txt')
 
     def flavourtext(self):
-        print_text(lib_script, 0, 1, 'blue')
+        print_text(self.script, 0, 1, 'blue')
         time.sleep(1)
-        print_text(lib_script, 1, 2, 'blue')
+        print_text(self.script, 1, 2, 'blue')
         time.sleep(1)
-        print_text(lib_script, 2, 3, 'blue')
+        print_text(self.script, 2, 3, 'blue')
         time.sleep(1)
-        print_text(lib_script, 3, 4, 'blue')
+        print_text(self.script, 3, 4, 'blue')
         time.sleep(1)
-        print_text(lib_script, 4, 5, 'blue')
+        print_text(self.script, 4, 5, 'blue')
         time.sleep(1)
-        print_text(lib_script, 5, 6, 'blue')
+        print_text(self.script, 5, 6, 'blue')
         time.sleep(1)
-        print_text(lib_script, 6, 7, 'blue')
+        print_text(self.script, 6, 7, 'blue')
         time.sleep(1)
-        print_text(lib_script, 7, 8, 'blue')
+        print_text(self.script, 7, 8, 'blue')
         time.sleep(1)
-        print_text(lib_script, 8, 9, 'blue')
+        print_text(self.script, 8, 9, 'blue')
         time.sleep(1)
-        print_text(lib_script, 9, 10, 'blue')
+        print_text(self.script, 9, 10, 'blue')
         time.sleep(1)
-        print_text(lib_script, 10, 11, 'blue')
+        print_text(self.script, 10, 11, 'blue')
 
     def scene(self):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
@@ -132,7 +129,7 @@ class Library(Room):
                     print('I can\'t find that book;'), \
                         (' try again or write \'exit\' to leave.')
         if answer == False:
-            print_text(lib_script, 11, 12, 'blue')
+            print_text(self.script, 11, 12, 'blue')
 
 
 class Study(Room):
@@ -140,46 +137,47 @@ class Study(Room):
         self.name = name
         self.doors = Doors('library', 'wall', 'wall', 'statue')
         self.inv = items.Inventory(['matches'])
+        self.script = script('study.txt')
         self.has_scene_played = False
 
     def flavourtext(self, player_inv):
-        print_text(study_script, 0, 1, 'light_grey')
+        print_text(self.script, 0, 1, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 1, 2, 'light_grey')
+        print_text(self.script, 1, 2, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 2, 3, 'light_grey')
+        print_text(self.script, 2, 3, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 3, 4, 'light_grey')
+        print_text(self.script, 3, 4, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 4, 5, 'light_grey')
+        print_text(self.script, 4, 5, 'light_grey')
         time.sleep(1)
         if 'knife' in player_inv.items:
-            print_text(study_script, 5, 6, 'light_grey')
+            print_text(self.script, 5, 6, 'light_grey')
             time.sleep(1)
-            print_text(study_script, 6, 7, 'light_grey')
+            print_text(self.script, 6, 7, 'light_grey')
             time.sleep(1)
-            print_text(study_script, 7, 8, 'red')
+            print_text(self.script, 7, 8, 'red')
             time.sleep(1)
-            print_text(study_script, 8, 9, 'light_grey')
+            print_text(self.script, 8, 9, 'light_grey')
 
     def scene(self, player_inv):
         if self.has_scene_played == False:
             answer = get_input('What do you want to interact with?  ')
             if answer == 'matches':
-                print_text(study_script, 9, 10, 'light_grey')
+                print_text(self.script, 9, 10, 'light_grey')
                 time.sleep(1)
-                print_text(study_script, 10, 11, 'light_grey')
+                print_text(self.script, 10, 11, 'light_grey')
                 get_matches = get_a_yes_no('Pick them up?  ')
                 if get_matches == True:
                     self.inv.transfer_item(player_inv, 'matches')
                     self.has_scene_played = True
-                    print_text(study_script, 11, 13, 'light_grey')
+                    print_text(self.script, 11, 13, 'light_grey')
                 if get_matches == False:
-                    print_text(study_script, 13, 14, 'light_grey')
+                    print_text(self.script, 13, 14, 'light_grey')
             else:
-                print_text(study_script, 14, 15, 'light_grey')
+                print_text(self.script, 14, 15, 'light_grey')
         if self.has_scene_played == True:
-            print_text(study_script, 15, 16, 'light_grey')
+            print_text(self.script, 15, 16, 'light_grey')
 
 
 class Statue(Room):
@@ -187,96 +185,98 @@ class Statue(Room):
         self.name = name
         self.doors = Doors('entrance', 'bedroom', 'study', 'kitchen')
         self.inv = items.Inventory([])
+        self.script = script('statue.txt')
 
     def flavourtext(self):
         random.seed()
         num = random.randint(1, 5)
         match num:
             case 1:
-                print_text(statue_script, 0, 3, 'light_grey')
+                print_text(self.script, 0, 3, 'light_grey')
             case 2:
-                print_text(statue_script, 3, 6, 'light_grey')
+                print_text(self.script, 3, 6, 'light_grey')
             case 3:
-                print_text(statue_script, 6, 7, 'light_grey')
+                print_text(self.script, 6, 7, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 7, 9, 'light_grey')
+                print_text(self.script, 7, 9, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 9, 10, 'light_cyan')
+                print_text(self.script, 9, 10, 'light_cyan')
             case 4:
-                print_text(statue_script, 10, 11, 'light_grey')
+                print_text(self.script, 10, 11, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 11, 12, 'light_grey')
+                print_text(self.script, 11, 12, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 12, 13, 'light_grey')
+                print_text(self.script, 12, 13, 'light_grey')
             case 5:
-                print_text(statue_script, 13, 14, 'light_grey')
+                print_text(self.script, 13, 14, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 14, 15, 'light_grey')
+                print_text(self.script, 14, 15, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 15, 16, 'light_blue')
+                print_text(self.script, 15, 16, 'light_blue')
                 time.sleep(1)
-                print_text(statue_script, 16, 17, 'light_grey')
+                print_text(self.script, 16, 17, 'light_grey')
 
 
 class Bedroom(Room):
     def __init__(self, name):
         self.name = name
         self.doors = Doors('statue', 'wall', 'wall', 'wall')
+        self.script = script('bedroom.txt')
 
     def scene(self, player_inventory, username):
-        print_text(bedroom_script, 0, 1, 'dark_grey')
+        print_text(self.script, 0, 1, 'dark_grey')
         if ('candle' in player_inventory.items and
                 'matches' not in player_inventory.items):
-            print_text(bedroom_script, 1, 2, 'dark_grey')
-            print_text(bedroom_script, 2, 3, 'dark_grey')
+            print_text(self.script, 1, 2, 'dark_grey')
+            print_text(self.script, 2, 3, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 3, 4, 'dark_grey')
+            print_text(self.script, 3, 4, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 4, 5, 'dark_grey')
+            print_text(self.script, 4, 5, 'dark_grey')
         elif ('matches' in player_inventory.items and
               'candle' not in player_inventory.items):
-            print_text(bedroom_script, 5, 6, 'dark_grey')
+            print_text(self.script, 5, 6, 'dark_grey')
             time.sleep(2)
-            print_text(bedroom_script, 6, 7, 'yellow')
+            print_text(self.script, 6, 7, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 7, 8, 'dark_grey')
-            print_text(bedroom_script, 8, 9, 'dark_grey')
+            print_text(self.script, 7, 8, 'dark_grey')
+            print_text(self.script, 8, 9, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 9, 10, 'light_cyan')
+            print_text(self.script, 9, 10, 'light_cyan')
             time.sleep(2)
-            print_text(bedroom_script, 10, 11, 'dark_grey')
+            print_text(self.script, 10, 11, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 11, 12, 'dark_grey')
+            print_text(self.script, 11, 12, 'dark_grey')
         elif (('candle' in player_inventory.items and
               'matches' in player_inventory.items)) or \
              ('lit candle' in player_inventory.items):
-            print_text(bedroom_script, 12, 13, 'yellow')
+            print_text(self.script, 12, 13, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 13, 14, 'yellow')
+            print_text(self.script, 13, 14, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 14, 19, 'yellow')
+            print_text(self.script, 14, 19, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 19, 20, 'yellow')
+            print_text(self.script, 19, 20, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 20, 21, 'yellow')
+            print_text(self.script, 20, 21, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 21, 22, 'yellow')
+            print_text(self.script, 21, 22, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 22, 23, 'yellow')
+            print_text(self.script, 22, 23, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 23, 24, 'yellow')
+            print_text(self.script, 23, 24, 'yellow')
             time.sleep(1)
-            print_text(bedroom_script, 24, 25, 'yellow')
+            print_text(self.script, 24, 25, 'yellow')
             characters.ghost.conversation(
                 player_inventory, username)
         else:
-            print_text(bedroom_script, 25, 26, 'dark_grey')
+            print_text(self.script, 25, 26, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 26, 27, 'dark_grey')
+            print_text(self.script, 26, 27, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 27, 28, 'dark_grey')
+            print_text(self.script, 27, 28, 'dark_grey')
             time.sleep(1)
-            print_text(bedroom_script, 28, 29, 'dark_grey')
+            print_text(self.script, 28, 29, 'dark_grey')
 
 
 class Kitchen(Room):
@@ -284,37 +284,29 @@ class Kitchen(Room):
         self.name = name
         self.doors = Doors('dining', 'wall', 'statue', 'wall')
         self.inv = items.Inventory(['knife'])
+        self.script = script('kitchen.txt')
 
     def flavourtext(self):
-        print_red('The kitchen is as hot as a furnace!')
-        print_red(
-            'The stove has been left on, flames rage from behind it\'s glass window.')
-        print_red(
-            'You try and turn it off but it\'s knobs are too hot for you to touch.')
+        print_text(self.script, 0, 4, 'light_red')
+    
 
     def scene(self, player_inv):
         answer = get_input('What do you want to inspect in the kitchen?  ')
         if answer == 'knife':
             if 'knife' in self.inv.items:
-                print(
-                    'You see a sharp kitchen knife stabbed deep into the wooden countertop.')
-                print(
-                    'It\'s gleaming metallic surface looks out of place amongst this run down kitchen.')
+                print_text(self.script, 4, 6, 'light_red')
                 knife_get = get_a_yes_no('Take the knife?  ')
                 if knife_get == True:
-                    print(
-                        'The knife feels good in your hand, like it\'s supposed to be there.')
+                    print_text(self.script, 6, 8, 'light_red')
                     self.inv.transfer_item(player_inv, 'knife')
-                    print('The knife is added to your inventory.')
                 else:
-                    print(
-                        'You leave it be, shining in the warm red light emanating from the oven.')
+                    print_text(self.script, 8, 9, 'light_red')
             else:
-                print('You already have the knife, remember? It hasn\'t left your hand.')
+                print_text(self.script, 9, 10, 'light_red')
         elif answer == 'stove':
-            print_red('It\'s too hot to touch!')
+            print_text(self.script, 10, 11, 'light_red')
         else:
-            print('I did\'t understand that.')
+            print_text(self.script, 11, 12, 'light_red')
 
 
 class Dining(Room):
@@ -323,47 +315,29 @@ class Dining(Room):
         self.doors = Doors('wall', 'kitchen', 'entrance', 'wall')
         self.has_scene_played = False
         self.inv = items.Inventory(['candle'])
+        self.script = script('dining.txt')
 
     def flavourtext(self):
         if self.has_scene_played == False:
-            print_green('There\'s a dinner table set for two.')
-            print_green('There\'s lovely silverwear, crisp white napkins.')
-            print_green(
-                'In the centre, something that used to be a roast chicken.')
-            time.sleep(1)
-            print_green('It looks like it might have been out for a while.')
-            time.sleep(2)
-            print_green('... It smells like it\'s been out for a while.')
-            time.sleep(2)
-            print_green('A tall white candle gives off warm light.')
+            print_text(self.script, 0, 11, 'light_grey')
         if self.has_scene_played == True:
-            print_green('There\'s a table set for two,'), \
-                ('the bone-whiteplates are empty. The smell of rot is intense.')
+            print_text(self.script, 11, 13, 'light_grey')
 
     def scene(self, user):
         answer = get_input('What would you like to interact with?  ')
         if answer == 'nothing':
-            print_green('You leave it be.')
+            print('You leave it be.')
             return
         if answer == 'candle' or 'the candle':
             if self.has_scene_played == False:
                 extinguish_candle = (get_a_yes_no('Blow out candle?  '))
                 if extinguish_candle == True:
                     self.has_scene_played = True
-                    print_green('You blow out the candle.')
-                    print_red('As soon as you do, the food resting on the dinner plates'), \
-                        (' errupts into a cacophonous flurry of flies and cockroaches.')
+                    print_text(self.script, 13, 14, 'light_grey')
                     time.sleep(1)
-                    print_red('They fly thick and fast at your face;'), \
-                        ('some get tangled in your hair,'), \
-                        (' some get into your mouth.')
-                    print_green(
-                        'When they finally dissipate, the plates are empty.')
+                    print_text(self.script, 14, 19, 'light_grey')
                     time.sleep(3)
-                    print_green('The smell remains.')
+                    print_text(self.script, 19, 23, 'light_grey')
                     self.inv.transfer_item(user, 'candle')
-                    time.sleep(3)
-                    print('You pick up the candle and put it in your pocket.')
                 if extinguish_candle == False:
-                    print_green('You leave it be.'), \
-                        (' The skin of the roast chicken bulges slightly.')
+                    print_text(self.script, 23, 24, 'light_grey')
