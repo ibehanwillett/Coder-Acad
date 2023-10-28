@@ -9,7 +9,8 @@ from general import get_a_yes_no, get_input, win_condition_met
 from general import script, line_start_and_end
 
 # Scripts
-entrance_script = script('entrance.txt')
+ent_script = script('entrance.txt')
+descript_script = script('descriptions.txt')
 
 # Room base class
 class Room:
@@ -18,30 +19,30 @@ class Room:
         self.inv = items.Inventory([])
 
     def description(self):
-        print(f'You are in the {self.name}')
+        print(f'You are in the {self.name}.')
         random.seed()
         num = random.randint(1, 10)
         match num:
             case 1:
-                print('You can hear the wind moaning outside.')
+                line_start_and_end(descript_script, 0, 1)
             case 2:
-                print('You feel watched.')
+                line_start_and_end(descript_script, 1, 2)
             case 3:
-                print_colour('The reflections are wrong here.', 'blue')
+                line_start_and_end(descript_script, 2, 3, 'light_blue')
             case 4:
-                print('Suddenly, you\'re struck by a ravenous hunger.')
+                line_start_and_end(descript_script, 3, 4)
             case 5:
-                print('Your teeth feel wrong in your mouth.')
+                line_start_and_end(descript_script, 4, 5)
             case 6:
-                print('The floorboards creak underneath your feet.')
+                line_start_and_end(descript_script, 5, 6)
             case 7:
-                print('Suddenly, your heart starts beating faster.')
+                line_start_and_end(descript_script, 6, 7)
             case 8:
-                print_green('You feel sick.')
+                line_start_and_end(descript_script, 7, 8)
             case 9:
-                print('Somewhere else, a door slams.')
+                line_start_and_end(descript_script, 8, 9)
             case 10:
-                print('You hear a scream from somewhere else in the house.')
+                line_start_and_end(descript_script, 9, 10)
         time.sleep(1)
 
     def print_item_list(self, room_inv):
@@ -65,7 +66,7 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
 
     def flavourtext(self, player_inv):
-       line_start_and_end(entrance_script,0, 5, 'dark_grey')
+       line_start_and_end(ent_script,0, 5, 'dark_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -73,9 +74,9 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else:
-                line_start_and_end(entrance_script, 5, 7, 'dark_grey')
+                line_start_and_end(ent_script, 5, 7, 'dark_grey')
         else:
-            line_start_and_end(entrance_script, 7, 8, 'dark_grey')
+            line_start_and_end(ent_script, 7, 8, 'dark_grey')
 
 
 class Library(Room):

@@ -1,5 +1,4 @@
 import sys
-from colorama import just_fix_windows_console
 from termcolor import colored
 
 
@@ -52,7 +51,7 @@ def win_condition_met(username):
     print("YOU WON!")
     quit()
 
-def print_colour(input, colour):
+def print_colour(input, colour=None):
     if colour is None:
         print(input)
     else:
@@ -66,6 +65,6 @@ def script(filename):
             room.append(line.rstrip('\n'))
     return room
 
-def line_start_and_end(script, start, end, colour):
+def line_start_and_end(script, start, end, colour=None):
     for line in range(start, end):
         print_colour(script[line], colour)
