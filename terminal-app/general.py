@@ -53,21 +53,21 @@ def win_condition_met(username):
     quit()
 
 
-def print_red(input):
-    text = colored(input, "red")
+def print_colour(input, colour):
+    text = colored(input, colour)
     print(text)
 
+def script(filename):
+    room = []
+    with open (filename, 'rt') as script:
+        for line in script:
+            room.append(line.rstrip('\n'))
+    return room
 
-def print_green(input):
-    text = colored(input, "green")
-    print(text)
-
-
-def print_blue(input):
-    text = colored(input, "blue")
-    print(text)
-
-
-def print_yellow(input):
-    text = colored(input, "yellow")
-    print(text)
+def line_start_and_end(script, start, end, colour):
+    if colour is None:
+        for line in range(start, end):
+            print(script[line])
+    else:
+        for line in range(start, end):
+            print_colour(script[line], colour)

@@ -6,14 +6,10 @@ from items import odyssey, carson, riddle
 import random
 from doors import Doors
 from general import get_a_yes_no, get_input, win_condition_met
-from general import print_red, print_green, print_blue, print_yellow
+from general import script, line_start_and_end
 
-# Text
-## Entrance Script
-entrance_script = []
-with open ('entrance.txt', 'rt') as ent_script:
-    for line in ent_script:
-        entrance_script.append(line.rstrip('\n'))
+# Scripts
+entrance_script = script('entrance.txt')
 
 # Room base class
 class Room:
@@ -69,11 +65,7 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
 
     def flavourtext(self, player_inv):
-        print('The entrance, once grand, is now a shambling pile of rot'), \
-            ('and peeling paint.')
-        print('The black and white parquet is cracked and ruined.')
-        print('Sometimes, something hot and wet'), \
-            ('oozes from underneath the tiles.')
+       line_start_and_end(entrance_script,0,6)
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
