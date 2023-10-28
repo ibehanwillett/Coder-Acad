@@ -10,8 +10,12 @@ class Character:
         self.has_had_conversation = False
 
     def conversation(self, player_inv, username):
+        convo_line = []
+        with open ('conversation.txt', 'rt') as convo_script:
+            for convo_line in convo_script:
+                convo_line.append(convo_line.rstrip('\n'))
         if self.has_had_conversation == False:
-            print('The ghost says \"Please...please don\'t go...\"')
+            print(convo_line(0))
             time.sleep(1)
             print('The ghost is crying. She was beautiful once.')
             time.sleep(1)

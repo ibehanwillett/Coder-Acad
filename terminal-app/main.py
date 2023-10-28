@@ -27,9 +27,14 @@ kitchen = rooms.Kitchen('kitchen')
 dining = rooms.Dining('dining room')
 
 #START OF GAME
-with open('intro.txt') as x:
-    intro = x.read()
-    intro = colored(intro, 'green')
+with open('house.txt') as x:
+    house = x.read()
+    house = colored(house, 'green')
+    print(house)
+time.sleep(1)
+with open('intro.txt') as y:
+    intro = y.read()
+    intro = colored(intro, 'yellow')
     print(intro)
 start_game = general.get_a_yes_no('')
 if start_game == False:
