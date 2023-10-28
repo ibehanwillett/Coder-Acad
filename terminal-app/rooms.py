@@ -8,6 +8,12 @@ from doors import Doors
 from general import get_a_yes_no, get_input, win_condition_met
 from general import print_red, print_green, print_blue, print_yellow
 
+# Text
+## Entrance Script
+entrance_script = []
+with open ('entrance.txt', 'rt') as ent_script:
+    for line in ent_script:
+        entrance_script.append(line.rstrip('\n'))
 
 # Room base class
 class Room:

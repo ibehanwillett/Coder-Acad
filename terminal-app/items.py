@@ -62,7 +62,7 @@ class Inventory:
                 self.items.append('lit candle')
                 self.items.remove('matches')
                 self.items.remove('candle')
-                print(
-                    'You now have a lit candle in your inventory.\nIt gives off a lovely light.')
+                print('You now have a lit candle in your inventory.')
+                print('It gives off a lovely light.')
             if answer == False:
                 return
