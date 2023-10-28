@@ -14,6 +14,7 @@ descript_script = script('descriptions.txt')
 lib_script = script('library.txt')
 study_script = script('study.txt')
 statue_script = script('statue.txt')
+bedroom_script = script('bedroom.txt')
 
 # Room base class
 class Room:
@@ -31,7 +32,7 @@ class Room:
             case 2:
                 print_text(descript_script, 1, 2)
             case 3:
-                print_text(descript_script, 2, 3, 'light_blue')
+                print_text(descript_script, 2, 3, 'light_cyan')
             case 4:
                 print_text(descript_script, 3, 4)
             case 5:
@@ -142,43 +143,43 @@ class Study(Room):
         self.has_scene_played = False
 
     def flavourtext(self, player_inv):
-        print_text(study_script, 0, 1, 'light grey')
+        print_text(study_script, 0, 1, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 1, 2, 'light grey')
+        print_text(study_script, 1, 2, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 2, 3, 'light grey')
+        print_text(study_script, 2, 3, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 3, 4, 'light grey')
+        print_text(study_script, 3, 4, 'light_grey')
         time.sleep(1)
-        print_text(study_script, 4, 5, 'light grey')
+        print_text(study_script, 4, 5, 'light_grey')
         time.sleep(1)
         if 'knife' in player_inv.items:
-            print_text(study_script, 5, 6, 'light grey')
+            print_text(study_script, 5, 6, 'light_grey')
             time.sleep(1)
-            print_text(study_script, 6, 7, 'light grey')
+            print_text(study_script, 6, 7, 'light_grey')
             time.sleep(1)
             print_text(study_script, 7, 8, 'red')
             time.sleep(1)
-            print_text(study_script, 8, 9, 'light grey')
+            print_text(study_script, 8, 9, 'light_grey')
 
     def scene(self, player_inv):
         if self.has_scene_played == False:
             answer = get_input('What do you want to interact with?  ')
             if answer == 'matches':
-                print_text(study_script, 9, 10, 'light grey')
+                print_text(study_script, 9, 10, 'light_grey')
                 time.sleep(1)
-                print_text(study_script, 10, 11, 'light grey')
+                print_text(study_script, 10, 11, 'light_grey')
                 get_matches = get_a_yes_no('Pick them up?  ')
                 if get_matches == True:
                     self.inv.transfer_item(player_inv, 'matches')
                     self.has_scene_played = True
-                    print_text(study_script, 11, 13, 'light grey')
+                    print_text(study_script, 11, 13, 'light_grey')
                 if get_matches == False:
-                    print_text(study_script, 13, 14, 'light grey')
+                    print_text(study_script, 13, 14, 'light_grey')
             else:
-                print_text(study_script, 14, 15, 'light grey')
+                print_text(study_script, 14, 15, 'light_grey')
         if self.has_scene_played == True:
-            print_text(study_script, 15, 16, 'light grey')
+            print_text(study_script, 15, 16, 'light_grey')
 
 
 class Statue(Room):
@@ -192,29 +193,29 @@ class Statue(Room):
         num = random.randint(1, 5)
         match num:
             case 1:
-                print_text(statue_script, 0, 3, 'light grey')
+                print_text(statue_script, 0, 3, 'light_grey')
             case 2:
-                print_text(statue_script, 3, 6, 'light grey')
+                print_text(statue_script, 3, 6, 'light_grey')
             case 3:
-                print_text(statue_script, 6, 7, 'light grey')
+                print_text(statue_script, 6, 7, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 7, 9, 'light grey')
+                print_text(statue_script, 7, 9, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 9, 10, 'light blue')
+                print_text(statue_script, 9, 10, 'light_cyan')
             case 4:
-                print_text(statue_script, 10, 11, 'light grey')
+                print_text(statue_script, 10, 11, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 11, 12, 'light grey')
+                print_text(statue_script, 11, 12, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 12, 13, 'light grey')
+                print_text(statue_script, 12, 13, 'light_grey')
             case 5:
-                print_text(statue_script, 13, 14, 'light grey')
+                print_text(statue_script, 13, 14, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 14, 15, 'light grey')
+                print_text(statue_script, 14, 15, 'light_grey')
                 time.sleep(1)
-                print_text(statue_script, 15, 16, 'light blue')
+                print_text(statue_script, 15, 16, 'light_blue')
                 time.sleep(1)
-                print_text(statue_script, 16, 17, 'light grey')
+                print_text(statue_script, 16, 17, 'light_grey')
 
 
 class Bedroom(Room):
@@ -222,35 +223,60 @@ class Bedroom(Room):
         self.name = name
         self.doors = Doors('statue', 'wall', 'wall', 'wall')
 
-    def scene(self, player_inventory, ghost_inventory, username):
-        print('It\'s so dark...')
+    def scene(self, player_inventory, username):
+        print_text(bedroom_script, 0, 1, 'dark_grey')
         if ('candle' in player_inventory.items and
                 'matches' not in player_inventory.items):
-            print('It\'s too dark to see.')
-            print('You have a candle, but nothing to light it with!')
-            print('You should probably leave.')
+            print_text(bedroom_script, 1, 2, 'dark_grey')
+            print_text(bedroom_script, 2, 3, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 3, 4, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 4, 5, 'dark_grey')
         elif ('matches' in player_inventory.items and
               'candle' not in player_inventory.items):
-            print('You try to light some matches...')
+            print_text(bedroom_script, 5, 6, 'dark_grey')
             time.sleep(2)
-            print_yellow('You get a second of light!'), \
-                ('You see briefly what look\'s to be a bedroom- wait.')
+            print_text(bedroom_script, 6, 7, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 7, 8, 'dark_grey')
+            print_text(bedroom_script, 8, 9, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 9, 10, 'light_cyan')
             time.sleep(2)
-            print('Did something just move?')
-            time.sleep(2)
-            print('The match burns out,'), \
-                ('leaving you with only burnt fingertips'), \
-                ('and a stone of dread rising in your throat.')
-            print('Best return with something to light the candle.')
+            print_text(bedroom_script, 10, 11, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 11, 12, 'dark_grey')
         elif (('candle' in player_inventory.items and
               'matches' in player_inventory.items)) or \
              ('lit candle' in player_inventory.items):
-            print_yellow('You see a spooky ghost girl!')
+            print_text(bedroom_script, 12, 13, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 13, 14, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 14, 19, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 19, 20, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 20, 21, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 21, 22, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 22, 23, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 23, 24, 'yellow')
+            time.sleep(1)
+            print_text(bedroom_script, 24, 25, 'yellow')
             characters.ghost.conversation(
                 player_inventory, username)
         else:
-            print('It\'s too dark to see!')
-            print('You get a feeling you should leave.')
+            print_text(bedroom_script, 25, 26, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 26, 27, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 27, 28, 'dark_grey')
+            time.sleep(1)
+            print_text(bedroom_script, 28, 29, 'dark_grey')
 
 
 class Kitchen(Room):
