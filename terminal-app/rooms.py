@@ -11,6 +11,7 @@ from general import script, line_start_and_end
 # Scripts
 ent_script = script('entrance.txt')
 descript_script = script('descriptions.txt')
+lib_script = script('library.txt')
 
 # Room base class
 class Room:
@@ -86,23 +87,27 @@ class Library(Room):
         self.inv = items.Inventory([odyssey, carson, riddle])
 
     def flavourtext(self):
-        print_blue('The walls are covered in heavy wooden bookshelves.')
+        line_start_and_end(lib_script, 0, 1, 'blue')
         time.sleep(1)
-        print_blue('Most of the shelves have collasped.')
+        line_start_and_end(lib_script, 1, 2, 'blue')
         time.sleep(1)
-        print_blue('The smell of rot and mildew is overwhelming:')
+        line_start_and_end(lib_script, 2, 3, 'blue')
         time.sleep(1)
-        print_blue('Black mold covers everything.')
+        line_start_and_end(lib_script, 3, 4, 'blue')
         time.sleep(1)
-        print_blue('You can hear a faint dripping noise.')
+        line_start_and_end(lib_script, 4, 5, 'blue')
         time.sleep(1)
-        print_blue('The air feels thick in your throat.')
+        line_start_and_end(lib_script, 5, 6, 'blue')
         time.sleep(1)
-        print_blue('Most of the books have become swollen with water.')
+        line_start_and_end(lib_script, 6, 7, 'blue')
         time.sleep(1)
-        print_blue('They\'ve fused together.')
+        line_start_and_end(lib_script, 7, 8, 'blue')
         time.sleep(1)
-        print_blue('Three books aren\'t too water damaged to read.')
+        line_start_and_end(lib_script, 8, 9, 'blue')
+        time.sleep(1)
+        line_start_and_end(lib_script, 9, 10, 'blue')
+        time.sleep(1)
+        line_start_and_end(lib_script, 10, 11, 'blue')
 
     def scene(self):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
@@ -124,8 +129,7 @@ class Library(Room):
                     print('I can\'t find that book;'), \
                         (' try again or write \'exit\' to leave.')
         if answer == False:
-            print_blue('You leave the books alone '), \
-                ('to their somber, sodden rest.')
+            line_start_and_end(lib_script, 11, 12, 'blue')
 
 
 class Study(Room):
