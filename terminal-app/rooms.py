@@ -6,12 +6,13 @@ from items import odyssey, carson, riddle
 import random
 from doors import Doors
 from general import get_a_yes_no, get_input, win_condition_met
-from general import script, line_start_and_end
+from general import script, print_text
 
 # Scripts
 ent_script = script('entrance.txt')
 descript_script = script('descriptions.txt')
 lib_script = script('library.txt')
+study_script = script('study.txt')
 
 # Room base class
 class Room:
@@ -25,25 +26,25 @@ class Room:
         num = random.randint(1, 10)
         match num:
             case 1:
-                line_start_and_end(descript_script, 0, 1)
+                print_text(descript_script, 0, 1)
             case 2:
-                line_start_and_end(descript_script, 1, 2)
+                print_text(descript_script, 1, 2)
             case 3:
-                line_start_and_end(descript_script, 2, 3, 'light_blue')
+                print_text(descript_script, 2, 3, 'light_blue')
             case 4:
-                line_start_and_end(descript_script, 3, 4)
+                print_text(descript_script, 3, 4)
             case 5:
-                line_start_and_end(descript_script, 4, 5)
+                print_text(descript_script, 4, 5)
             case 6:
-                line_start_and_end(descript_script, 5, 6)
+                print_text(descript_script, 5, 6)
             case 7:
-                line_start_and_end(descript_script, 6, 7)
+                print_text(descript_script, 6, 7)
             case 8:
-                line_start_and_end(descript_script, 7, 8)
+                print_text(descript_script, 7, 8)
             case 9:
-                line_start_and_end(descript_script, 8, 9)
+                print_text(descript_script, 8, 9)
             case 10:
-                line_start_and_end(descript_script, 9, 10)
+                print_text(descript_script, 9, 10)
         time.sleep(1)
 
     def print_item_list(self, room_inv):
@@ -67,7 +68,7 @@ class Entrance(Room):
         self.inv = items.Inventory(['locked door'])
 
     def flavourtext(self, player_inv):
-       line_start_and_end(ent_script,0, 5, 'dark_grey')
+       print_text(ent_script,0, 5, 'dark_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -75,9 +76,9 @@ class Entrance(Room):
             if 'key' in player_inventory.items:
                 win_condition_met(username)
             else:
-                line_start_and_end(ent_script, 5, 7, 'dark_grey')
+                print_text(ent_script, 5, 7, 'dark_grey')
         else:
-            line_start_and_end(ent_script, 7, 8, 'dark_grey')
+            print_text(ent_script, 7, 8, 'dark_grey')
 
 
 class Library(Room):
@@ -87,27 +88,27 @@ class Library(Room):
         self.inv = items.Inventory([odyssey, carson, riddle])
 
     def flavourtext(self):
-        line_start_and_end(lib_script, 0, 1, 'blue')
+        print_text(lib_script, 0, 1, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 1, 2, 'blue')
+        print_text(lib_script, 1, 2, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 2, 3, 'blue')
+        print_text(lib_script, 2, 3, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 3, 4, 'blue')
+        print_text(lib_script, 3, 4, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 4, 5, 'blue')
+        print_text(lib_script, 4, 5, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 5, 6, 'blue')
+        print_text(lib_script, 5, 6, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 6, 7, 'blue')
+        print_text(lib_script, 6, 7, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 7, 8, 'blue')
+        print_text(lib_script, 7, 8, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 8, 9, 'blue')
+        print_text(lib_script, 8, 9, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 9, 10, 'blue')
+        print_text(lib_script, 9, 10, 'blue')
         time.sleep(1)
-        line_start_and_end(lib_script, 10, 11, 'blue')
+        print_text(lib_script, 10, 11, 'blue')
 
     def scene(self):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
@@ -129,7 +130,7 @@ class Library(Room):
                     print('I can\'t find that book;'), \
                         (' try again or write \'exit\' to leave.')
         if answer == False:
-            line_start_and_end(lib_script, 11, 12, 'blue')
+            print_text(lib_script, 11, 12, 'blue')
 
 
 class Study(Room):
@@ -140,46 +141,43 @@ class Study(Room):
         self.has_scene_played = False
 
     def flavourtext(self, player_inv):
-        print('The study\'s wall are covered in writing.')
+        print_text(study_script, 0, 1, 'light grey')
         time.sleep(1)
-        print('The words spiral out from the writing desk')
+        print_text(study_script, 1, 2, 'light grey')
         time.sleep(1)
-        print('like someone starting writing and couldn\'t stop.')
+        print_text(study_script, 2, 3, 'light grey')
         time.sleep(1)
-        print('The writing gets more erratic as it goes on.')
+        print_text(study_script, 3, 4, 'light grey')
         time.sleep(1)
-        print('Eventually the ink runs out'), \
-            ('and the words are scratched into the wall instead.')
-        time.sleep(1)
-        print(' ...then the writer found a new kind of ink.')
+        print_text(study_script, 4, 5, 'light grey')
         time.sleep(1)
         if 'knife' in player_inv.items:
-            print_red('You can read the words out now.')
+            print_text(study_script, 5, 6, 'light grey')
             time.sleep(1)
-            print_red('How could you not?')
+            print_text(study_script, 6, 7, 'light grey')
             time.sleep(1)
-            print_red('They reads \"MEAT MEAT MEAT MEAT MEAT\"')
+            print_text(study_script, 7, 8, 'red')
             time.sleep(1)
-            print_red('They\'re lyrics and you know the song.')
+            print_text(study_script, 8, 9, 'light grey')
 
     def scene(self, player_inv):
         if self.has_scene_played == False:
             answer = get_input('What do you want to interact with?  ')
             if answer == 'matches':
-                print('You see some scattered matches on the table.')
-                print('Most of them have been ruined by the... ink.'), \
-                    (' but some are still good.')
+                print_text(study_script, 9, 10, 'light grey')
+                time.sleep(1)
+                print_text(study_script, 10, 11, 'light grey')
                 get_matches = get_a_yes_no('Pick them up?  ')
                 if get_matches == True:
                     self.inv.transfer_item(player_inv, 'matches')
                     self.has_scene_played = True
-                    print('You pick the matches up.')
+                    print_text(study_script, 11, 13, 'light grey')
                 if get_matches == False:
-                    print('You leave them alone.')
+                    print_text(study_script, 13, 14, 'light grey')
             else:
-                print('I don\'t know what you mean.')
+                print_text(study_script, 14, 15, 'light grey')
         if self.has_scene_played == True:
-            print('God... why does some of the ink still look wet?')
+            print_text(study_script, 15, 16, 'light grey')
 
 
 class Statue(Room):

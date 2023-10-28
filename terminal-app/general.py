@@ -65,6 +65,6 @@ def script(filename):
             room.append(line.rstrip('\n'))
     return room
 
-def line_start_and_end(script, start, end, colour=None):
+def print_text(script, start, end, colour=None):
     for line in range(start, end):
         print_colour(script[line], colour)
