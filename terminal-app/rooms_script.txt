@@ -1,0 +1,112 @@
+random room descriptions
+You can hear the wind moaning outside.')
+('You feel watched.')
+'The reflections are wrong here.')
+'Suddenly, you\'re struck by a ravenous hunger.')
+'Your teeth feel wrong in your mouth.')
+The floorboards creak underneath your feet.')
+Suddenly, your heart starts beating faster.')
+You feel sick.')
+'Somewhere else, a door slams.
+You hear a scream from somewhere else in the house.')
+looking around answers
+There\'s nothing interesting here.')
+'Here\'s what you see:'
+entrance
+'The entrance, once grand, is now a shambling pile of rot and peeling paint.')
+The black and white parquet is cracked and ruined. Sometimes, something hot and wet oozes from underneath the tiles.')
+'You scream and bang on the door. It remains locked.')
+'The wind howls outside.')
+library
+The walls are covered in heavy wooden bookshelves.'
+Most of the shelves have collasped.
+The smell of rot and mildew is overwhelming:'
+Black mold covers everything.'
+You can hear a faint dripping noise.')
+The air feels thick in your throat.')
+Most of the books have become swollen with water.')
+They\'ve fused together.')
+'Three books aren\'t too water damaged to read.')
+'You leave the books alone to their somber, sodden rest.')
+study
+The study\'s wall are covered in writing.'
+The words spiral out from the writing desk like someone starting writing and couldn\'t stop.')
+The writing gets more erratic as it goes on.'
+'Eventually the ink runs out and the words are scratched into the wall instead.')
+...then the writer found a new kind of ink.')
+study w/ knife
+You can read the words out now.')
+How could you not?')
+They reads \"MEAT MEAT MEAT MEAT MEAT\"')
+They\'re lyrics and you know the song.')
+study scene
+'You see some scattered matches on the table.')
+Most of them have been ruined by the... ink... but some are still good.')
+You pick the matches up.')
+You leave them alone.')
+I don\'t know what you mean.')
+God... why does some of the ink still look wet?')
+Statue room
+statue descriptions
+The room is full of different statutes of men grappling with snakes.')
+All the statues are facing you. Have they always faced this direction?'), \
+Did they always look this angry?')
+There\'s only one statue in the room.')
+It\'s of a young women.'), \
+She\'s looking into a handmirror and crying.')
+She looks... familiar.')
+The room is filled with horse statues.')
+The horses are bitng and tearing at each other.'
+Eurgh!')
+There\'s a statue of...')
+'you?')
+You\'re looking into a handmirror and crying.')
+Bedroom
+It\'s so dark...')
+candle no matches
+It\'s too dark to see.')
+You have a candle, but nothing to light it with!')
+'You should probably leave.')
+matches no candle
+'You try to light some matches...')
+'You get a second of light!'), 
+You see briefly what look\'s to be a bedroom- wait.')
+Did something just move?')
+The match burns out, leaving you with only burnt fingertips and a stone of dread rising in your throat.')
+Best return with something to light the candle.
+matches and candle
+You see a spooky ghost girl!
+nothing
+It\'s too dark to see!'
+You get a feeling you should leave.'
+Kitchen
+he kitchen is as hot as a furnace!
+The stove has been left on, flames rage from behind it\'s glass window.
+You try and turn it off but it\'s knobs are too hot for you to touch.'
+kitchen scene
+You see a sharp kitchen knife stabbed deep into the wooden countertop.')
+It\'s gleaming metallic surface looks out of place amongst this run down kitchen.'
+The knife feels good in your hand, like it\'s supposed to be there.'
+The knife is added to your inventory.')
+You leave it be, shining in the warm red light emanating from the oven.')
+You already have the knife, remember? It hasn\'t left your hand.
+It\'s too hot to touch!')
+I did\'t understand that.'
+Dining room
+before scene
+There\'s a dinner table set for two.')
+'There\'s lovely silverwear, crisp white napkins.')
+In the centre, something that used to be a roast chicken.')
+It looks like it might have been out for a while.')
+... It smells like it\'s been out for a while.')
+A tall white candle gives off warm light.')
+after scene
+There\'s a table set for two.
+The bone-whiteplates are empty. The smell of rot is intense.')
+dining room scene
+You blow out the candle.')
+As soon as you do, the food resting on the dinner plates errupts into a cacophonous flurry of flies and cockroaches.')
+'They fly thick and fast at your face; some get tangled in your hair, some get into your mouth.')
+When they finally dissipate, the plates are empty.'
+You pick up the candle and put it in your pocket.
+The skin of the roast chicken bulges slightly.'
