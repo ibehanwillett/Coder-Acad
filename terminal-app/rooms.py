@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import time
 import characters
 import items
@@ -58,17 +58,27 @@ class Room(ABC):
         if answer == False:
             pass
 
+    @abstractmethod
+    def flavourtext(self, player_inv):
+        pass
+
+    @abstractmethod
+    def scene(self, player_inv, username):
+        pass
 
 # Rooms themselves definition
 class Entrance(Room):
     def __init__(self, name):
         self.name = name
         self.doors = Doors('locked', 'statue', 'library', 'dining')
-        self.inv = items.Inventory(['locked door'])
+        self.inv = items.Inventory('locked door')
         self.script = script('entrance.txt')
 
-    def flavourtext(self, player_inv):
-        print_text(self.script, 0, 5, 'light_grey')
+    def flavourtext(self, player_inventory):
+        if 'key' not in player_inventory.items:
+            print_text(self.script, 0, 5, 'light_grey')
+        else:
+            print('Quickly, you\'re almost free!')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -88,7 +98,7 @@ class Library(Room):
         self.inv = items.Inventory([odyssey, carson, riddle])
         self.script = script('library.txt')
 
-    def flavourtext(self):
+    def flavourtext(self, player_inventory):
         print_text(self.script, 0, 1, 'blue')
         time.sleep(1)
         print_text(self.script, 1, 2, 'blue')
@@ -111,11 +121,11 @@ class Library(Room):
         time.sleep(1)
         print_text(self.script, 10, 11, 'blue')
 
-    def scene(self):
+    def scene(self, username):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
         if answer == True:
             while True:
-                book_pick = get_input('Which book do you want to read?  ')
+                book_pick = get_input(f'Which book do you want to read {username}?  ')
                 if book_pick == 'book with a blue spine' or book_pick == 'blue book':
                     odyssey.interact(0, 1, 'blue')
                     break
@@ -128,8 +138,7 @@ class Library(Room):
                 if book_pick == 'none':
                     break
                 else:
-                    print('I can\'t find that book;'), \
-                        (' try again or write \'exit\' to leave.')
+                    print('I can\'t find that book;')
         if answer == False:
             print_text(self.script, 11, 12, 'blue')
 
@@ -162,9 +171,9 @@ class Study(Room):
             time.sleep(1)
             print_text(self.script, 8, 9, 'light_grey')
 
-    def scene(self, player_inv):
+    def scene(self, player_inv, username):
         if self.has_scene_played == False:
-            answer = get_input('What do you want to interact with?  ')
+            answer = get_input(f'What thing do you interact with {username}?  ')
             if answer == 'matches':
                 print_text(self.script, 9, 10, 'light_grey')
                 time.sleep(1)
@@ -189,7 +198,10 @@ class Statue(Room):
         self.inv = items.Inventory([])
         self.script = script('statue.txt')
 
-    def flavourtext(self):
+    def print_item_list(self, room_inv):
+        pass
+
+    def flavourtext(self, player_inventory):
         random.seed()
         num = random.randint(1, 5)
         match num:
@@ -218,6 +230,9 @@ class Statue(Room):
                 time.sleep(1)
                 print_text(self.script, 16, 17, 'light_grey')
 
+    def scene(self, player_inventory, username):
+        pass
+
 
 class Bedroom(Room):
     def __init__(self, name):
@@ -225,8 +240,12 @@ class Bedroom(Room):
         self.doors = Doors('statue', 'wall', 'wall', 'wall')
         self.script = script('bedroom.txt')
 
-    def flavourtext(self):
+    def flavourtext(self, player_inventory):
         pass
+
+    def print_item_list(self, room_inv):
+        pass
+    
     def scene(self, player_inventory, username):
         print_text(self.script, 0, 1, 'dark_grey')
         if ('candle' in player_inventory.items and
@@ -290,11 +309,11 @@ class Kitchen(Room):
         self.inv = items.Inventory(['knife'])
         self.script = script('kitchen.txt')
 
-    def flavourtext(self):
+    def flavourtext(self, player_inventory):
         print_text(self.script, 0, 4, 'light_red')
 
-    def scene(self, player_inv):
-        answer = get_input('What in the kitchen do you want to look at?  ')
+    def scene(self, player_inv, username):
+        answer = get_input(f'Do you want to look at {username}?  ')
         if answer == 'knife':
             if 'knife' in self.inv.items:
                 print_text(self.script, 4, 6, 'light_red')
@@ -320,14 +339,14 @@ class Dining(Room):
         self.inv = items.Inventory(['candle'])
         self.script = script('dining.txt')
 
-    def flavourtext(self):
+    def flavourtext(self, player_inventory):
         if self.has_scene_played == False:
             print_text(self.script, 0, 11, 'light_grey')
         if self.has_scene_played == True:
             print_text(self.script, 11, 13, 'light_grey')
 
-    def scene(self, user):
-        answer = get_input('What would you like to interact with?  ')
+    def scene(self, player_inventory, username):
+        answer = get_input(f'What do you interact with {username}?  ')
         if answer == 'nothing':
             print('You leave it be.')
             return
@@ -341,6 +360,6 @@ class Dining(Room):
                     print_text(self.script, 14, 19, 'light_grey')
                     time.sleep(3)
                     print_text(self.script, 19, 23, 'light_grey')
-                    self.inv.transfer_item(user, 'candle')
+                    self.inv.transfer_item(player_inventory, 'candle')
                 if extinguish_candle == False:
                     print_text(self.script, 23, 24, 'light_grey')

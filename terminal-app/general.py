@@ -32,6 +32,9 @@ def get_a_yes_no(prompt):
         except ValueError:
             print('No numbers please!')
             continue
+        except:
+            print('Something went wrong. Please try again!')
+            continue
         quitcheck(answer)
         if answer == ('yes' or 'y'):
             return True
@@ -71,3 +74,10 @@ def script(filename):
 def print_text(script, start, end, colour=None):
     for line in range(start, end):
         print_colour(script[line], colour)
+
+def room_content(room, player_inv, username):
+    room.description()
+    room.flavourtext(player_inv)
+    room.print_item_list(room.inv.items)
+    room.scene(player_inv, username)
+    return room.doors.leave(player_inv)
