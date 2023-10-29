@@ -1,6 +1,8 @@
 import general
 from general import get_input
 import time
+import sys
+
 
 class Doors:
     def __init__(cls, north, south, east, west):
@@ -8,7 +10,7 @@ class Doors:
         cls.south = south
         cls.east = east
         cls.west = west
- 
+
     def leave(cls, player_inventory):
         def where_from(cls, player_inventory):
             while True:
@@ -16,8 +18,8 @@ class Doors:
                 print(f'To the south, {cls.south}.')
                 print(f'To the east, {cls.east}')
                 print(f'To the west, {cls.west}')
-                print('Type the direction you\'d like to go,' \
-                ' or inv to check your inventory.')
+                print('Type the direction you\'d like to go,'
+                      ' or inv to check your inventory.')
                 direction = get_input('Where would like to go?  ')
                 general.quitcheck(direction)
                 match direction:
@@ -36,7 +38,7 @@ class Doors:
                     case _:
                         print('Sorry, I didn\'t understand.')
                         continue
-        
+
         while True:
             where = where_from(cls, player_inventory)
             if where == 'locked':
@@ -45,6 +47,8 @@ class Doors:
                 if 'key' in player_inventory.items:
                     print('The key slides into the locked door!')
                     general.win_condition_met()
+                    time.sleep(10)
+                    sys.exit()
                 else:
                     continue
             elif where == 'wall':
@@ -53,5 +57,3 @@ class Doors:
                 continue
             else:
                 return (f'{where}')
-
-   

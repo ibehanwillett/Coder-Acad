@@ -50,7 +50,7 @@ def win_condition_met(username):
     print('You certainly don\'t hear the whisper...')
     print(f'\"Goodbye... {username}')
     print("YOU WON!")
-    quit()
+
 
 def print_colour(input, colour=None):
     if colour is None:
@@ -59,12 +59,14 @@ def print_colour(input, colour=None):
         text = colored(input, colour)
         print(text)
 
+
 def script(filename):
     room = []
-    with open (filename, 'rt') as script:
+    with open(filename, 'rt') as script:
         for line in script:
             room.append(line.rstrip('\n'))
     return room
+
 
 def print_text(script, start, end, colour=None):
     for line in range(start, end):

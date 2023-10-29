@@ -12,7 +12,9 @@ from general import script, print_text
 descript_script = script('descriptions.txt')
 
 # Room base class
-class Room:
+
+
+class Room(ABC):
     def __init__(self, name):
         self.name = name
         self.inv = items.Inventory([])
@@ -66,7 +68,7 @@ class Entrance(Room):
         self.script = script('entrance.txt')
 
     def flavourtext(self, player_inv):
-       print_text(self.script, 0, 5, 'light_grey')
+        print_text(self.script, 0, 5, 'light_grey')
 
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
@@ -115,13 +117,13 @@ class Library(Room):
             while True:
                 book_pick = get_input('Which book do you want to read?  ')
                 if book_pick == 'book with a blue spine' or book_pick == 'blue book':
-                    odyssey.interact()
+                    odyssey.interact(0, 1, 'blue')
                     break
                 if book_pick == 'book with a red spine' or book_pick == 'red book':
-                    carson.interact()
+                    carson.interact(1, 4, 'red')
                     break
                 if book_pick == 'book with a black spine' or book_pick == 'black book':
-                    riddle.interact()
+                    riddle.interact(4, 5, 'dark_grey')
                     break
                 if book_pick == 'none':
                     break
@@ -223,6 +225,8 @@ class Bedroom(Room):
         self.doors = Doors('statue', 'wall', 'wall', 'wall')
         self.script = script('bedroom.txt')
 
+    def flavourtext(self):
+        pass
     def scene(self, player_inventory, username):
         print_text(self.script, 0, 1, 'dark_grey')
         if ('candle' in player_inventory.items and
@@ -288,10 +292,9 @@ class Kitchen(Room):
 
     def flavourtext(self):
         print_text(self.script, 0, 4, 'light_red')
-    
 
     def scene(self, player_inv):
-        answer = get_input('What do you want to inspect in the kitchen?  ')
+        answer = get_input('What in the kitchen do you want to look at?  ')
         if answer == 'knife':
             if 'knife' in self.inv.items:
                 print_text(self.script, 4, 6, 'light_red')

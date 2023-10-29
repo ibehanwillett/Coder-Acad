@@ -1,7 +1,5 @@
 import rooms
 import general
-from general import get_input, win_condition_met
-import sys
 import time
 from colorama import just_fix_windows_console
 from termcolor import colored
@@ -11,7 +9,7 @@ import characters
 just_fix_windows_console()
 
 # Player and Charater Set Up
-player = characters.Character('Player', ' ')
+player = characters.Character('Player', '')
 ghost = characters.ghost
 
 # Position Set Up
@@ -26,7 +24,7 @@ bedroom = rooms.Bedroom('bedroom')
 kitchen = rooms.Kitchen('kitchen')
 dining = rooms.Dining('dining room')
 
-#START OF GAME
+# START OF GAME
 with open('house.txt') as x:
     house = x.read()
     house = colored(house, 'green')
@@ -91,12 +89,3 @@ while True:
         bedroom.description()
         bedroom.scene(player.inv, username)
         position = bedroom.doors.leave(player.inv)
-
-
-
-    
-    
-
-
-    
-
