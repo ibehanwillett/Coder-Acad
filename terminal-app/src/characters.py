@@ -27,7 +27,6 @@ class Character:
             if (answer == 'a mirror' or answer == 'mirror'):
                 print_text(self.script, 7, 8, 'light_cyan')
                 self.inv.transfer_item(player_inv, 'key')
-                print(player_inv.items)
                 print_text(self.script, 8, 11, 'light_cyan')
                 print(f'\"It\'s not to late to stay {username}!\"')
             else:
@@ -36,4 +35,4 @@ class Character:
             print_text(self.script, 15, 16, 'light_cyan')
 
 
-ghost = Character('Ghost', ['key'])
+ghost = Character('Ghost', 'key')

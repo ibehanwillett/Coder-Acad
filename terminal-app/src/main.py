@@ -10,7 +10,7 @@ import characters
 just_fix_windows_console()
 
 # Player and Charater Set Up
-player = characters.Character('Player', '')
+player = characters.Character('Player','')
 ghost = characters.ghost
 
 # Room set up

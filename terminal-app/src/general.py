@@ -45,14 +45,14 @@ def get_a_yes_no(prompt):
             continue
 
 
-def win_condition_met(username):
+def win_condition_met():
     print('You open the door!')
     print('Outside the day is bright and sunny!')
     print('You sprint off into the warm sunlight.')
-    print('You don\'t even notice the face at the bedroom window.')
-    print('You certainly don\'t hear the whisper...')
-    print(f'\"Goodbye... {username}')
+    print('You don\'t even notice the face at the bedroom window...')
+    print('She, as always, cries alone.')
     print("YOU WON!")
+    quit()
 
 
 def print_colour(input, colour=None):

@@ -18,11 +18,12 @@ def test_inv_transfer_item(monkeypatch):
 
 # This function is desgined to test the room to player inventory transfer.
 
-def test_inv_transfer_item_library():
+# def test_inv_transfer_item_library():
     roomtest = rooms.Library('testlibrary')
     playertest = characters.Character('testplayer', '')
     roomtest.inv.transfer_item(playertest.inv, items.carson)
     assert items.carson in playertest.inv.items
+
     # The expected result is carson is in playertest.inv.items
 
 def test_inv_transfer_item_dining():

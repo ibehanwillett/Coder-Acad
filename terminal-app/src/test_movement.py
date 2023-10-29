@@ -1,7 +1,7 @@
 import pytest
 import rooms
 import characters
-import doors
+
 
 
 # Door test

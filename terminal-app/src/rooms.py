@@ -82,7 +82,8 @@ class Entrance(Room):
         answer = get_a_yes_no('Do you try and open the locked door?  ')
         if answer == True:
             if 'key' in player_inventory.items:
-                win_condition_met(username)
+                print(f'Oh {username}!')
+                win_condition_met()
             else:
                 print_text(self.script, 5, 7, 'light_grey')
         else:
