@@ -75,6 +75,7 @@ def print_text(script, start, end, colour=None):
     for line in range(start, end):
         print_colour(script[line], colour)
 
+
 def room_content(room, player_inv, username):
     room.description()
     room.flavourtext(player_inv)

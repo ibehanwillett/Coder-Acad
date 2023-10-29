@@ -12,12 +12,9 @@ from general import script, print_text
 descript_script = script('descriptions.txt')
 
 # Room base class
-
-
 class Room(ABC):
     def __init__(self, name):
         self.name = name
-
 
     def description(self):
         print(f'You are in the {self.name}.')
@@ -65,6 +62,7 @@ class Room(ABC):
     @abstractmethod
     def scene(self, player_inv, username):
         pass
+
 
 # Rooms themselves definition
 class Entrance(Room):
@@ -128,7 +126,8 @@ class Library(Room):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
         if answer == True:
             while True:
-                book_pick = get_input(f'Which book do you want to read {username}?  ')
+                book_pick = get_input(
+                    f'Which book do you want to read {username}?  ')
                 if book_pick == 'book with a blue spine' or book_pick == 'blue book':
                     odyssey.interact(0, 1, 'blue')
                     break
@@ -176,7 +175,8 @@ class Study(Room):
 
     def scene(self, player_inv, username):
         if self.has_scene_played == False:
-            answer = get_input(f'What thing do you interact with {username}?  ')
+            answer = get_input(
+                f'What thing do you interact with {username}?  ')
             if answer == 'matches':
                 print_text(self.script, 9, 10, 'light_grey')
                 time.sleep(1)
@@ -249,7 +249,7 @@ class Bedroom(Room):
 
     def print_item_list(self, room_inv):
         pass
-    
+
     def scene(self, player_inventory, username):
         print_text(self.script, 0, 1, 'dark_grey')
         if ('candle' in player_inventory.items and

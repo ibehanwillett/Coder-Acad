@@ -24,9 +24,9 @@ dining = rooms.Dining('dining room')
 
 # Position Set Up
 position = 'entrance'
-map = { 'entrance': entrance, 'library': library, 'study': study, \
-       'statue' : statue, 'bedroom': bedroom, 'kitchen': kitchen, \
-        'dining' : dining}
+map = {'entrance': entrance, 'library': library, 'study': study,
+       'statue': statue, 'bedroom': bedroom, 'kitchen': kitchen,
+       'dining': dining}
 
 # START OF GAME
 with open('house.txt') as x:
@@ -56,4 +56,4 @@ time.sleep(1)
 print('You take a look around.')
 
 while True:
-     position = room_content(map[position], player.inv, username)
+    position = room_content(map[position], player.inv, username)

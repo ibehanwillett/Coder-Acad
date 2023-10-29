@@ -1,7 +1,7 @@
 import general
 import pytest
 
-# Testing yes or no input
+# Testing Yes or No input for yes
 def test_yes_no_input_for_yes(monkeypatch):
     # Monkey patch stimulating a 'yes' input
     monkeypatch.setattr('builtins.input', lambda _: 'yes')
