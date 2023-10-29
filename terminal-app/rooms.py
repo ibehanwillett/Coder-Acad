@@ -17,7 +17,7 @@ descript_script = script('descriptions.txt')
 class Room(ABC):
     def __init__(self, name):
         self.name = name
-        self.inv = items.Inventory([])
+
 
     def description(self):
         print(f'You are in the {self.name}.')
@@ -71,7 +71,7 @@ class Entrance(Room):
     def __init__(self, name):
         self.name = name
         self.doors = Doors('locked', 'statue', 'library', 'dining')
-        self.inv = items.Inventory('locked door')
+        self.inv = items.Inventory(['locked door'])
         self.script = script('entrance.txt')
 
     def flavourtext(self, player_inventory):
@@ -121,7 +121,10 @@ class Library(Room):
         time.sleep(1)
         print_text(self.script, 10, 11, 'blue')
 
-    def scene(self, username):
+    def print_item_list(self, room_inv):
+        pass
+
+    def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
         if answer == True:
             while True:
@@ -239,6 +242,7 @@ class Bedroom(Room):
         self.name = name
         self.doors = Doors('statue', 'wall', 'wall', 'wall')
         self.script = script('bedroom.txt')
+        self.inv = items.Inventory([])
 
     def flavourtext(self, player_inventory):
         pass
@@ -306,29 +310,32 @@ class Kitchen(Room):
     def __init__(self, name):
         self.name = name
         self.doors = Doors('dining', 'wall', 'statue', 'wall')
-        self.inv = items.Inventory(['knife'])
+        self.inv = items.Inventory(['knife', 'stove'])
         self.script = script('kitchen.txt')
 
     def flavourtext(self, player_inventory):
         print_text(self.script, 0, 4, 'light_red')
 
     def scene(self, player_inv, username):
-        answer = get_input(f'Do you want to look at {username}?  ')
-        if answer == 'knife':
-            if 'knife' in self.inv.items:
-                print_text(self.script, 4, 6, 'light_red')
-                knife_get = get_a_yes_no('Take the knife?  ')
-                if knife_get == True:
-                    print_text(self.script, 6, 8, 'light_red')
-                    self.inv.transfer_item(player_inv, 'knife')
+        if self.inv.items != []:
+            answer = get_input(f'What do you want to look at {username}?  ')
+            if answer == 'knife':
+                if 'knife' in self.inv.items:
+                    print_text(self.script, 4, 6, 'light_red')
+                    knife_get = get_a_yes_no('Take the knife?  ')
+                    if knife_get == True:
+                        print_text(self.script, 6, 8, 'light_red')
+                        self.inv.transfer_item(player_inv, 'knife')
+                    else:
+                        print_text(self.script, 8, 9, 'light_red')
                 else:
-                    print_text(self.script, 8, 9, 'light_red')
+                    print_text(self.script, 9, 10, 'light_red')
+            elif answer == 'stove':
+                print_text(self.script, 10, 11, 'light_red')
             else:
-                print_text(self.script, 9, 10, 'light_red')
-        elif answer == 'stove':
-            print_text(self.script, 10, 11, 'light_red')
+                print_text(self.script, 11, 12, 'light_red')
         else:
-            print_text(self.script, 11, 12, 'light_red')
+            pass
 
 
 class Dining(Room):
@@ -346,20 +353,23 @@ class Dining(Room):
             print_text(self.script, 11, 13, 'light_grey')
 
     def scene(self, player_inventory, username):
-        answer = get_input(f'What do you interact with {username}?  ')
-        if answer == 'nothing':
-            print('You leave it be.')
-            return
-        if answer == 'candle' or 'the candle':
-            if self.has_scene_played == False:
-                extinguish_candle = (get_a_yes_no('Blow out candle?  '))
-                if extinguish_candle == True:
-                    self.has_scene_played = True
-                    print_text(self.script, 13, 14, 'light_grey')
-                    time.sleep(1)
-                    print_text(self.script, 14, 19, 'light_grey')
-                    time.sleep(3)
-                    print_text(self.script, 19, 23, 'light_grey')
-                    self.inv.transfer_item(player_inventory, 'candle')
-                if extinguish_candle == False:
-                    print_text(self.script, 23, 24, 'light_grey')
+        if self.inv.items != []:
+            answer = get_input(f'What do you interact with {username}?  ')
+            if answer == 'nothing':
+                print('You leave it be.')
+                return
+            if answer == 'candle' or 'the candle':
+                if self.has_scene_played == False:
+                    extinguish_candle = (get_a_yes_no('Blow out candle?  '))
+                    if extinguish_candle == True:
+                        self.has_scene_played = True
+                        print_text(self.script, 13, 14, 'light_grey')
+                        time.sleep(1)
+                        print_text(self.script, 14, 19, 'light_grey')
+                        time.sleep(3)
+                        print_text(self.script, 19, 23, 'light_grey')
+                        self.inv.transfer_item(player_inventory, 'candle')
+                    if extinguish_candle == False:
+                        print_text(self.script, 23, 24, 'light_grey')
+        else:
+            print_text(self.script, 23, 24, 'light_grey')

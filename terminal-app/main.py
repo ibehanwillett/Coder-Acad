@@ -1,5 +1,6 @@
 import rooms
 import general
+from general import room_content
 import time
 from colorama import just_fix_windows_console
 from termcolor import colored
@@ -12,9 +13,6 @@ just_fix_windows_console()
 player = characters.Character('Player', '')
 ghost = characters.ghost
 
-# Position Set Up
-position = 'entrance'
-
 # Room set up
 entrance = rooms.Entrance('entrance')
 library = rooms.Library('library')
@@ -23,6 +21,12 @@ statue = rooms.Statue('statue room')
 bedroom = rooms.Bedroom('bedroom')
 kitchen = rooms.Kitchen('kitchen')
 dining = rooms.Dining('dining room')
+
+# Position Set Up
+position = 'entrance'
+map = { 'entrance': entrance, 'library': library, 'study': study, \
+       'statue' : statue, 'bedroom': bedroom, 'kitchen': kitchen, \
+        'dining' : dining}
 
 # START OF GAME
 with open('house.txt') as x:
@@ -52,40 +56,4 @@ time.sleep(1)
 print('You take a look around.')
 
 while True:
-    if position == 'entrance':
-        entrance.description()
-        entrance.flavourtext(player.inv)
-        entrance.scene(player.inv, username)
-        position = entrance.doors.leave(player.inv)
-    if position == 'library':
-        library.description()
-        library.flavourtext()
-        library.print_item_list(library.inv.items)
-        library.scene()
-        position = library.doors.leave(player.inv)
-    if position == 'study':
-        study.description()
-        study.flavourtext(player.inv)
-        study.print_item_list(study.inv.items)
-        study.scene(player.inv)
-        position = study.doors.leave(player.inv)
-    if position == 'statue':
-        statue.description()
-        statue.flavourtext()
-        position = statue.doors.leave(player.inv)
-    if position == 'kitchen':
-        kitchen.description()
-        kitchen.flavourtext()
-        kitchen.print_item_list(kitchen.inv.items)
-        kitchen.scene(player.inv)
-        position = kitchen.doors.leave(player.inv)
-    if position == 'dining':
-        dining.description()
-        dining.flavourtext()
-        dining.print_item_list(dining.inv.items)
-        dining.scene(player.inv)
-        position = dining.doors.leave(player.inv)
-    if position == 'bedroom':
-        bedroom.description()
-        bedroom.scene(player.inv, username)
-        position = bedroom.doors.leave(player.inv)
+     position = room_content(map[position], player.inv, username)
