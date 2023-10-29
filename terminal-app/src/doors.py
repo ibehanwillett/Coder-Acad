@@ -18,8 +18,8 @@ class Doors:
                 print(f'To the south, {cls.south}.')
                 print(f'To the east, {cls.east}')
                 print(f'To the west, {cls.west}')
-                print('Type the direction you\'d like to go,'
-                      ' or inv to check your inventory.')
+                print('Type the direction you\'d like to go,')
+                print('Or type inv to check your inventory.')
                 direction = get_input('Where would like to go?  ')
                 general.quitcheck(direction)
                 match direction:

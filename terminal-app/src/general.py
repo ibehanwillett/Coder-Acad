@@ -36,9 +36,9 @@ def get_a_yes_no(prompt):
             print('Something went wrong. Please try again!')
             continue
         quitcheck(answer)
-        if answer == ('yes' or 'y'):
+        if answer == 'yes' or answer == 'y':
             return True
-        elif answer == ('no' or 'n'):
+        elif answer == 'no' or answer == 'n':
             return False
         else:
             print('Yes or no please!')

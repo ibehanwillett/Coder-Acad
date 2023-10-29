@@ -119,22 +119,22 @@ class Library(Room):
         time.sleep(1)
         print_text(self.script, 10, 11, 'blue')
 
-    def print_item_list(self, room_inv):
-        pass
-
     def scene(self, player_inventory, username):
         answer = get_a_yes_no('Do you want to read any of the books?  ')
         if answer == True:
             while True:
                 book_pick = get_input(
                     f'Which book do you want to read {username}?  ')
-                if book_pick == 'book with a blue spine' or book_pick == 'blue book':
+                if book_pick == 'book with a blue spine' or \
+                    book_pick == 'blue book':
                     odyssey.interact(0, 1, 'blue')
                     break
-                if book_pick == 'book with a red spine' or book_pick == 'red book':
+                if book_pick == 'book with a red spine' or \
+                     book_pick == 'red book':
                     carson.interact(1, 4, 'red')
                     break
-                if book_pick == 'book with a black spine' or book_pick == 'black book':
+                if book_pick == 'book with a black spine' or \
+                      book_pick == 'black book':
                     riddle.interact(4, 5, 'dark_grey')
                     break
                 if book_pick == 'none':
@@ -176,7 +176,7 @@ class Study(Room):
     def scene(self, player_inv, username):
         if self.has_scene_played == False:
             answer = get_input(
-                f'What thing do you interact with {username}?  ')
+                f'What things do you interact with {username}?  ')
             if answer == 'matches':
                 print_text(self.script, 9, 10, 'light_grey')
                 time.sleep(1)
