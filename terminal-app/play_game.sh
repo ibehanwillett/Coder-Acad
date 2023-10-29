@@ -7,7 +7,7 @@ then
     To install pip3, please go to https://pypi.org/project/pip/' >&2
   exit 1
 fi
-
+cd ./src;
 echo 'Thank you for playing Haunted House!'
 source .venv/bin/activate
 echo "Installing the game now..."

@@ -2,7 +2,7 @@
 
           ******** WELCOME TO THE HAUNTED HOUSE TEXT ADVENTURE! ********
     * MOVING FROM ROOM TO ROOM - type the direction you'd like to go. (i.e north, south, east, west.)
-    * INVENTORY - input 'inv'
+    * INVENTORY - input 'inv' when prompted.
     * QUIT - input 'quit'
 
 
