@@ -9,7 +9,8 @@ then
 fi
 cd ./src;
 echo 'Thank you for playing Haunted House!'
-source .venv/bin/activate
+python3 -m venv .venv 
+source venv .venv/bin/activate
 echo "Installing the game now..."
 pip3 install -r requirements.txt 
 echo 'All done! Have fun! :)'

@@ -114,3 +114,4 @@ If you have an older version of Python or do not have Python installed, please f
 * tomli==2.0.1
 
 ## References
+ASCII.co.uk, U. (n.d.). Haunted - ASCII ART. https://ascii.co.uk/art/haunted 
