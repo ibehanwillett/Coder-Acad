@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from flask_marshmallow import Marshmallow
@@ -35,6 +35,10 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 # default will be handled by Alchemy.
 
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'email', 'password', 'is_admin')
+
 @app.cli.command("db_create")
 def db_create():
     db.drop_all()
@@ -56,7 +60,7 @@ def db_seed():
             password=bcrypt.generate_password_hash('tisbutascratch').decode('utf8'),
         )
     ]
-    
+
     cards = [
         Card(
             title="Start the project",
@@ -84,6 +88,24 @@ def db_seed():
 
     print("Database seeded")
 
+@app.route('/users/register', methods=['POST'])
+def register():
+    # Parse incoming POST body through schema
+    user_info = UserSchema().load(request.json)
+    # Create a new user with parsed data
+    user = User(
+        email=user_info['email'],
+        password=bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
+        name=user_info.get('name','')
+    )
+
+    # Add & commit the new user to the database
+    db.session.add(user)
+    db.session.commit()
+
+    # Return the new user
+    return UserSchema(exclude=['password']).dump(user), 201
+   
 
 @app.route('/cards')
 def all_cards():
