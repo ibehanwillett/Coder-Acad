@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-from datetime import date
+from datetime import date, timedelta
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 
 app = Flask(__name__)
 
@@ -124,7 +124,7 @@ def login():
     # 3. Check the password hash
     if user and bcrypt.check_password_hash(user.password, user_info['password']):
         # 4. Create a JWT 
-        token = create_access_token(identity=user.email, additional_claims={'email': user.email, 'name' : user.name})
+        token = create_access_token(identity=user.email, expires_delta=timedelta(hours=2))
         return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}
     else:
         return {'error':'Invalid password or email'}, 401
@@ -133,6 +133,7 @@ def login():
     return 'ok', 200
 
 @app.route('/cards')
+@jwt_required()
 def all_cards():
     # select * from cards;
     stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 2)).order_by(Card.title.desc())
