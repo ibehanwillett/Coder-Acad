@@ -5,10 +5,11 @@ from datetime import date, timedelta
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from os import environ
 
 app = Flask(__name__)
 
-app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks'
+app.config['JWT_SECRET_KEY'] = environ.get('JWT_KEY')
 
 app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://trello_dev:spameggs123@127.0.0.1:5432/trello' # Connector string
 
