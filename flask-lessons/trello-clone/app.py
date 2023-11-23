@@ -1,10 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from datetime import date, timedelta
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 
@@ -16,6 +16,17 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt= Bcrypt(app)
 jwt = JWTManager(app)
+
+def admin_required():
+    user_email = get_jwt_identity()
+    stmt = db.select(User).where(User.email == user_email)
+    user = db.session.scalar(stmt)
+    if not user.is_admin:
+        return abort(401)
+    
+@app.errorhandler(401)
+def unauthorized(err):
+    return {'error': 'You are not authorized to access this resource'},401
 
 class Card(db.Model):
     __tablename__ = "cards"
@@ -97,7 +108,7 @@ def db_seed():
 def register():
     try:
         # Parse incoming POST body through schema
-        user_info = UserSchema().load(request.json)
+        user_info = UserSchema(exclude=['id','is_admin']).load(request.json)
         # Create a new user with parsed data
         user = User(
             email=user_info['email'],
@@ -125,18 +136,18 @@ def login():
     if user and bcrypt.check_password_hash(user.password, user_info['password']):
         # 4. Create a JWT 
         token = create_access_token(identity=user.email, expires_delta=timedelta(hours=2))
+        # 5. Return the token
         return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}
     else:
         return {'error':'Invalid password or email'}, 401
 
-    # 5. Return the token
-    return 'ok', 200
-
 @app.route('/cards')
 @jwt_required()
 def all_cards():
+    admin_required()
     # select * from cards;
-    stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 2)).order_by(Card.title.desc())
+    stmt = db.select(Card)
+        # .where(db.or_(Card.status != 'Done', Card.id > 2)).order_by(Card.title.desc())
     cards = db.session.scalars(stmt).all()
     return CardSchema(many=True).dump(cards)
 
@@ -149,3 +160,4 @@ def index():
 # @app.errorhandler(IntegrityError)
 # def integrity_error(err):
 #     return {'error': err.__dict__},409
+
