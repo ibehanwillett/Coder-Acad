@@ -1,3 +1,4 @@
 FLASK_RUN_PORT= # flask server port
 FLASK_DEBUG= # set TRUE for debug mode
 JWT_KEY= # JWT signing key
+DB_URI = # Connector string for database
