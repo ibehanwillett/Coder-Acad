@@ -3,6 +3,7 @@ from models.user import User
 from models.card import Card
 from datetime import date
 from flask import Blueprint
+from models.comments import Comment
 
 db_commands = Blueprint('db', __name__)
 @db_commands.cli.command("create")
@@ -36,25 +37,46 @@ def db_seed():
             description="Stage 1 - ERD Creation",
             status='Done',
             date_created=date.today(),
-            user_id = users(0).id
+            user_id = users[0].id
         ),
         Card(
             title="ORM Queries",
             description="Stage 2 - Implement CRUD queries",
             status='In Progress',
             date_created=date.today(),
-            user_id = users(1).id
+            user_id = users[1].id
         ),
         Card(
             title="Marshmallow",
             description="Stage 3 - Implement JSONify of models",
             status='In Progress',
             date_created=date.today(),
-            user_id = users(0).id,
+            user_id = users[0].id,
         ),
     ]
 
     db.session.add_all(cards)
     db.session.commit()
 
+    comments = [
+        Comment(
+            message = 'comment 1',
+            user_id=users[0].id,
+            card_id=cards[1].id
+        ),
+
+        Comment(
+            message = 'comment 2',
+            user_id=users[1].id,
+            card_id=cards[1].id
+        ),
+
+        Comment(
+            message = 'comment 3',
+            user_id=users[1].id,
+            card_id=cards[0].id
+        ),
+    ]
+    db.session.add_all(comments)
+    db.session.commit()
     print("Database seeded")
