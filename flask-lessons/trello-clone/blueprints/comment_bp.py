@@ -2,7 +2,7 @@ from flask import Blueprint, request, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.comment import CommentSchema, Comment
-from auth import admin_required
+from auth import authorize
 
 comments_bp = Blueprint('comments', __name__)
 
@@ -32,30 +32,28 @@ comments_bp = Blueprint('comments', __name__)
 # POST /cards/<card_id>/comments
 @comments_bp.route('/<int:card_id>/comments', methods=['POST'])
 @jwt_required()
-def create_comment():
+def create_comment(card_id):
     comment_info = CommentSchema(only=['message']).load(request.json)
     comment = Comment(
-        title = comment_info['title'],
-        description = comment_info.get('description', ''),
-        status = comment_info.get('status', 'To Do'),
-        user_id = get_jwt_identity()
+        message = comment_info['message'],
+        user_id = get_jwt_identity(),
+        card_id = card_id
     )
     db.session.add(comment)
     db.session.commit()
     return CommentSchema().dump(comment), 201
 
 # Update a comment
-@comments_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+# PUT/PATCH 
+@comments_bp.route('/<int:card_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
-def update_comment(id):
-    admin_required()
-    comment_info = CommentSchema(exclude=['id', 'date_created']).load(request.json)
-    stmt = db.select(Comment).filter_by(id=id) # .where(Comment.id == id)
+def update_comment(card_id, comment_id):
+    comment_info = CommentSchema(only=['message']).load(request.json)
+    stmt = db.select(Comment).filter_by(comment_id=id) # .where(Comment.id == id)
     comment = db.session.scalar(stmt)
     if comment:
-        comment.title = comment_info.get('title', comment.title)
-        comment.description = comment_info.get('description', comment.description)
-        comment.status = comment_info.get('status', comment.status)
+        authorize(comment.user_id)
+        comment.description = comment_info.get('message', comment.message)
         db.session.commit()
         return CommentSchema().dump(comment)
     else:
@@ -64,9 +62,9 @@ def update_comment(id):
 # Delete a comment
 @comments_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required()
-def delete_comment(id):
-    admin_required()
-    stmt = db.select(Comment).filter_by(id=id) # .where(Comment.id == id)
+def delete_comment(card_id, comment_id):
+    authorize(comment.user_id)
+    stmt = db.select(Comment).filter_by(comment_id=id) # .where(Comment.id == id)
     comment = db.session.scalar(stmt)
     if comment:
         db.session.delete(comment)
