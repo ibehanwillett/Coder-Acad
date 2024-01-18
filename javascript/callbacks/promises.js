@@ -4,16 +4,15 @@ function adder(a, b) {
     return a + b
 }
 
-function adderPromise(x, y) {
-    return new Promise ( (resolve,reject) => {
+async function adderPromise(x, y) {
         if (typeof x === 'number' && typeof y === 'number') {
         const answer = adder(x, y)
-        resolve(answer)
+        return (answer)
         } else {
-            reject('x and y must be a number')
+            throw('x and y must be a number')
         }
-    })
-}
+    }
+
 
 // adderPromise(15,14)
 //     .then(value => {
@@ -23,9 +22,10 @@ function adderPromise(x, y) {
 //     .catch( err =>console.error(err))
 
 
-adderPromise(15,14)
-    .then(value => adderPromise(value,100))
-    .then(answer=> console.log(answer))
-    .catch( err =>console.error(err))
+value = await adderPromise(15,14)
+console.log(value)
+    // .then(value => adderPromise(value,100))
+    // .then(answer=> console.log(answer))
+    // .catch( err =>console.error(err))
 
 console.log('Not waiting!')

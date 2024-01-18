@@ -15,16 +15,17 @@ function getJoke(){
 
 }
 
-function fetchJoke(){
-    fetch('https://icanhazdadjoke.com/', {
+async function fetchJoke(){
+    const res = await fetch('https://icanhazdadjoke.com/', {
         headers: {
             'Accept': 'application/json'
         }
     })
-    .then(res => res.json()
-    .then(data => console.log(data.joke)))
+    const data = await res.json()
+    return data.joke
 }
-fetchJoke()
+
+fetchJoke().then(joke => console.log(joke))
 // const jokes = []
 // getJoke()
 // .then(joke => {
