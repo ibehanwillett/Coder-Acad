@@ -40,6 +40,32 @@ app.post('/entries', async (req, res) => {
     res.status(400).send({error: err.message})}
 })
 
+app.put('/entries/:id', async (req, res) => {
+    try {
+        const updatedEntry = await EntryModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        if (updatedEntry) {
+            res.status(204).send(updatedEntry)
+        } else {
+            res.status(404).send({error: err.message})
+        }
+    } 
+    catch (err) {
+    res.status(400).send({error: err.message})}
+})
+
+app.delete('/entries/:id', async (req, res) => {
+    try {
+        const deletedEntry = await EntryModel.findByIdAndDelete(req.params.id)
+        if (deletedEntry) {
+            res.sendStatus(204)
+        } else {
+            res.status(404).send({error: err.message})
+        }
+    } 
+    catch (err) {
+    res.status(400).send({error: err.message})}
+})
+
 
 
 app.listen(4002);
