@@ -1,13 +1,8 @@
-import express, { response } from 'express';
+import express from 'express';
+import { EntryModel, CategoryModel, closeConnection } from './db.js'
+
 
 const categories = ['Food', 'Gaming', 'Coding', 'Other']
-
-const entries = [
-    {category: 'Food', content: 'Pizza is yummy!'},
-    {category: 'Coding', content: 'Coding is fun!'},
-    {category: 'Gaming', content: 'I love Inscrption!'},
-]
-// Using array index as id during development
 
 const app = express();
 
@@ -15,30 +10,37 @@ app.use(express.json());
 // Runs on every request & looks at request header & content type. if that's application /json it'll ignore the body & move on.
 app.get('/', (request, response) => response.send({info: "Journal API"}))
 
-app.get('/categories', (request, response) => response.status(201).send(categories))
+app.get('/categories', async (request, response) => response.status(201).send(await CategoryModel.find()))
 
 // Entries
-app.get('/entries', (req, res) => res.send(entries))
+app.get('/entries', async (req, res) => res.send(await EntryModel.find()))
 // Gets single entry
-app.get('/entries/:id', (req, res) => {
-    const entry = entries[req.params.id - 1];
+app.get('/entries/:id', async (req, res) => {
+    const entry = await EntryModel.findById(req.params.id); 
     if (entry) {
         res.status(200).send(entry)
     } else {
         res.status(404).send({error: "Entry not found!"})
     }
 })
-app.post('/entries', (req, res) => {
+app.post('/entries', async (req, res) => {
+    try {
     // Get entry data from request
     console.log(req.body)
     // Validate
     //To do
     // Create new entry object
     // Push new entry into array
-    entries.push(req.body)
+    // entries.push(req.body)
+    const insertedEntry = await EntryModel.create(req.body)
+
     // Respond with 201 & the created resource
-    res.status(201).send(entries[entries.length - 1])
+    res.status(201).send(insertedEntry)
+    } catch (err) {
+    res.status(400).send({error: err.message})}
 })
 
-app.listen(4001);
+
+
+app.listen(4002);
 
