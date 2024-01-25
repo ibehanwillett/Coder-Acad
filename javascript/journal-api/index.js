@@ -2,7 +2,7 @@ import express from 'express';
 import { EntryModel, CategoryModel, closeConnection } from './db.js'
 
 
-const categories = ['Food', 'Gaming', 'Coding', 'Other']
+
 
 const app = express();
 
@@ -25,18 +25,11 @@ app.get('/entries/:id', async (req, res) => {
 })
 app.post('/entries', async (req, res) => {
     try {
-    // Get entry data from request
-    console.log(req.body)
-    // Validate
-    //To do
-    // Create new entry object
-    // Push new entry into array
-    // entries.push(req.body)
-    const insertedEntry = await EntryModel.create(req.body)
-
-    // Respond with 201 & the created resource
-    res.status(201).send(insertedEntry)
-    } catch (err) {
+        const cat = await CategoryModel.findOne({name: req.body.category})
+        const insertedEntry = await EntryModel.create(req.body)
+        res.status(201).send(insertedEntry)
+    }
+    catch (err) {
     res.status(400).send({error: err.message})}
 })
 
@@ -44,7 +37,7 @@ app.put('/entries/:id', async (req, res) => {
     try {
         const updatedEntry = await EntryModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
         if (updatedEntry) {
-            res.status(204).send(updatedEntry)
+            res.send(updatedEntry)
         } else {
             res.status(404).send({error: err.message})
         }

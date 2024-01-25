@@ -14,20 +14,20 @@ const closeConnection = () => {
     mongoose.disconnect()
 }
 
+const categoriesSchema = new mongoose.Schema({
+    name: { type: String, required: true }
+})
+
+const CategoryModel = new mongoose.model('Category', categoriesSchema)
+
 const entriesSchema = new mongoose.Schema({
-    category: { type: String,
-        required: true },
-    content: { type: String,
-        required: true },
-}) 
+    category: { type: mongoose.ObjectId, ref: 'Category' },
+    content: { type: String, required: true }
+})
 
 const EntryModel = new mongoose.model('Entry', entriesSchema)
 
-const categorySchema = new mongoose.Schema({
-    category: { type: String,
-        required: true }
-}) 
 
-const CategoryModel = new mongoose.model('Category', categorySchema)
+
 
 export { EntryModel, CategoryModel, closeConnection }
