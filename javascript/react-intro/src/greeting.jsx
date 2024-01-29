@@ -1,9 +1,10 @@
 
-function Greeting () {
+function Greeting ({ name="stranger", age='?' }) {
+    
     return (
       <>
-        <p>Bonjour!</p>
-        <p>ES: Hola!</p>
+        <p>Bonjour {name}!</p>
+        <p>ES: Hola! You're {age} years old.</p>
         </> 
     )
   }
