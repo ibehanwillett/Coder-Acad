@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-const ShowCount = ({count}) => {
-  return <p>You have clicked {count} times.</p>
-}
+import Bitcoinindex from './Bitcoinindex'
+
 function App() {
-  let [count, setCount] = useState(0)
 
   return (
     <>
-    <h1>State</h1>
-    <ShowCount count = {count}/>
-    <button onClick={() => setCount(count+1)}>Click me!</button>
+    <h1>Bitcoin Index</h1>
+    <Bitcoinindex />
     </>
   )
 }
