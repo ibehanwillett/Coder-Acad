@@ -1,5 +1,5 @@
-import { add, PI } from './math.js'
+import math from './math.js'
 
-console.log(PI)
+console.log(math.PI)
 
-console.log(add(1,1))
+console.log(math.add(1,1))
