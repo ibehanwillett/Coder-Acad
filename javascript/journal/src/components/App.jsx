@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
 import Home from './Home.jsx'
 import NewEntry from './NewEntry.jsx'
 import CategorySelection from './CategorySelection.jsx'
@@ -14,7 +12,6 @@ function App() {
       
       <BrowserRouter>
       <NavBar />
-      <h1>Journal</h1>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/category' element={<CategorySelection/>}/>
