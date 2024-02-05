@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-const CategorySelection = () => {
- const[categories, setCatergories] = useState(['Food', 'Gaming', 'Coding'])
+const CategorySelection = ({ categories }) => {
+
 
   return (
     <>

@@ -13,7 +13,7 @@ const NavBar = () => {
     <>
     <nav className="navbar has-background-info-light" role="navigation" aria-label="main navigation">
   <div className="navbar-brand">
-    <h1>Journal</h1>
+  
 
     <a role="button" onClick={toggleHamburger} className="navbar-burger"  aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -25,17 +25,17 @@ const NavBar = () => {
   <div id="navbarBasicExample" ref={navBarRef} className="navbar-menu">
     <div className="navbar-start">
     
-    <Link to='/' className="navbar-item">
-        Home
+    <Link to='/' className="navbar-brand">
+      <h1>Journal</h1>
     </Link>
 
     <Link to='/category' className="navbar-item">
-        Select Category
+        Create Entry
     </Link>
 
-    <Link to='entry/new'className="navbar-item">
+    {/* <Link to='entry/new'className="navbar-item">
         New Entry
-    </Link>
+    </Link> */}
     
     </div>
     </div>
