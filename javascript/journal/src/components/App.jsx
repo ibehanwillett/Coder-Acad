@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/category' element={<CategorySelection/>}/>
           <Route path='/entry'>
-            <Route path='new' element={<NewEntry/>}/>
+            <Route path='new/:cat_id' element={<NewEntry/>}/>
           </Route>
           <Route path='*' element={<h2>Page Not Found</h2>}/>
           

@@ -11,8 +11,8 @@ const NavBar = () => {
 
   return (
     <>
-    <nav class="navbar has-background-info-light" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
+    <nav className="navbar has-background-info-light" role="navigation" aria-label="main navigation">
+  <div className="navbar-brand">
     <h1>Journal</h1>
 
     <a role="button" onClick={toggleHamburger} className="navbar-burger"  aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
