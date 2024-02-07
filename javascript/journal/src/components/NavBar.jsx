@@ -31,9 +31,9 @@ const NavBar = () => {
         Create Entry
     </Link>
 
-    {/* <Link to='entry/new'className="navbar-item">
-        New Entry
-    </Link> */}
+    <Link to='entry/1'className="navbar-item">
+        Existing Entry
+    </Link>
     
     </div>
     </div>
