@@ -7,32 +7,45 @@ import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom'
 import ShowEntry from './ShowEntry.jsx'
 
 function App() {
-  const[categories, setCategories] = useState(['Food', 'Gaming', 'Coding'])
-  const [entries, setEntries] = useState([{category: 0, content: "Soup"}])
+  const[categories, setCategories] = useState([])
+  const [entries, setEntries] = useState([])
   const params = useParams()
 
   useEffect(() => {
     fetch('http://localhost:4002/categories')
     .then(res => res.json())
-    .then(data => setCategories(data.categories)) 
+    .then(data => setCategories(data))
+
+    fetch('http://localhost:4002/entries')
+    .then(res => res.json())
+    .then(data => setEntries(data)) 
   }, []
+  
   )
 
   function addEntry(cat_id, content) {
     const newId = entries.length
     // 1. Create a entry object from user input
     const newEntry = {
-        category: cat_id,
+        category: categories[cat_id]?._id,
         content: content,
     }
-    // 2. Add new entry to the entries list
-    setEntries([...entries, newEntry])
+
+    fetch('http://localhost:4002/entries', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newEntry)
+    })
+    .then(res => res.json())
+    .then(data => setEntries([...entries, data]))
     return newId
 }
 
 function ShowEntryWrapper() {
   const { id } = useParams()
-  return <ShowEntry entry={entries[id]} categories={categories}/>
+  return <ShowEntry entry={entries[id]} />
 }
 
   return (

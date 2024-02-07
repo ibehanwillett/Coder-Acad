@@ -16,7 +16,7 @@ function createEntry(e) {
 
   return (
     <>
-    <h3>New entry in category: {categories[params.cat_id]}</h3>
+    <h3>New entry in category: {categories[params.cat_id]?.name}</h3>
     <form className="section" onSubmit={createEntry}>
       <div className="field"> 
         <label className="label">Content</label>
