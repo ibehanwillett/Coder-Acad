@@ -6,7 +6,7 @@ const CategorySelection = ({ categories }) => {
 
   return (
     <>
-    <h1>Please select a category:</h1>
+    <h3>Please select a category:</h3>
       <ul>
         {
           categories.map((cat, index) => (
