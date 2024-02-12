@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
     "start": "node index.js",
     "seed": "node seed.js"
   },
@@ -17,5 +17,9 @@
     "dotenv": "^16.4.0",
     "express": "^4.18.2",
     "mongoose": "^8.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   }
 }
